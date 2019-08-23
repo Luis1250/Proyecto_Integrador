@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="RenameExternalProjectImportWizard">
+		<item value="false" key="WizardRenameImportProjectPage.STORE_CLEAN_BUILD_OUTPUT"/>
+		<item value="true" key="WizardRenameImportProjectPage.STORE_ARCHIVE_SELECTED"/>
+		<list key="WizardRenameImportProjectPage.STORE_ARCHIVES">
+			<item value="C:\Users\mulca\Downloads\Perifericos_template.zip"/>
+		</list>
+		<list key="WizardRenameImportProjectPage.STORE_DIRECTORIES">
+			<item value=""/>
+		</list>
+	</section>
+</section>
