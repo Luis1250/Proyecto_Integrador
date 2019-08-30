@@ -30,4 +30,6 @@
 *.exe
 *.out
 *.app
-ESTRUCTURA DEL PROYECTO/7) Repository/.metadata/
+
+# Metadata from Eclipse
+.metadata
