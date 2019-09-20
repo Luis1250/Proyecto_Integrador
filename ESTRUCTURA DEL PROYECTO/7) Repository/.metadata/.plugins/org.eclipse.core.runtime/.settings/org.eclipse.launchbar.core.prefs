@@ -1,6 +1,0 @@
-LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/arch=x86
-LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/os=win32
-activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local
-configDescList=org.eclipse.launchbar.core.descriptorType.default\:Proyecto_Integrador Debug
-eclipse.preferences.version=1
-org.eclipse.launchbar.core.descriptorType.default\:Proyecto_Integrador\ Debug/activeLaunchMode=debug
