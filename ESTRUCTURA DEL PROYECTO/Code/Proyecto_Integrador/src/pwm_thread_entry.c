@@ -1,15 +1,7 @@
 /** File: pwm_thread_handler.h
  *
- *  Created on: 22/07/2019
- *
- * - 22-jul-2019  Francisco Govea
- *   - Add improvements to PWM
- *
- * - 24-jul-2019  Francico Govea
- *   - Add interruption
- *
- * - 25-jul-2019  Francisco Govea
- *   - Add interruption for Encoder
+ *  Created on: 01/10/2019
+ *      Author: Team 2
  */
 
 #include <PWM_Thread.h>

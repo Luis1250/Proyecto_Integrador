@@ -6,7 +6,7 @@
 /*  site at www.expresslogic.com.                                              */
 /*                                                                             */
 /*  GUIX Studio Revision 5.4.2.9                                               */
-/*  Date (dd.mm.yyyy):  9. 8.2019   Time (hh:mm): 18:16                        */
+/*  Date (dd.mm.yyyy):  4.10.2019   Time (hh:mm): 09:47                        */
 /*******************************************************************************/
 
 
@@ -24,7 +24,7 @@ GX_CONST GX_COLOR display_1_theme_1_color_table[] =
     0x000074d5,
     0x00000000,
     0x0000ffff,
-    0x00000017,
+    0x000064b3,
     0x00008410,
     0x0000dedb,
     0x0000e60c,
@@ -328,31 +328,40 @@ GX_CONST GX_PIXELMAP *display_1_theme_1_pixelmap_table[] =
 /* String values                                                               */
 
 GX_CONST GX_UBYTE display_1_HELLO_WORLD_English[25] = "Hello World (to window1)";
-GX_CONST GX_UBYTE display_1_CHECKBOX_TEXT_English[11] = " Press Me!";
-GX_CONST GX_UBYTE display_1_BUTTON_DISABLED_English[17] = "Stay in Window 1";
-GX_CONST GX_UBYTE display_1_BUTTON_ENABLED_English[14] = "Goto Window 2";
-GX_CONST GX_UBYTE display_1_INSTRUCT_CHECKBOX_English[30] = "Press \"Press Me!\" for more.";
+GX_CONST GX_UBYTE display_1_CHECKBOX_TEXT_English[18] = "Check Diagnostics";
+GX_CONST GX_UBYTE display_1_BUTTON_DISABLED_English[22] = "Stay in Motor Control";
+GX_CONST GX_UBYTE display_1_BUTTON_ENABLED_English[18] = "Go to Diagnostics";
+GX_CONST GX_UBYTE display_1_INSTRUCT_CHECKBOX_English[29] = "Press \"Press Me!\" for more";
 GX_CONST GX_UBYTE display_1_WINDOW1_English[8] = "Window1";
 GX_CONST GX_UBYTE display_1_WINDOW2_English[8] = "Window2";
 GX_CONST GX_UBYTE display_1_INSTRUCT_BUTTON_English[23] = "Press to go to window2";
-GX_CONST GX_UBYTE display_1_NAME2_LBL_English[18] = "Guarneros, Hector";
-GX_CONST GX_UBYTE display_1_NAME1_LBL_English[17] = "Govea, Francisco";
-GX_CONST GX_UBYTE display_1_NAMES_LBL_English[15] = "Programadores:";
-GX_CONST GX_UBYTE display_1_HW_VER_LBL_English[12] = "HW Version:";
-GX_CONST GX_UBYTE display_1_HW_VER_VALUE_LBL_English[4] = "1.0";
-GX_CONST GX_UBYTE display_1_SW_VER_VALUE_LBL_English[5] = "1.10";
-GX_CONST GX_UBYTE display_1_SW_VER_LBL_English[12] = "SW Version:";
-GX_CONST GX_UBYTE display_1_RPM_LBL_English[5] = "RPM:";
-GX_CONST GX_UBYTE display_1_RPM_VALUE_LBL_English[2] = "0";
-GX_CONST GX_UBYTE display_1_SPEED_VALUE_LBL_English[6] = "0 RPM";
-GX_CONST GX_UBYTE display_1_SET_POINT_LBL_English[7] = "Speed:";
-GX_CONST GX_UBYTE display_1_DUTY_CYCLE_LBL_English[12] = "Duty cycle:";
-GX_CONST GX_UBYTE display_1_DUTY_CYCLE_VALUE_LBL_English[3] = "0%";
-GX_CONST GX_UBYTE display_1_PROY_NAME_LBL_English[21] = "Control Vel Motor CD";
+GX_CONST GX_UBYTE display_1_TEXT_SPEED_English[7] = "Speed:";
+GX_CONST GX_UBYTE display_1_TEXT_DUTYCYCLE_English[12] = "Duty_cycle:";
+GX_CONST GX_UBYTE display_1_TEXT_PERCENTAGE_English[2] = "%";
+GX_CONST GX_UBYTE display_1_TEXT_RPM_English[4] = "RPM";
+GX_CONST GX_UBYTE display_1_TEXT_SWVERSION_English[12] = "SW Version:";
+GX_CONST GX_UBYTE display_1_TEXT_XX_English[4] = "x.x";
+GX_CONST GX_UBYTE display_1_TEXT_NOMBREPROYECTO_English[22] = "CONTROL VEL. MOTOR CD";
+GX_CONST GX_UBYTE display_1_TEXT_HWVERSION_English[12] = "HW Version:";
+GX_CONST GX_UBYTE display_1_TEXT_CESEQP001_English[11] = "CESEQ-P001";
+GX_CONST GX_UBYTE display_1_TEXT_CESEQC001_English[11] = "CESEQ-C001";
+GX_CONST GX_UBYTE display_1_TEXT_DEVELOPERS_English[8] = "TEAM 2:";
+GX_CONST GX_UBYTE display_1_TEXT_DEV2_English[14] = "Jesus Ramirez";
+GX_CONST GX_UBYTE display_1_TEXT_DEV1_English[13] = "Algemiro Gil";
+GX_CONST GX_UBYTE display_1_TEXT_SETPOINT_English[10] = "SetPoint:";
+GX_CONST GX_UBYTE display_1_TEXT_DIAGNOSTICS_English[12] = "DIAGNOSTICS";
+GX_CONST GX_UBYTE display_1_TEXT_VARIABLES_English[10] = "VARIABLES";
+GX_CONST GX_UBYTE display_1_STRING_1_English[10] = "Jesus Rmz";
+GX_CONST GX_UBYTE display_1_STRING_2_English[13] = "Algemiro Gil";
+GX_CONST GX_UBYTE display_1_TEXT_DEV3_English[13] = "Luis Sanchez";
+GX_CONST GX_UBYTE display_1_DEV_3_English[14] = "Jesus Ramirez";
+GX_CONST GX_UBYTE display_1_STRING_4_English[14] = {0x4c, 0x75, 0x69, 0x73, 0x20, 0x53, 0xc3, 0xa1, 0x6e, 0x63, 0x68, 0x65, 0x7a, 0x00};
+GX_CONST GX_UBYTE display_1_STRING_3_English[4] = "0.0";
+GX_CONST GX_UBYTE display_1_STRING_5_English[2] = "0";
 
 /* String Table for display_1 language English                                 */
 
-GX_CONST GX_UBYTE *display_1_English_string_table[23] =
+GX_CONST GX_UBYTE *display_1_English_string_table[33] =
 {
     GX_NULL,
     display_1_HELLO_WORLD_English,
@@ -363,20 +372,30 @@ GX_CONST GX_UBYTE *display_1_English_string_table[23] =
     display_1_WINDOW1_English,
     display_1_WINDOW2_English,
     display_1_INSTRUCT_BUTTON_English,
-    display_1_NAME2_LBL_English,
-    display_1_NAME1_LBL_English,
-    display_1_NAMES_LBL_English,
-    display_1_HW_VER_LBL_English,
-    display_1_HW_VER_VALUE_LBL_English,
-    display_1_SW_VER_VALUE_LBL_English,
-    display_1_SW_VER_LBL_English,
-    display_1_RPM_LBL_English,
-    display_1_RPM_VALUE_LBL_English,
-    display_1_SPEED_VALUE_LBL_English,
-    display_1_SET_POINT_LBL_English,
-    display_1_DUTY_CYCLE_LBL_English,
-    display_1_DUTY_CYCLE_VALUE_LBL_English,
-    display_1_PROY_NAME_LBL_English
+    GX_NULL,
+    display_1_TEXT_SPEED_English,
+    display_1_TEXT_DUTYCYCLE_English,
+    display_1_TEXT_PERCENTAGE_English,
+    display_1_TEXT_RPM_English,
+    display_1_TEXT_SWVERSION_English,
+    display_1_TEXT_XX_English,
+    display_1_TEXT_NOMBREPROYECTO_English,
+    display_1_TEXT_HWVERSION_English,
+    display_1_TEXT_CESEQP001_English,
+    display_1_TEXT_CESEQC001_English,
+    display_1_TEXT_DEVELOPERS_English,
+    display_1_TEXT_DEV2_English,
+    display_1_TEXT_DEV1_English,
+    display_1_TEXT_SETPOINT_English,
+    display_1_TEXT_DIAGNOSTICS_English,
+    display_1_TEXT_VARIABLES_English,
+    display_1_STRING_1_English,
+    display_1_STRING_2_English,
+    display_1_TEXT_DEV3_English,
+    display_1_DEV_3_English,
+    display_1_STRING_4_English,
+    display_1_STRING_3_English,
+    display_1_STRING_5_English
 
 };
 

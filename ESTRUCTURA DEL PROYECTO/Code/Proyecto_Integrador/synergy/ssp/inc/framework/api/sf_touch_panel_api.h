@@ -64,7 +64,7 @@ SSP_HEADER
  * Macro definitions
  **********************************************************************************************************************/
 #define SF_TOUCH_PANEL_API_VERSION_MAJOR (1U)
-#define SF_TOUCH_PANEL_API_VERSION_MINOR (2U)
+#define SF_TOUCH_PANEL_API_VERSION_MINOR (4U)
 
 /** Touch panel message size in 4 byte words, rounded up. */
 #define SF_TOUCH_PANEL_MESSAGE_WORDS ((sizeof(sf_touch_panel_payload_t) + 3) / 4)

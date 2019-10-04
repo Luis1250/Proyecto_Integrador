@@ -6,7 +6,7 @@
 /*  www.expresslogic.com.                                                      */
 /*                                                                             */
 /*  GUIX Studio Revision 5.4.2.9                                               */
-/*  Date (dd.mm.yyyy):  9. 8.2019   Time (hh:mm): 18:16                        */
+/*  Date (dd.mm.yyyy):  4.10.2019   Time (hh:mm): 09:47                        */
 /*******************************************************************************/
 
 
@@ -22,25 +22,25 @@ extern   "C" {
 
 /* Define widget ids                                                           */
 
-#define ID_WINDOW2 1
-#define ID_HELLO 2
-#define ID_WINDOW2_TEXT 3
-#define ID_WINDOW1 4
-#define ID_WINDOW1_TEXT 5
-#define id_name2_lbl 6
-#define id_name1_lbl 7
-#define id_names_lbl 8
-#define id_hw_ver_lbl 9
-#define id_hw_ver_value_lbl 10
-#define id_sw_ver_value_lbl 11
-#define id_sw_ver_lbl 12
-#define id_rpm_lbl 13
-#define id_rpm_value_lbl 14
-#define id_speed_value_lbl 15
-#define id_set_point_lbl 16
-#define id_duty_cycle_lbl 17
-#define id_duty_cycle_value_lbl 18
-#define id_proy_name_lbl 19
+#define ID_WINDOW1 1
+#define ID_BUTTONCOUNTER 2
+#define ID_SPEEDCOUNTER 3
+#define ID_PROYECTNAME 4
+#define ID_TDUTYCYCLE 5
+#define ID_TSPEED 6
+#define ID_TSWVERSION 7
+#define ID_THWVERSION 8
+#define ID_TCESEQP001 9
+#define ID_TCESEQC001 10
+#define ID_TDEVELOPERS 11
+#define ID_Developer1 12
+#define ID_Developer2 13
+#define ID_TSETPOINT 14
+#define ID_SETPOINTCOUNTER 15
+#define SW_Ver 16
+#define ID_WINDOW2 17
+#define ID_HELLO 18
+#define ID_BUTTONCOUNTER2 19
 
 
 /* Define animation ids                                                        */
@@ -90,7 +90,25 @@ typedef struct
     GX_RESOURCE_ID font_id;
     GX_RESOURCE_ID normal_text_color_id;
     GX_RESOURCE_ID selected_text_color_id;
+} GX_TEXT_BUTTON_PROPERTIES;
+
+typedef struct
+{
+    GX_RESOURCE_ID string_id;
+    GX_RESOURCE_ID font_id;
+    GX_RESOURCE_ID normal_text_color_id;
+    GX_RESOURCE_ID selected_text_color_id;
 } GX_PROMPT_PROPERTIES;
+
+typedef struct
+{
+    GX_RESOURCE_ID string_id;
+    GX_RESOURCE_ID font_id;
+    GX_RESOURCE_ID normal_text_color_id;
+    GX_RESOURCE_ID selected_text_color_id;
+    VOID (*format_func)(GX_NUMERIC_PROMPT *, INT);
+    INT            numeric_prompt_value;
+} GX_NUMERIC_PROMPT_PROPERTIES;
 
 typedef struct
 {
@@ -100,39 +118,43 @@ typedef struct
 
 /* Declare top-level control blocks                                            */
 
+typedef struct WINDOW1_CONTROL_BLOCK_STRUCT
+{
+    GX_WINDOW_MEMBERS_DECLARE
+    GX_NUMERIC_PROMPT window1_counter_dutycycle;
+    GX_NUMERIC_PROMPT window1_speedcounter;
+    GX_PROMPT window1_proyectname;
+    GX_PROMPT window1_dutycycle;
+    GX_PROMPT window1_speed;
+    GX_PROMPT window1_prompt_4;
+    GX_PROMPT window1_prompt_5;
+    GX_PROMPT window1_swversion;
+    GX_PROMPT window1_hwversion;
+    GX_PROMPT window1_ceseqp001;
+    GX_PROMPT window1_ceseqc001;
+    GX_PROMPT window1_developers;
+    GX_PROMPT window1_Dev1;
+    GX_PROMPT window1_Dev3;
+    GX_PROMPT window1_setpoint;
+    GX_NUMERIC_PROMPT window1_setpointcounter;
+    GX_PROMPT window1_prompt_15;
+    GX_PROMPT window1_Dev2;
+    GX_PROMPT window1_swver;
+} WINDOW1_CONTROL_BLOCK;
+
 typedef struct WINDOW2_CONTROL_BLOCK_STRUCT
 {
     GX_WINDOW_MEMBERS_DECLARE
     GX_PROMPT window2_hellotext;
-    GX_PROMPT window2_window2_text;
+    GX_TEXT_BUTTON window2_buttoncounter2;
 } WINDOW2_CONTROL_BLOCK;
-
-typedef struct WINDOW1_CONTROL_BLOCK_STRUCT
-{
-    GX_WINDOW_MEMBERS_DECLARE
-    GX_PROMPT window1_window1_text;
-    GX_PROMPT window1_name2_lbl;
-    GX_PROMPT window1_name1_lbl;
-    GX_PROMPT window1_names_lbl;
-    GX_PROMPT window1_hw_ver_lbl;
-    GX_PROMPT window1_hw_ver_value_lbl;
-    GX_PROMPT window1_sw_ver_value_lbl;
-    GX_PROMPT window1_sw_ver_lbl;
-    GX_PROMPT window1_rpm_lbl;
-    GX_PROMPT window1_rpm_value_lbl;
-    GX_PROMPT window1_speed_value_lbl;
-    GX_PROMPT window1_set_point_lbl;
-    GX_PROMPT window1_duty_cycle_lbl;
-    GX_PROMPT window1_duty_cycle_value_lbl;
-    GX_PROMPT window1_proy_name_lbl;
-} WINDOW1_CONTROL_BLOCK;
 
 
 /* extern statically defined control blocks                                    */
 
 #ifndef GUIX_STUDIO_GENERATED_FILE
-extern WINDOW2_CONTROL_BLOCK window2;
 extern WINDOW1_CONTROL_BLOCK window1;
+extern WINDOW2_CONTROL_BLOCK window2;
 #endif
 
 /* Prototype Synergy display driver specific functions                         */
@@ -196,8 +218,8 @@ VOID _gx_synergy_jpeg_draw (GX_DRAW_CONTEXT *p_context, INT x, INT y, GX_PIXELMA
 
 /* Declare event process functions, draw functions, and callback functions     */
 
-UINT window2_handler(GX_WINDOW *widget, GX_EVENT *event_ptr);
 UINT window1_handler(GX_WINDOW *widget, GX_EVENT *event_ptr);
+UINT window2_handler(GX_WINDOW *widget, GX_EVENT *event_ptr);
 
 /* Declare the GX_STUDIO_DISPLAY_INFO structure                                */
 
@@ -223,7 +245,9 @@ typedef struct GX_STUDIO_DISPLAY_INFO_STRUCT
 
 /* Declare Studio-generated functions for creating top-level widgets           */
 
+UINT gx_studio_text_button_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *control_block, GX_WIDGET *parent);
 UINT gx_studio_prompt_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *control_block, GX_WIDGET *parent);
+UINT gx_studio_numeric_prompt_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *control_block, GX_WIDGET *parent);
 UINT gx_studio_window_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *control_block, GX_WIDGET *parent);
 GX_WIDGET *gx_studio_widget_create(GX_BYTE *storage, GX_CONST GX_STUDIO_WIDGET *definition, GX_WIDGET *parent);
 UINT gx_studio_named_widget_create(char *name, GX_WIDGET *parent, GX_WIDGET **new_widget);

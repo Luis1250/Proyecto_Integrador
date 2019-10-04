@@ -1,13 +1,9 @@
 /*
  * Comm_Handler.h
  *
- *  Created on: 26/07/2019
  *
- * - 26-jul-2019  Francisco Govea
- *  - Add communication layer
- *
- * - 07-aug-2019  Francisco Govea
- *  - Implement Receive Communication
+ *  Created on: 01/10/2019
+ *      Author: Team 2
  */
 
 #ifndef COMM_HANDLER_H_

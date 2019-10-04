@@ -1,10 +1,9 @@
 /*
  * Encoder_Handler.h
  *
- *  Created on: 25/07/2019
  *
- * - 25-jul-2019  Francisco Govea
- *  - Add interruption for Encoder
+ *  Created on: 01/10/2019
+ *      Author: Team 2
  */
 
 #ifndef ENCODER_HANDLER_H_

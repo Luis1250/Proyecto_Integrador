@@ -1,10 +1,9 @@
 /*
  * ADC_Thread_entry.h
  *
- *  Created on: 12/07/2019
  *
- * - 12-jul-2019  Francisco Govea
- *   - Create initial file
+ *  Created on: 01/10/2019
+ *      Author: Team 2
  */
 
 #ifndef ADC_THREAD_HANDLER_H_

@@ -1,10 +1,9 @@
 /*
  * Encoder_Thread_entry.c
  *
- *  Created on: 25/07/2019
  *
- * - 25-jul-2019  Francisco Govea
- *  - Add interruption for Encoder
+ *  Created on: 01/10/2019
+ *      Author: Team 2
  */
 
 #include "Encoder_Thread.h"

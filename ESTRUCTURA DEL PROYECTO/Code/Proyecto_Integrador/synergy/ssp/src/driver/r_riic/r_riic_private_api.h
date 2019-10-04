@@ -44,8 +44,6 @@ ssp_err_t R_RIIC_MasterSlaveAddressSet (i2c_ctrl_t    * const p_api_ctrl,
                                         i2c_addr_mode_t const addr_mode);
 
 
-/** TODO_RIIC slave functions */
-
 /** Common macro for SSP header files. There is also a corresponding SSP_HEADER macro at the top of this file. */
 SSP_FOOTER
 

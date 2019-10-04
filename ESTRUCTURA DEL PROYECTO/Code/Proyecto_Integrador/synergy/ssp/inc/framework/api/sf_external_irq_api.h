@@ -60,7 +60,7 @@ SSP_HEADER
  * Macro definitions
  **********************************************************************************************************************/
 #define SF_EXTERNAL_IRQ_API_VERSION_MAJOR (1U)
-#define SF_EXTERNAL_IRQ_API_VERSION_MINOR (2U)
+#define SF_EXTERNAL_IRQ_API_VERSION_MINOR (4U)
 
 /**********************************************************************************************************************
  * Typedef definitions
@@ -94,7 +94,7 @@ typedef struct st_sf_external_irq_cfg
 /** External IRQ framework API structure.  External IRQ implementations  use the following API. */
 typedef struct st_sf_external_irq_api
 {
-    /** Acquire mutex, then handle driver initialization at the HAL layer.
+    /** Create the semaphore, then handle driver initialization at the HAL layer.
      * @par Implemented as
      *  - SF_EXTERNAL_IRQ_Open()
      *
@@ -128,7 +128,7 @@ typedef struct st_sf_external_irq_api
      */
     ssp_err_t (* versionGet)(ssp_version_t     * const p_version);
 
-    /** Release channel mutex and close channel at HAL layer.
+    /** Close channel at HAL layer and release the RTOS services.
      * @par Implemented as
      *  - SF_EXTERNAL_IRQ_Close()
      *

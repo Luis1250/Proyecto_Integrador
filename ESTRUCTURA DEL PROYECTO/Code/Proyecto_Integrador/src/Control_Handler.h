@@ -1,11 +1,12 @@
 /*
  * Control_Handler.h
  *
- *  Created on: 27/07/2019
  *
- * - 27-jul-2019   Francisco Govea
- *  - Add Control Module
+ *  Created on: 01/10/2019
+ *      Author: Team 2
  */
+
+#include "constants.h"
 
 #ifndef CONTROL_HANDLER_H_
 #define CONTROL_HANDLER_H_
@@ -23,24 +24,6 @@
  */
 #define MAX_REVOLUTIONS_PER_MINUTE   3036
 
-/**
- * Defines the constant for Proportional part.
- */
-#define KP_CONSTANT            0
-
-/**
- * Defines the constant for Integral part.
- */
-#define KI_CONSTANT            0
-
-/**
- * Defines the constant for Derivative part.
- */
-#define KD_CONSTANT            0
-
-/****************************************************************************
- * Variables
- ****************************************************************************/
 
 /**
  * Struct: Control_Variables_T

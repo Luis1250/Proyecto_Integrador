@@ -17,7 +17,8 @@ static const timer_on_gpt_cfg_t pwm_timer_extend =
 { .gtioca =
 { .output_enabled = false, .stop_level = GPT_PIN_LEVEL_LOW },
   .gtiocb =
-  { .output_enabled = true, .stop_level = GPT_PIN_LEVEL_LOW } };
+  { .output_enabled = true, .stop_level = GPT_PIN_LEVEL_LOW },
+  .shortest_pwm_signal = GPT_SHORTEST_LEVEL_OFF, };
 static const timer_cfg_t pwm_timer_cfg =
 { .mode = TIMER_MODE_PWM,
   .period = 100,

@@ -157,9 +157,9 @@ __STATIC_INLINE void    HW_RIIC_ClockCfg        (R_IIC0_Type * p_riic_reg,
  * Enable/disable slope control circuit
  * @param   p_riic_reg      Base address of the hardware registers
  * @param   timeout         timeout type
- * @param   short_mode      Counting mode is short
+ * @param   timeout mode    short mode or long mode
  **********************************************************************************************************************/
-__STATIC_INLINE void    HW_RIIC_TimeoutCfg (R_IIC0_Type * p_riic_reg, riic_timeout_t timeout, bool short_mode)
+__STATIC_INLINE void    HW_RIIC_TimeoutCfg (R_IIC0_Type * p_riic_reg, riic_timeout_t timeout, riic_timeout_mode_t timeout_mode)
 {
    if(RIIC_TIMEOUT_OFF != timeout)
    {
@@ -177,7 +177,7 @@ __STATIC_INLINE void    HW_RIIC_TimeoutCfg (R_IIC0_Type * p_riic_reg, riic_timeo
            p_riic_reg->ICMR2_b.TMOL = 1;
        }
 
-       p_riic_reg->ICMR2_b.TMOS = short_mode;
+       p_riic_reg->ICMR2_b.TMOS = (RIIC_TIMEOUT_MODE_SHORT == timeout_mode);
 
        /* Enable timeout function */
        p_riic_reg->ICFER_b.TMOE = 1;
@@ -469,29 +469,32 @@ __STATIC_INLINE uint8_t HW_RIIC_GetAndClearErrsEvents (R_IIC0_Type * p_riic_reg)
 {
     uint8_t errs_events = 0;
 
+    /** Clear all the event flags except the receive data full, transmit end and transmit data empty flags*/
     if (p_riic_reg->ICSR2_b.TMOF)
     {
         errs_events |= RIIC_ERR_EVENT_TIMEOUT;
+        p_riic_reg->ICSR2_b.TMOF = 0;
     }
     if (p_riic_reg->ICSR2_b.AL)
     {
         errs_events |= RIIC_ERR_EVENT_ARBITRATION_LOSS;
+        p_riic_reg->ICSR2_b.AL = 0;
     }
     if (p_riic_reg->ICSR2_b.NACKF)
     {
         errs_events |= RIIC_ERR_EVENT_NACK;
+        p_riic_reg->ICSR2_b.NACKF = 0;
     }
     if (p_riic_reg->ICSR2_b.START)
     {
         errs_events |= RIIC_ERR_EVENT_START;
+        p_riic_reg->ICSR2_b.START = 0;
     }
     if (p_riic_reg->ICSR2_b.STOP)
     {
         errs_events |= RIIC_ERR_EVENT_STOP;
+        p_riic_reg->ICSR2_b.STOP = 0;
     }
-
-    /** Clear all the event flags except the receive data full, transmit end and transmit data empty flags*/
-    p_riic_reg->ICSR2 &= 0xE0;
 
     return errs_events;
 }
@@ -503,26 +506,6 @@ __STATIC_INLINE uint8_t HW_RIIC_GetAndClearErrsEvents (R_IIC0_Type * p_riic_reg)
 __STATIC_INLINE bool    HW_RIIC_StopPending     (R_IIC0_Type * p_riic_reg)
 {
     return (1 == p_riic_reg->ICCR2_b.SP);
-}
-
-/*******************************************************************************************************************//**
- * Resets the internal timeout counter.
- * @param   p_riic_reg      Base address of the hardware registers
- **********************************************************************************************************************/
-__STATIC_INLINE void    HW_RIIC_ResetTimeout    (R_IIC0_Type * p_riic_reg)
-{
-    /* Disable timeout function */
-    p_riic_reg->ICFER_b.TMOE = 0;
-
-    /* Clear the timeout status flag */
-    if(1 == p_riic_reg->ICSR2_b.TMOF)
-    {
-        p_riic_reg->ICSR2_b.TMOF = 0;
-    }
-    p_riic_reg->ICSR2_b.TMOF = 0;
-
-    /* Enable timeout function */
-    p_riic_reg->ICFER_b.TMOE = 1;
 }
 
 /*******************************************************************************************************************//**
@@ -660,9 +643,6 @@ __STATIC_INLINE uint8_t volatile const * HW_RIIC_ReadAddrGet (R_IIC0_Type * p_ri
  **********************************************************************************************************************/
 __STATIC_INLINE void HW_RIIC_EnableTENDIRQ(R_IIC0_Type * p_riic_reg, IRQn_Type irq)
 {
-    /* Clear the TEND flag as described in the HW manual */
-    HW_RIIC_ClearTxEnd(p_riic_reg);
-
     /* Clear any pending TEND interrupts */
     R_BSP_IrqStatusClear(irq);
     NVIC_ClearPendingIRQ(irq);
@@ -760,11 +740,16 @@ __STATIC_INLINE void   HW_RIIC_EnableNACKE (R_IIC0_Type * p_riic_reg, bool enabl
  **********************************************************************************************************************/
 __STATIC_INLINE void   HW_RIIC_EnableNFE (R_IIC0_Type * p_riic_reg, uint8_t num_filter_stages)
 {
-   if(0 < num_filter_stages)
+   if (0 < num_filter_stages)
    {
-       p_riic_reg->ICMR3_b.NF = (num_filter_stages & 0x03U);
+       p_riic_reg->ICMR3_b.NF = ((num_filter_stages - 0x01U) & 0x03U);
        p_riic_reg->ICFER_b.NFE = 0x01U;
    }
+   else
+    {
+       p_riic_reg->ICMR3_b.NF = 0;
+       p_riic_reg->ICFER_b.NFE = 0;
+    }
 }
 
 /*******************************************************************************************************************//**
@@ -776,6 +761,15 @@ __STATIC_INLINE void   HW_RIIC_FMPSlopeCircuit(R_IIC0_Type * p_riic_reg, bool en
     p_riic_reg->ICFER_b.FMPE = enable;
 }
 
+/*******************************************************************************************************************//**
+* This function sets the SDA output delay in the I2C Mode Register 2 (ICMR2).
+* @param   p_riic_reg       Base address of the hardware registers
+* @param   delay            add delay to the SDA output up to 7 cycles
+***********************************************************************************************************************/
+__STATIC_INLINE void   HW_RIIC_DataOutputDelay (R_IIC0_Type * p_riic_reg, uint32_t const delay)
+{
+    p_riic_reg->ICMR2_b.SDDL = (uint8_t)(delay & 0x07);
+}
 
 /** Common macro for SSP header files. There is also a corresponding SSP_HEADER macro at the top of this file. */
 SSP_FOOTER

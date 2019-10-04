@@ -6,7 +6,7 @@
 /*  site at www.expresslogic.com.                                              */
 /*                                                                             */
 /*  GUIX Studio Revision 5.4.2.9                                               */
-/*  Date (dd.mm.yyyy):  9. 8.2019   Time (hh:mm): 18:16                        */
+/*  Date (dd.mm.yyyy):  4.10.2019   Time (hh:mm): 09:47                        */
 /*******************************************************************************/
 
 
@@ -88,20 +88,30 @@
 #define GX_STRING_ID_WINDOW1 6
 #define GX_STRING_ID_WINDOW2 7
 #define GX_STRING_ID_INSTRUCT_BUTTON 8
-#define GX_STRING_ID_NAME2_LBL 9
-#define GX_STRING_ID_NAME1_LBL 10
-#define GX_STRING_ID_NAMES_LBL 11
-#define GX_STRING_ID_HW_VER_LBL 12
-#define GX_STRING_ID_HW_VER_VALUE_LBL 13
-#define GX_STRING_ID_SW_VER_VALUE_LBL 14
-#define GX_STRING_ID_SW_VER_LBL 15
-#define GX_STRING_ID_RPM_LBL 16
-#define GX_STRING_ID_RPM_VALUE_LBL 17
-#define GX_STRING_ID_SPEED_VALUE_LBL 18
-#define GX_STRING_ID_SET_POINT_LBL 19
-#define GX_STRING_ID_DUTY_CYCLE_LBL 20
-#define GX_STRING_ID_DUTY_CYCLE_VALUE_LBL 21
-#define GX_STRING_ID_PROY_NAME_LBL 22
-#define DISPLAY_1_STRING_TABLE_SIZE 23
+#define GX_STRING_ID_BUTTON_COUNTER 9
+#define GX_STRING_ID_TEXT_SPEED 10
+#define GX_STRING_ID_TEXT_DUTYCYCLE 11
+#define GX_STRING_ID_TEXT_PERCENTAGE 12
+#define GX_STRING_ID_TEXT_RPM 13
+#define GX_STRING_ID_TEXT_SWVERSION 14
+#define GX_STRING_ID_TEXT_XX 15
+#define GX_STRING_ID_TEXT_NOMBREPROYECTO 16
+#define GX_STRING_ID_TEXT_HWVERSION 17
+#define GX_STRING_ID_TEXT_CESEQP001 18
+#define GX_STRING_ID_TEXT_CESEQC001 19
+#define GX_STRING_ID_TEXT_DEVELOPERS 20
+#define GX_STRING_ID_TEXT_DEV2 21
+#define GX_STRING_ID_TEXT_DEV1 22
+#define GX_STRING_ID_TEXT_SETPOINT 23
+#define GX_STRING_ID_TEXT_DIAGNOSTICS 24
+#define GX_STRING_ID_TEXT_VARIABLES 25
+#define GX_STRING_ID_STRING_1 26
+#define GX_STRING_ID_STRING_2 27
+#define GX_STRING_ID_TEXT_DEV3 28
+#define GX_STRING_ID_DEV_3 29
+#define GX_STRING_ID_STRING_4 30
+#define GX_STRING_ID_STRING_3 31
+#define GX_STRING_ID_STRING_5 32
+#define DISPLAY_1_STRING_TABLE_SIZE 33
 
 #endif                                       /* sentry                         */

@@ -2155,8 +2155,8 @@
 									"left": 178,
 									"top": 202,
 									"width": 54.18994140625,
-									"height": 39,
-									"text": "Get current RPMs",
+									"height": 26,
+									"text": "Get error e(t)",
 									"wordWrap": true
 								}
 							],
@@ -2237,7 +2237,7 @@
 									"top": 290,
 									"width": 54.18994140625,
 									"height": 26,
-									"text": "Get Error",
+									"text": "Get new c(t)",
 									"wordWrap": true
 								}
 							],
@@ -2315,19 +2315,19 @@
 									"fillColor": "#2b71ff",
 									"font": "Arial;13;0",
 									"left": 178,
-									"top": 362,
+									"top": 370,
 									"width": 54.18994140625,
-									"height": 39,
-									"text": "Send new demand",
+									"height": 52,
+									"text": "Send new demand y(t)",
 									"wordWrap": true
 								}
 							],
 							"fillColor": "#2b71ff",
 							"font": "Arial;13;0",
 							"left": 168,
-							"top": 352,
+							"top": 360,
 							"width": 74.18994140625,
-							"height": 59,
+							"height": 81,
 							"nameLabel": {
 								"$ref": "AAAAAAFtS37gXngagq8="
 							}
@@ -2354,7 +2354,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 226,
-									"top": 331,
+									"top": 335,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 15,
@@ -2372,10 +2372,68 @@
 								"$ref": "AAAAAAFtS3jkl3gG2TA="
 							},
 							"lineStyle": 2,
-							"points": "212:325;212:352",
+							"points": "212:325;212:360",
 							"nameLabel": {
 								"$ref": "AAAAAAFtS37iQ3giv9s="
 							}
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAFtc75KOXSkQEQ=",
+							"_parent": {
+								"$ref": "AAAAAAFtS3eu5XfSkOE="
+							},
+							"font": "Arial;13;0",
+							"left": 296,
+							"top": 120,
+							"width": 121,
+							"height": 41,
+							"text": "Read Sensor r(t)"
+						},
+						{
+							"_type": "UMLNoteLinkView",
+							"_id": "AAAAAAFtc75KkXSnY58=",
+							"_parent": {
+								"$ref": "AAAAAAFtS3eu5XfSkOE="
+							},
+							"font": "Arial;13;0",
+							"head": {
+								"$ref": "AAAAAAFtc75KOXSkQEQ="
+							},
+							"tail": {
+								"$ref": "AAAAAAFtS3fkLXfhoPA="
+							},
+							"lineStyle": 1,
+							"points": "242:143;295:142"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAFtc8csBHS0rMI=",
+							"_parent": {
+								"$ref": "AAAAAAFtS3eu5XfSkOE="
+							},
+							"font": "Arial;13;0",
+							"left": 296,
+							"top": 176,
+							"width": 193,
+							"height": 83,
+							"text": "\ne(t)=SP-VP(t)\nSP:SetPoint: r(t)\nPV: Process Variable: h(t)"
+						},
+						{
+							"_type": "UMLNoteLinkView",
+							"_id": "AAAAAAFtc8csXXS3hyA=",
+							"_parent": {
+								"$ref": "AAAAAAFtS3eu5XfSkOE="
+							},
+							"font": "Arial;13;0",
+							"head": {
+								"$ref": "AAAAAAFtc8csBHS0rMI="
+							},
+							"tail": {
+								"$ref": "AAAAAAFtS3iAI3fzClI="
+							},
+							"lineStyle": 1,
+							"points": "242:220;295:219"
 						}
 					]
 				},
@@ -2431,7 +2489,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFtS3eu5XfRwwQ="
 					},
-					"name": "Get current RPMs",
+					"name": "Get error e(t)",
 					"ownedElements": [
 						{
 							"_type": "FCFlow",
@@ -2454,7 +2512,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFtS3eu5XfRwwQ="
 					},
-					"name": "Get Error",
+					"name": "Get new c(t)",
 					"ownedElements": [
 						{
 							"_type": "FCFlow",
@@ -2477,7 +2535,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFtS3eu5XfRwwQ="
 					},
-					"name": "Send new demand"
+					"name": "Send new demand y(t)"
 				}
 			]
 		},

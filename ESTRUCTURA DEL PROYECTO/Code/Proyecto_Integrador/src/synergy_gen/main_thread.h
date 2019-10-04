@@ -4,9 +4,9 @@
 #include "bsp_api.h"
 #include "tx_api.h"
 #include "hal_data.h"
-#ifdef __cplusplus 
+#ifdef __cplusplus
 extern "C" void main_thread_entry(void);
-#else 
+#else
 extern void main_thread_entry(void);
 #endif
 #include "r_sci_spi.h"
@@ -73,6 +73,7 @@ void NULL(i2c_callback_args_t *p_args);
 #endif
 
 extern riic_instance_ctrl_t g_i2c_ctrl;
+extern const riic_extended_cfg g_i2c_extend;
 #define SYNERGY_NOT_DEFINED (1)            
 #if (SYNERGY_NOT_DEFINED == g_transfer0)
 #define g_i2c_P_TRANSFER_TX (NULL)
@@ -85,7 +86,7 @@ extern riic_instance_ctrl_t g_i2c_ctrl;
 #define g_i2c_P_TRANSFER_RX (&g_transfer1)
 #endif
 #undef SYNERGY_NOT_DEFINED
-#define g_i2c_P_EXTEND (NULL)
+#define g_i2c_P_EXTEND (&g_i2c_extend)
 /** SF Touch Panel on SF Touch Panel I2C Instance. */
 extern const sf_touch_panel_instance_t g_sf_touch_panel_i2c;
 /** Messaging Framework Instance */

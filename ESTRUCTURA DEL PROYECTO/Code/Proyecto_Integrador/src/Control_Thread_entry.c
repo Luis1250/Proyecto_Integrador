@@ -1,10 +1,8 @@
 /*
  * Control_Thread_entry.c
  *
- *  Created on: 27/07/2019
- *
- * - 27-jul-2019   Francisco Govea
- *  - Add Control Module
+ *  Created on: 01/10/2019
+ *      Author: Team 2
  */
 
 #include "Control_Thread.h"

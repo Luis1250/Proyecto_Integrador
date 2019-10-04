@@ -48,7 +48,7 @@ SSP_HEADER
  **********************************************************************************************************************/
 /** Version of code that implements the API defined in this file */
 #define SF_MESSAGE_CODE_VERSION_MAJOR (1U)
-#define SF_MESSAGE_CODE_VERSION_MINOR (5U)
+#define SF_MESSAGE_CODE_VERSION_MINOR (7U)
 
 /** The size of a message queue in words */
 #define SF_MESSAGE_QUEUE_MESSAGE_WORDS (1)

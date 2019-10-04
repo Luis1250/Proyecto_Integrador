@@ -53,7 +53,7 @@ SSP_HEADER
  * Macro definitions
  **********************************************************************************************************************/
 #define SF_EXTERNAL_IRQ_CODE_VERSION_MAJOR (1U)
-#define SF_EXTERNAL_IRQ_CODE_VERSION_MINOR (5U)
+#define SF_EXTERNAL_IRQ_CODE_VERSION_MINOR (7U)
 
 /**********************************************************************************************************************
  * Typedef definitions
@@ -63,7 +63,6 @@ SSP_HEADER
 typedef struct st_sf_external_irq_instance_ctrl
 {
     uint32_t                  open;          ///< Used by driver to check if control block is valid.
-    TX_MUTEX                  mutex;         ///< Mutex used to protect access to lower level driver hardware registers.
     TX_SEMAPHORE              semaphore;     ///< Semaphore used for ::SF_EXTERNAL_IRQ_Wait.
     external_irq_instance_t const * p_lower_lvl_irq;  ///< Pointer to lower level driver instance.
     bool                      callback_used; ///< Used by driver to check if wait can be used.

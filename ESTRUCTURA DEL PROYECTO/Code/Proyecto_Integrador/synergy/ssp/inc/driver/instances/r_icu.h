@@ -49,7 +49,7 @@ SSP_HEADER
 Macro definitions
 ***********************************************************************************************************************/
 #define ICU_CODE_VERSION_MAJOR   (1U)
-#define ICU_CODE_VERSION_MINOR   (4U)
+#define ICU_CODE_VERSION_MINOR   (6U)
 
 /*********************************************************************************************************************
  * Typedef definitions

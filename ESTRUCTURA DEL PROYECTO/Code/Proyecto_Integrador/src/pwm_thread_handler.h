@@ -1,19 +1,8 @@
 /*
  * PWM_Thread_entry.h
  *
- *  Created on: 12/07/2019
- *
- * - 12-jul-2019  Francisco Govea
- *   - Create initial file
- *
- * - 22-jul-2019  Francisco Govea
- *   - Add improvements to PWM
- *
- * - 25-jul-2019  Francisco Govea
- *   - Add interruption for Encoder
- *
- * - 07-aug-2019  Francisco Govea
- *   - Add Function to send duty cycle
+ *  Created on: 01/10/2019
+ *      Author: Team 2
  */
 
 #ifndef PWM_THREAD_HANDLER_H_

@@ -46,11 +46,18 @@ SSP_HEADER
 Macro definitions
 ***********************************************************************************************************************/
 #define RIIC_MASTER_CODE_VERSION_MAJOR   (1U)
-#define RIIC_MASTER_CODE_VERSION_MINOR   (9U)
+#define RIIC_MASTER_CODE_VERSION_MINOR   (13U)
 
 /***********************************************************************************************************************
 Typedef definitions
 ***********************************************************************************************************************/
+/** I2C Timeout mode parameter definition */
+typedef enum e_riic_timeout_mode
+{
+    RIIC_TIMEOUT_MODE_LONG      = 0,     ///< Timeout Detection Time Select: Long Mode -> TMOS = 0
+    RIIC_TIMEOUT_MODE_SHORT     = 1      ///< Timeout Detection Time Select: Short Mode -> TMOS = 1
+} riic_timeout_mode_t;
+
 /** I2C control structure. DO NOT INITIALIZE. */
 typedef struct st_riic_instance_ctrl
 {
@@ -79,12 +86,20 @@ typedef struct st_riic_instance_ctrl
     volatile bool   restart;        /**< Holds whether or not the restart should be issued when done */
     volatile bool   err;            /**< Tracks whether or not an error occurred during processing */
     volatile bool   restarted;      /**< Tracks whether or not a restart was issued during the previous transfer */
-    volatile bool   transaction_completed; /**< Tracks if the transaction started earlier was completed  */
     volatile bool   dummy_read_completed;  /**< Tracks whether the dummy read is performed */
     volatile bool   activation_on_rxi; /**<< Tracks whether the transfer is activated on RXI interrupt */
     volatile bool   activation_on_txi; /**<< Tracks whether the transfer is activated on TXI interrupt */
     volatile bool   address_restarted;   /**<< Tracks whether the restart condition is send on 10 bit read */
+    volatile bsp_lock_t   resource_lock_tx_rx; /**< Resource lock for transmission/reception */
+    riic_timeout_mode_t   timeout_mode;  /**<< Holds the timeout mode value. i.e short mode or long mode */
+    i2c_hw_err_event_t    actual_hwErr_event; /**<< Holds error event value obtained through hardware */
 } riic_instance_ctrl_t;
+
+/** R_IIC extended configuration */
+typedef struct st_riic_extended_cfg
+{
+    riic_timeout_mode_t timeout_mode;      ///< Timeout Detection Time Select: Long Mode = 0 and Short Mode = 1.
+} riic_extended_cfg;
 
 /**********************************************************************************************************************
 Exported global variables

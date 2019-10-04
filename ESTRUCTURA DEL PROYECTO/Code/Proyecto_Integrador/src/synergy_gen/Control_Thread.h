@@ -4,9 +4,9 @@
 #include "bsp_api.h"
 #include "tx_api.h"
 #include "hal_data.h"
-#ifdef __cplusplus 
+#ifdef __cplusplus
 extern "C" void Control_Thread_entry(void);
-#else 
+#else
 extern void Control_Thread_entry(void);
 #endif
 #ifdef __cplusplus

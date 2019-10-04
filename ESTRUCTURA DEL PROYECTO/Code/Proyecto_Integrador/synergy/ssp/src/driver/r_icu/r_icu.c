@@ -211,6 +211,9 @@ ssp_err_t R_ICU_ExternalIrqEnable (external_irq_ctrl_t * const p_api_ctrl)
 
     ICU_ERROR_RETURN(SSP_INVALID_VECTOR != p_ctrl->irq, SSP_ERR_INTERNAL);
 
+    /* Clear the interrupt status and Pending bits, before the interrupt is enabled. */
+    R_BSP_IrqStatusClear(p_ctrl->irq);
+    NVIC_ClearPendingIRQ(p_ctrl->irq);
     NVIC_EnableIRQ(p_ctrl->irq);
 
     return SSP_SUCCESS;
@@ -236,7 +239,10 @@ ssp_err_t R_ICU_ExternalIrqDisable (external_irq_ctrl_t * const p_api_ctrl)
 
     ICU_ERROR_RETURN(SSP_INVALID_VECTOR != p_ctrl->irq, SSP_ERR_INTERNAL);
 
+    /* Disable the interrupt, and then clear the interrupt pending bits and interrupt status. */
     NVIC_DisableIRQ(p_ctrl->irq);
+    NVIC_ClearPendingIRQ(p_ctrl->irq);
+    R_BSP_IrqStatusClear(p_ctrl->irq);
 
     return SSP_SUCCESS;
 }
@@ -349,7 +355,11 @@ ssp_err_t R_ICU_ExternalIrqClose (external_irq_ctrl_t * const p_api_ctrl)
     ssp_vector_info_t * p_vector_info;
     if (SSP_INVALID_VECTOR != p_ctrl->irq)
     {
+        /* Disable the interrupt, and then clear the interrupt pending bits and interrupt status. */
         NVIC_DisableIRQ(p_ctrl->irq);
+        NVIC_ClearPendingIRQ(p_ctrl->irq);
+        R_BSP_IrqStatusClear(p_ctrl->irq);
+
         R_SSP_VectorInfoGet(p_ctrl->irq, &p_vector_info);
         *(p_vector_info->pp_ctrl) = NULL;
     }

@@ -159,8 +159,10 @@ SSP_VECTOR_DEFINE_CHAN(iic_tei_isr, IIC, TEI, 2);
 SSP_VECTOR_DEFINE_CHAN(iic_eri_isr, IIC, ERI, 2);
 #endif
 riic_instance_ctrl_t g_i2c_ctrl;
+const riic_extended_cfg g_i2c_extend =
+{ .timeout_mode = RIIC_TIMEOUT_MODE_SHORT, };
 const i2c_cfg_t g_i2c_cfg =
-{ .channel = 2, .rate = I2C_RATE_STANDARD, .slave = 0x48, .addr_mode = I2C_ADDR_MODE_7BIT,
+{ .channel = 2, .rate = I2C_RATE_STANDARD, .slave = 0x48, .addr_mode = I2C_ADDR_MODE_7BIT, .sda_delay = 0,
 #define SYNERGY_NOT_DEFINED (1)            
 #if (SYNERGY_NOT_DEFINED == g_transfer0)
   .p_transfer_tx = NULL,
@@ -174,7 +176,8 @@ const i2c_cfg_t g_i2c_cfg =
 #endif
 #undef SYNERGY_NOT_DEFINED	
   .p_callback = NULL,
-  .p_context = (void *) &g_i2c, .rxi_ipl = (15), .txi_ipl = (15), .tei_ipl = (15), .eri_ipl = (15), .p_extend = NULL, };
+  .p_context = (void *) &g_i2c, .rxi_ipl = (15), .txi_ipl = (15), .tei_ipl = (15), .eri_ipl = (15), .p_extend =
+          &g_i2c_extend, };
 /* Instance structure to use this module. */
 const i2c_master_instance_t g_i2c =
 { .p_ctrl = &g_i2c_ctrl, .p_cfg = &g_i2c_cfg, .p_api = &g_i2c_master_on_riic };

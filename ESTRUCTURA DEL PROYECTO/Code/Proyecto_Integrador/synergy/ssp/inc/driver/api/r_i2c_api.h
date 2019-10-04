@@ -90,12 +90,22 @@ typedef enum e_i2c_event
     I2C_EVENT_TX_COMPLETE   = 3     ///< A transmit operation was completed successfully
 } i2c_event_t;
 
+/** RIIC master hardware error callback events */
+typedef enum e_i2c_hw_err_event_t
+{
+    I2C_HW_ERR_EVENT_TIMEOUT          = 1,    ///< Timeout generated during transfer
+    I2C_HW_ERR_EVENT_ARBITRATION_LOSS = 2,    ///< Arbitration loss
+    I2C_HW_ERR_EVENT_NACK             = 16,   ///< NACK event generation
+    I2C_HW_ERR_EVENT_UNDEFINED        = 255   ///< Error not defined
+}i2c_hw_err_event_t;
+
 /** I2C callback parameter definition */
 typedef struct st_i2c_callback_args
 {
-    void        const   * const p_context;      ///< Pointer to user-provided context
-    uint32_t    const           bytes;          ///< Number of received/transmitted bytes in buff
-    i2c_event_t const           event;          ///< Event code
+    void        const  *  const   p_context;         ///< Pointer to user-provided context
+    uint32_t    const             bytes;             ///< Number of received/transmitted bytes in buff
+    i2c_event_t const             event;             ///< Event code
+    i2c_hw_err_event_t    const   i2c_hw_err_event;  ///< IIC Master hardware error events
 } i2c_callback_args_t;
 
 /** I2C configuration block */

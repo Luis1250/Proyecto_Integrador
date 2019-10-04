@@ -53,6 +53,15 @@ Macro definitions
 #define I2C_CODE_READ          (0x01U)
 #define I2C_CODE_10BIT         (0xF0U)
 
+/* Total wait count value within which ICBRL expected to expire.
+ * Max value of ICBRL is 0x1F and Max peripheral clock is 60MHz.
+ * Considering Max System Clock at 240MHz, the maximum required delay has
+ * to be 4 times of ICBRL Max value. */
+#define BUSBUSY_TIMEOUT_COUNT  (0x7CU)
+
+#define RIIC_NANOSECONDS_PER_SECOND      (1000000000U)
+
+
 /***********************************************************************************************************************
 Typedef definitions
 ***********************************************************************************************************************/
@@ -70,12 +79,17 @@ static ssp_err_t riic_transfer_open    (riic_instance_ctrl_t * p_ctrl, i2c_cfg_t
 
 static ssp_err_t r_riic_irq_cfg        (ssp_feature_t * p_feature, ssp_signal_t signal, uint8_t ipl,
                                                                              void * p_ctrl, IRQn_Type * p_irq);
+static void riic_sda_delay_settings    (uint32_t const    clk_divisor, uint16_t   sda_delay,
+                                                                             uint32_t  * const  p_cycles);
 
 /** Functions that manipulate hardware */
+#if RIIC_CFG_PARAM_CHECKING_ENABLE
 static ssp_err_t riic_param_check     (riic_instance_ctrl_t * const p_ctrl, i2c_cfg_t const   * const p_cfg);
+#endif
 static ssp_err_t riic_open_hw_master  (riic_instance_ctrl_t * const p_ctrl, ssp_feature_t * p_feature);
 static void      riic_close_hw_master             (riic_instance_ctrl_t * const p_ctrl);
 static void      riic_configure_interrupts_master (riic_instance_ctrl_t  * const p_ctrl);
+static void      riic_extra_clock_cycles          (riic_instance_ctrl_t  * const p_ctrl, uint8_t clock_cycles);
 static void      riic_abort_hw_master             (riic_instance_ctrl_t  * const p_ctrl);
 static void      riic_enable_transfer_support_tx  (riic_instance_ctrl_t  * const p_ctrl);
 static void      riic_enable_transfer_support_rx  (riic_instance_ctrl_t  * const p_ctrl);
@@ -167,7 +181,7 @@ ssp_err_t R_RIIC_MasterVersionGet   (ssp_version_t          * const p_version)
  *
  * @retval  SSP_SUCCESS               Requested clock rate was set exactly.
  * @retval  SSP_ERR_ASSERTION         The parameter p_api_ctrl or p_cfg is NULL or clock rate is greater than 1MHz.
- *                                    or p_cfg->p_extend not equal to NULL.
+ *                                    or the extended parameter is NULL
  * @retval  SSP_ERR_IN_USE            Attempted to open an already open device instance.
  * @retval  SSP_ERR_INVALID_ARGUMENT  If fast mode plus is configured and the channel does not support it
  * @retval  SSP_ERR_INVALID_RATE      The requested rate cannot be set.
@@ -203,6 +217,8 @@ ssp_err_t R_RIIC_MasterOpen         (i2c_ctrl_t             * const p_api_ctrl,
 
     err = R_BSP_HardwareLock(&ssp_feature);
     RIIC_ERROR_RETURN(SSP_SUCCESS == err, err);
+
+    p_ctrl->timeout_mode = ((riic_extended_cfg *) p_cfg->p_extend)->timeout_mode;
 
     p_ctrl->p_reg = (R_IIC0_Type *) info.ptr;
 
@@ -241,16 +257,16 @@ ssp_err_t R_RIIC_MasterOpen         (i2c_ctrl_t             * const p_api_ctrl,
     }
 
     /* Finally, we can consider the device opened */
-    p_ctrl->transaction_completed = true;
-    p_ctrl->p_buff                = NULL;
-    p_ctrl->total                 = 0U;
-    p_ctrl->remain                = 0U;
-    p_ctrl->loaded                = 0U;
-    p_ctrl->read                  = false;
-    p_ctrl->restart               = false;
-    p_ctrl->err                   = false;
-    p_ctrl->restarted             = false;
-    p_ctrl->open                  = RIIC_OPEN;
+    p_ctrl->resource_lock_tx_rx.lock = BSP_LOCK_UNLOCKED;
+    p_ctrl->p_buff                   = NULL;
+    p_ctrl->total                    = 0U;
+    p_ctrl->remain                   = 0U;
+    p_ctrl->loaded                   = 0U;
+    p_ctrl->read                     = false;
+    p_ctrl->restart                  = false;
+    p_ctrl->err                      = false;
+    p_ctrl->restarted                = false;
+    p_ctrl->open                     = RIIC_OPEN;
 
     return SSP_SUCCESS;
 }
@@ -281,7 +297,6 @@ ssp_err_t R_RIIC_MasterClose        (i2c_ctrl_t             * const p_api_ctrl)
 
     /* Abort an in-progress transfer with this device only */
     err = riic_abort_seq_master(p_ctrl);
-    RIIC_ERROR_RETURN(SSP_SUCCESS == err, err);
 
     /* The device is now considered closed */
     p_ctrl->open = 0U;
@@ -289,19 +304,23 @@ ssp_err_t R_RIIC_MasterClose        (i2c_ctrl_t             * const p_api_ctrl)
     /* Close the handles for the transfer interfaces */
     if (NULL != p_ctrl->info.p_transfer_rx)
     {
-        err = p_ctrl->info.p_transfer_rx->p_api->close(p_ctrl->info.p_transfer_rx->p_ctrl);
-        RIIC_ERROR_RETURN(SSP_SUCCESS == err, err);
+        p_ctrl->info.p_transfer_rx->p_api->close(p_ctrl->info.p_transfer_rx->p_ctrl);
     }
 
     if (NULL != p_ctrl->info.p_transfer_tx)
     {
-        err = p_ctrl->info.p_transfer_tx->p_api->close(p_ctrl->info.p_transfer_tx->p_ctrl);
-        RIIC_ERROR_RETURN(SSP_SUCCESS == err, err);
+        p_ctrl->info.p_transfer_tx->p_api->close(p_ctrl->info.p_transfer_tx->p_ctrl);
     }
 
     /* De-configure everything. */
     riic_close_hw_master(p_ctrl);
 
+    /* Closed the I2C device, release the lock for this operation.
+     * Return code is not checked here since unlocking cannot fail when performed
+     * after a guarded locking operation */
+    R_BSP_SoftwareUnlock((bsp_lock_t *)&p_ctrl->resource_lock_tx_rx);
+
+    RIIC_ERROR_RETURN(SSP_SUCCESS == err, err);
     return SSP_SUCCESS;
 }
 
@@ -319,6 +338,7 @@ ssp_err_t R_RIIC_MasterClose        (i2c_ctrl_t             * const p_api_ctrl)
  * @retval  SSP_ERR_INVALID_SIZE    Provided number of bytes more than uint16_t size(65535) while DTC is used
  *                                  for data transfer.
  * @retval  SSP_ERR_IN_USE          Another transfer was in progress.
+ * @retval  SSP_ERR_HW_LOCKED       Driver busy doing RIIC operation
  * @retval  SSP_ERR_ABORTED         The transfer failed.
 ***********************************************************************************************************************/
 ssp_err_t R_RIIC_MasterRead         (i2c_ctrl_t             * const p_api_ctrl,
@@ -339,51 +359,50 @@ ssp_err_t R_RIIC_MasterRead         (i2c_ctrl_t             * const p_api_ctrl,
     /* Check if the device is even open, return an error if not */
     RIIC_ERROR_RETURN(RIIC_OPEN == p_ctrl->open, SSP_ERR_NOT_OPEN);
 
-    /* Fail if there is already a transfer in progress */
-    if (false == p_ctrl->transaction_completed)
+    /* Attempt to acquire lock for this transfer operation. Prevents re-entrance conflict. */
+    err = R_BSP_SoftwareLock((bsp_lock_t *)&p_ctrl->resource_lock_tx_rx);
+    RIIC_ERROR_RETURN(SSP_SUCCESS == err, SSP_ERR_HW_LOCKED);
+
+    /* If DTC is used for data transfer validate the data length provided by user,
+     * If length not supported then return error. */
+    if (NULL != p_ctrl->info.p_transfer_rx)
     {
-        err = SSP_ERR_IN_USE;
+        uint32_t num_transfers = bytes;
+        transfer_properties_t transfer_max = {0U};
+        p_ctrl->info.p_transfer_rx->p_api->infoGet(p_ctrl->info.p_transfer_rx->p_ctrl, &transfer_max);
+        if (num_transfers >= transfer_max.transfer_length_max)
+        {
+            /* Data length provided not valid, release the lock for this operation. Return code is not checked here
+             * since unlocking cannot fail when performed after a guarded locking operation */
+            R_BSP_SoftwareUnlock((bsp_lock_t *)&p_ctrl->resource_lock_tx_rx);
+            return SSP_ERR_INVALID_SIZE;
+        }
+
+    }
+    /* Record the new information about this transfer */
+    p_ctrl->p_buff  = p_dest;
+    p_ctrl->total   = bytes;
+    p_ctrl->restart = restart;
+    p_ctrl->read    = true;
+
+    /* Handle the different addressing modes */
+    if (p_ctrl->info.addr_mode == I2C_ADDR_MODE_7BIT)
+    {
+        /* Set the address bytes according to a 7-bit slave read command */
+        p_ctrl->addr_high  = 0U;
+        p_ctrl->addr_low   = (uint8_t) ((p_ctrl->info.slave << 1U) | (uint8_t) I2C_CODE_READ);
+        p_ctrl->addr_total = 1U;
     }
     else
     {
-        /* If DTC is used for data transfer validate the data length provided by user,
-         * If length not supported then return error. */
-        if (NULL != p_ctrl->info.p_transfer_rx)
-        {
-            uint32_t num_transfers = bytes;
-            transfer_properties_t transfer_max = {0U};
-            p_ctrl->info.p_transfer_rx->p_api->infoGet(p_ctrl->info.p_transfer_rx->p_ctrl, &transfer_max);
-            if (num_transfers >= transfer_max.transfer_length_max)
-            {
-                return SSP_ERR_INVALID_SIZE;
-            }
-
-        }
-        /* Record the new information about this transfer */
-        p_ctrl->p_buff  = p_dest;
-        p_ctrl->total   = bytes;
-        p_ctrl->restart = restart;
-        p_ctrl->read    = true;
-
-        /* Handle the different addressing modes */
-        if (p_ctrl->info.addr_mode == I2C_ADDR_MODE_7BIT)
-        {
-            /* Set the address bytes according to a 7-bit slave read command */
-            p_ctrl->addr_high  = 0U;
-            p_ctrl->addr_low   = (uint8_t) ((p_ctrl->info.slave << 1U) | (uint8_t) I2C_CODE_READ);
-            p_ctrl->addr_total = 1U;
-        }
-        else
-        {
-            /* Set the address bytes according to a 10-bit slave read command */
-            p_ctrl->addr_high  = (uint8_t)(((p_ctrl->info.slave >> 7U) | I2C_CODE_10BIT) & (uint8_t)~I2C_CODE_READ);
-            p_ctrl->addr_low   = (uint8_t) p_ctrl->info.slave;
-            p_ctrl->addr_total = 3U;
-        }
-
-        /* Kickoff the read operation as a master */
-        err = riic_run_hw_master(p_ctrl);
+        /* Set the address bytes according to a 10-bit slave read command */
+        p_ctrl->addr_high  = (uint8_t)(((p_ctrl->info.slave >> 7U) | I2C_CODE_10BIT) & (uint8_t)~I2C_CODE_READ);
+        p_ctrl->addr_low   = (uint8_t) p_ctrl->info.slave;
+        p_ctrl->addr_total = 3U;
     }
+
+    /* Kickoff the read operation as a master */
+    err = riic_run_hw_master(p_ctrl);
 
     RIIC_ERROR_RETURN(SSP_SUCCESS == err, err);
     return SSP_SUCCESS;
@@ -403,6 +422,7 @@ ssp_err_t R_RIIC_MasterRead         (i2c_ctrl_t             * const p_api_ctrl,
  * @retval  SSP_ERR_INVALID_SIZE  Provided number of bytes more than uint16_t size(65535) while DTC is used
  *                                for data transfer.
  * @retval  SSP_ERR_IN_USE        Another transfer was in progress.
+ * @retval  SSP_ERR_HW_LOCKED     Driver busy doing RIIC operation
  * @retval  SSP_ERR_ABORTED       The transfer failed.
 ***********************************************************************************************************************/
 ssp_err_t R_RIIC_MasterWrite        (i2c_ctrl_t             * const p_api_ctrl,
@@ -422,53 +442,51 @@ ssp_err_t R_RIIC_MasterWrite        (i2c_ctrl_t             * const p_api_ctrl,
     /* Check if the device is even open, return an error if not */
     RIIC_ERROR_RETURN(RIIC_OPEN == p_ctrl->open, SSP_ERR_NOT_OPEN);
 
-    /* Fail if there is already a transfer in progress */
-    if (false == p_ctrl->transaction_completed)
+    /* Attempt to acquire lock for this transfer operation. Prevents re-entrance conflict. */
+    err = R_BSP_SoftwareLock((bsp_lock_t *)&p_ctrl->resource_lock_tx_rx);
+    RIIC_ERROR_RETURN(SSP_SUCCESS == err, SSP_ERR_HW_LOCKED);
+
+    /* If DTC is used for data transfer validate the data length provided by user,
+     * If length not supported then return error. */
+    if (NULL != p_ctrl->info.p_transfer_tx)
     {
-        err = SSP_ERR_IN_USE;
+        uint32_t num_transfers = bytes;
+        transfer_properties_t transfer_max = {0U};
+        p_ctrl->info.p_transfer_tx->p_api->infoGet(p_ctrl->info.p_transfer_tx->p_ctrl, &transfer_max);
+        if (num_transfers >= transfer_max.transfer_length_max)
+        {
+            /* Data length provided not valid, release the lock for this operation. Return code is not checked here
+             * since unlocking cannot fail when performed after a guarded locking operation */
+            R_BSP_SoftwareUnlock((bsp_lock_t *)&p_ctrl->resource_lock_tx_rx);
+            return SSP_ERR_INVALID_SIZE;
+        }
+    }
+    /* Record the new information about this transfer */
+    p_ctrl->p_buff  = p_src;
+    p_ctrl->total   = bytes;
+    p_ctrl->remain  = bytes;
+    p_ctrl->restart = restart;
+    p_ctrl->read    = false;
+
+    /* Handle the different addressing modes */
+    if (p_ctrl->info.addr_mode == I2C_ADDR_MODE_7BIT)
+    {
+        /* Set the address bytes according to a 7-bit slave write command */
+        p_ctrl->addr_high  = 0U;
+        p_ctrl->addr_low   = (uint8_t) (p_ctrl->info.slave << 1U) & ~I2C_CODE_READ;
+        p_ctrl->addr_total = 1U;
     }
     else
     {
-        /* If DTC is used for data transfer validate the data length provided by user,
-         * If length not supported then return error. */
-        if (NULL != p_ctrl->info.p_transfer_tx)
-        {
-            uint32_t num_transfers = bytes;
-            transfer_properties_t transfer_max = {0U};
-            p_ctrl->info.p_transfer_tx->p_api->infoGet(p_ctrl->info.p_transfer_tx->p_ctrl, &transfer_max);
-            if (num_transfers >= transfer_max.transfer_length_max)
-            {
-                return SSP_ERR_INVALID_SIZE;
-            }
-        }
-        /* Record the new information about this transfer */
-        p_ctrl->p_buff  = p_src;
-        p_ctrl->total   = bytes;
-        p_ctrl->remain  = bytes;
-        p_ctrl->restart = restart;
-        p_ctrl->read    = false;
-
-        /* Handle the different addressing modes */
-        if (p_ctrl->info.addr_mode == I2C_ADDR_MODE_7BIT)
-        {
-            /* Set the address bytes according to a 7-bit slave write command */
-            p_ctrl->addr_high  = 0U;
-            p_ctrl->addr_low   = (uint8_t) (p_ctrl->info.slave << 1U) & ~I2C_CODE_READ;
-            p_ctrl->addr_total = 1U;
-        }
-        else
-        {
-            /* Set the address bytes according to a 10-bit slave read command */
-            p_ctrl->addr_high  = (uint8_t)((p_ctrl->info.slave >> 7U) | I2C_CODE_10BIT) & (uint8_t)~I2C_CODE_READ;
-            p_ctrl->addr_low   = (uint8_t) p_ctrl->info.slave;
-            p_ctrl->addr_total = 2U;
-        }
-
-        /* Kickoff the write operation as a master */
-        err = riic_run_hw_master(p_ctrl);
+        /* Set the address bytes according to a 10-bit slave read command */
+        p_ctrl->addr_high  = (uint8_t)((p_ctrl->info.slave >> 7U) | I2C_CODE_10BIT) & (uint8_t)~I2C_CODE_READ;
+        p_ctrl->addr_low   = (uint8_t) p_ctrl->info.slave;
+        p_ctrl->addr_total = 2U;
     }
-
+     /* Kickoff the write operation as a master */
+    err = riic_run_hw_master(p_ctrl);
     RIIC_ERROR_RETURN(SSP_SUCCESS == err, err);
+
     return SSP_SUCCESS;
 }
 
@@ -507,7 +525,7 @@ ssp_err_t R_RIIC_MasterReset        (i2c_ctrl_t             * const p_api_ctrl)
  *
  * @retval  SSP_SUCCESS                 Address of the slave is set correctly.
  * @retval  SSP_ERR_ASSERTION           Pointer to control structure is NULL.
- * @retval  SSP_ERR_IN_USE              Another transfer was in-progress.
+ * @retval  SSP_ERR_HW_LOCKED           Driver busy doing RIIC operation.
  * @retval  SSP_ERR_NOT_OPEN            Device was not even opened.
  *
  **********************************************************************************************************************/
@@ -515,7 +533,7 @@ ssp_err_t R_RIIC_MasterSlaveAddressSet (i2c_ctrl_t    * const p_api_ctrl,
                                         uint16_t        const slave,
                                         i2c_addr_mode_t const addr_mode)
 {
-	riic_instance_ctrl_t * p_ctrl = (riic_instance_ctrl_t *) p_api_ctrl;
+    riic_instance_ctrl_t * p_ctrl = (riic_instance_ctrl_t *) p_api_ctrl;
 
     ssp_err_t err = SSP_SUCCESS;
 
@@ -526,19 +544,21 @@ ssp_err_t R_RIIC_MasterSlaveAddressSet (i2c_ctrl_t    * const p_api_ctrl,
     /* Check if the device is open, return an error if not */
     RIIC_ERROR_RETURN(RIIC_OPEN == p_ctrl->open, SSP_ERR_NOT_OPEN);
 
-    /* Fail if there is already a transfer in progress */
-    if (false == p_ctrl->transaction_completed)
-    {
-        err = SSP_ERR_IN_USE;
-    }
-    else
-    {
-    	/* Sets the address of the slave device */
-    	p_ctrl->info.slave     = slave;
+    /* Attempt to acquire lock for configuring the slave address. Prevents re-entrance conflict. */
+    err = R_BSP_SoftwareLock((bsp_lock_t *)&p_ctrl->resource_lock_tx_rx);
 
-    	/* Sets the mode of addressing */
-    	p_ctrl->info.addr_mode = addr_mode;
-    }
+    /* Fail if there is already a transfer in progress */
+    RIIC_ERROR_RETURN(SSP_SUCCESS == err, SSP_ERR_HW_LOCKED);
+
+    /* Sets the address of the slave device */
+    p_ctrl->info.slave     = slave;
+
+    /* Sets the mode of addressing */
+    p_ctrl->info.addr_mode = addr_mode;
+
+    /* Slave address configured, release the lock for this operation. Return code is not checked here,
+     * since the unlocking performed cannot fail after the locking is performed in the same context.*/
+    R_BSP_SoftwareUnlock((bsp_lock_t *)&p_ctrl->resource_lock_tx_rx);
 
     return err;
 }
@@ -568,13 +588,16 @@ static void        riic_notify             (riic_instance_ctrl_t * const p_ctrl,
         uint32_t total_bytes = p_ctrl->total;
         i2c_callback_args_t args =
         {
-            .p_context  = p_ctrl->info.p_context,
-            .bytes      = total_bytes - p_ctrl->remain,
-            .event      = event
+            .p_context        = p_ctrl->info.p_context,
+            .bytes            = total_bytes - p_ctrl->remain,
+            .event            = event,
+            .i2c_hw_err_event = p_ctrl->actual_hwErr_event
         };
 
         /* Now do the callback here */
         p_ctrl->info.p_callback(&args);
+        /* Clear the err flags */
+        p_ctrl->err = false;
     }
 
     /* Turn off all the interrupts here since this always means the transfer is over */
@@ -585,8 +608,9 @@ static void        riic_notify             (riic_instance_ctrl_t * const p_ctrl,
     NVIC_DisableIRQ(p_ctrl->tei_irq);
     NVIC_DisableIRQ(p_ctrl->txi_irq);
 
-    /** Set the flag indicating that the transaction is completed*/
-    p_ctrl->transaction_completed = true;
+    /* Transfer has finished, release the lock for this operation. Return code is not checked here since unlocking
+     * cannot fail when performed after a guarded locking operation */
+    R_BSP_SoftwareUnlock((bsp_lock_t *)&p_ctrl->resource_lock_tx_rx);
 }
 
 /*******************************************************************************************************************//**
@@ -599,9 +623,9 @@ static void        riic_notify             (riic_instance_ctrl_t * const p_ctrl,
 ***********************************************************************************************************************/
 static ssp_err_t      riic_clock_settings     (riic_instance_ctrl_t * const p_ctrl)
 {
-	ssp_err_t ssp_err = SSP_ERR_INVALID_RATE;
+    ssp_err_t ssp_err = SSP_ERR_INVALID_RATE;
     const uint32_t  precision = 100U;
-	uint32_t divisor = 1U;
+    uint32_t divisor = 1U;
     uint32_t period_count32 = 0U;
     uint64_t period_count64 = 0U;
     uint64_t pclk_64 = 0U;
@@ -609,6 +633,7 @@ static ssp_err_t      riic_clock_settings     (riic_instance_ctrl_t * const p_ct
     uint8_t cks_value = 0U;
     uint8_t brch_value = 0U;
     uint8_t brcl_value = 0U;
+    uint32_t  cycles = 0U;
 
     ssp_err  = g_cgc_on_cgc.systemClockFreqGet(CGC_SYSTEM_CLOCKS_PCLKB, &pclk_32);
     RIIC_ERROR_RETURN(SSP_SUCCESS == ssp_err, ssp_err);
@@ -632,7 +657,7 @@ static ssp_err_t      riic_clock_settings     (riic_instance_ctrl_t * const p_ct
         /* If we can store this number of counts, we are close enough, exit the loop */
         if (period_count32 <= (2U << RIIC_MAX_BITS_BR_REGS))
         {
-           break;
+            break;
         }
 
         /* Otherwise, divide the clock once and try again */
@@ -647,19 +672,33 @@ static ssp_err_t      riic_clock_settings     (riic_instance_ctrl_t * const p_ct
         brch_value  = (uint8_t)(period_count32 - brcl_value);
 
         /* Refer to HW manual ICBRH settings for the following adjustments */
-        if(brch_value > 5U)
+        if (brch_value > 6U)
         {
-        	brcl_value = (uint8_t)(brcl_value - (3U + ((cks_value > 0U) ? 0U : 1U)));
-        	brch_value = (uint8_t)(brch_value - (3U + ((cks_value > 0U) ? 0U : 1U)));
+            if (I2C_RATE_FAST == p_ctrl->info.rate)
+            {
+                brcl_value = (uint8_t)(brcl_value - 6U);
+                brch_value = (uint8_t)(brch_value - 6U);
+            }
+            else
+            {
+                brcl_value = (uint8_t)(brcl_value - (3U + ((cks_value > 0U) ? 0U : 1U)));
+                brch_value = (uint8_t)(brch_value - (3U + ((cks_value > 0U) ? 0U : 1U)));
+            }
         }
+
+        /* Calculate SDA Output Delay */
+        riic_sda_delay_settings(divisor, p_ctrl->info.sda_delay, &cycles);
 
         /* Configure the clock and filters */
         HW_RIIC_SetICBRL(p_ctrl->p_reg, brcl_value);
         HW_RIIC_SetICBRH(p_ctrl->p_reg, brch_value);
         HW_RIIC_SetCKS(p_ctrl->p_reg,cks_value);
 
-        /* Disable digital filter */
-        HW_RIIC_EnableNFE(p_ctrl->p_reg, 0U);
+        /* Enable digital filter */
+        HW_RIIC_EnableNFE(p_ctrl->p_reg, 1U);
+
+        /* Set SDA Output Delay */
+        HW_RIIC_DataOutputDelay(p_ctrl->p_reg, (uint8_t)cycles);
 
         ssp_err = SSP_SUCCESS;
     }
@@ -712,8 +751,8 @@ static ssp_err_t riic_abort_seq_master (riic_instance_ctrl_t * const p_ctrl)
         }
     }
 
-    /* Check if there is an in-progress transfer associated with the match */
-    if ((0U != p_ctrl->remain) || (p_ctrl->restarted))
+    /* Check if there is an in-progress transfer associated with the match or an error event occurred */
+    if ((0U != p_ctrl->remain) || (p_ctrl->restarted) || (true == p_ctrl->err))
     {
         /* Safely stop the hardware from operating */
         riic_abort_hw_master(p_ctrl);
@@ -723,7 +762,6 @@ static ssp_err_t riic_abort_seq_master (riic_instance_ctrl_t * const p_ctrl)
 
         /* Update the transfer descriptor to show no longer in-progress and an error */
         p_ctrl->remain = 0U;
-        p_ctrl->err    = true;
 
         /* Update the transfer descriptor to make sure interrupts no longer process */
         p_ctrl->addr_loaded = p_ctrl->addr_total;
@@ -751,19 +789,29 @@ static ssp_err_t riic_abort_seq_master (riic_instance_ctrl_t * const p_ctrl)
  **********************************************************************************************************************/
 static ssp_err_t    riic_transfer_open     (riic_instance_ctrl_t * p_ctrl, i2c_cfg_t const * const p_cfg)
 {
-    ssp_err_t result = SSP_SUCCESS;
+    ssp_err_t result_rx = SSP_SUCCESS;
+    ssp_err_t result_tx = SSP_SUCCESS;
 
     if (NULL != p_cfg->p_transfer_rx)
     {
-        result = riic_transfer_configure_rx(p_ctrl, p_cfg);
+        result_rx = riic_transfer_configure_rx(p_ctrl, p_cfg);
+        RIIC_ERROR_RETURN(SSP_SUCCESS == result_rx, result_rx);
     }
 
     if (NULL != p_cfg->p_transfer_tx)
     {
-        result = riic_transfer_configure_tx(p_ctrl, p_cfg);
+        result_tx = riic_transfer_configure_tx(p_ctrl, p_cfg);
+        if(SSP_SUCCESS != result_tx)
+        {
+            /* If TX transfer instance configuration is failed and RX transfer instance is
+             * not NULL, then close the RX transfer instance which is already open. */
+            if(NULL != p_cfg->p_transfer_rx)
+            {
+                p_cfg->p_transfer_rx->p_api->close(p_cfg->p_transfer_rx->p_ctrl);
+            }
+            return result_tx;
+        }
     }
-
-    RIIC_ERROR_RETURN(SSP_SUCCESS == result, result);
     return SSP_SUCCESS;
 }
 
@@ -778,7 +826,7 @@ static ssp_err_t    riic_transfer_open     (riic_instance_ctrl_t * p_ctrl, i2c_c
  **********************************************************************************************************************/
 static ssp_err_t riic_open_hw_master       (riic_instance_ctrl_t * const p_ctrl, ssp_feature_t * p_feature)
 {
-	ssp_err_t ssp_err = SSP_SUCCESS;
+    ssp_err_t ssp_err = SSP_SUCCESS;
 
     /* Perform the first part of the initialization sequence */
     R_BSP_ModuleStart(p_feature);
@@ -811,8 +859,8 @@ static ssp_err_t riic_open_hw_master       (riic_instance_ctrl_t * const p_ctrl,
         HW_RIIC_FMPSlopeCircuit(p_ctrl->p_reg, true);
     }
 
-    /* Allow timeouts to be generated on the low value of SCL using short count mode */
-    HW_RIIC_TimeoutCfg(p_ctrl->p_reg, RIIC_TIMEOUT_ON_SCL_LOW, true);
+    /* Allow timeouts to be generated on the low value of SCL using either long or short mode */
+    HW_RIIC_TimeoutCfg(p_ctrl->p_reg, RIIC_TIMEOUT_ON_SCL_LOW, p_ctrl->timeout_mode);
 
     /* Enable master arbitration loss detection */
     HW_RIIC_EnableMALE(p_ctrl->p_reg, true);
@@ -876,6 +924,33 @@ static void        riic_configure_interrupts_master    (riic_instance_ctrl_t * c
 }
 
 /*******************************************************************************************************************//**
+ * @brief   Manually issue given number of clock pulses to finish the transfer
+ *
+ * @param[in]    p_ctrl        Pointer to control struct of specific device
+ * @param[in]    clock_cycles  Number of clock cycles
+***********************************************************************************************************************/
+static void riic_extra_clock_cycles (riic_instance_ctrl_t * const p_ctrl, uint8_t clock_cycles)
+{
+    while (clock_cycles)
+    {
+        HW_RIIC_ExtraClock(p_ctrl->p_reg);
+        while (!HW_RIIC_ExtraClockDone(p_ctrl->p_reg))
+        {
+            /* Waiting for clock cycle to finish */
+            /* The CLO bit clears automatically after one clock cycle is output */
+        }
+        clock_cycles--;
+    }
+
+    /* Check if the peripheral is holding the line low */
+    if (HW_RIIC_SDALow(p_ctrl->p_reg))
+    {
+        /* Release the line manually */
+        HW_RIIC_SDARelease(p_ctrl->p_reg);
+    }
+}
+
+/*******************************************************************************************************************//**
  * @brief   Safely stops the current data transfer when operating as a master.
  *
  * @param[in]       p_ctrl  Pointer to control struct of specific device
@@ -900,30 +975,15 @@ static void        riic_abort_hw_master    (riic_instance_ctrl_t        * const 
         (values of the BC[2:0] bits return to 000b (ie, 9 bits) at the end of a data transfer as per HM)*/
         if (9U != bits_pending)
         {
-            /* Manually issue enough clocks to finish the transfer */
-            while (bits_pending)
-            {
-                HW_RIIC_ExtraClock(p_ctrl->p_reg);
-                while (!HW_RIIC_ExtraClockDone(p_ctrl->p_reg))
-                {
-                    /* Waiting for clock cycle to finish */
-                }
-                bits_pending = (uint8_t) (bits_pending - 1U);
-            }
-
-            /* Check if the peripheral is holding the line low */
-            if (HW_RIIC_SDALow(p_ctrl->p_reg))
-            {
-                /* Release the line manually */
-                HW_RIIC_SDARelease(p_ctrl->p_reg);
-            }
+            riic_extra_clock_cycles(p_ctrl, bits_pending);
         }
 
         /* Try to issue the stop condition now */
         HW_RIIC_SendStop(p_ctrl->p_reg);
 
-        /* Allow timeouts to be generated on the low value of SCL using short count mode */
-        HW_RIIC_TimeoutCfg(p_ctrl->p_reg, RIIC_TIMEOUT_ON_SCL_LOW, true);
+
+        /* Allow timeouts to be generated on the low value of SCL using either long or short mode */
+        HW_RIIC_TimeoutCfg(p_ctrl->p_reg, RIIC_TIMEOUT_ON_SCL_LOW, p_ctrl->timeout_mode);
 
         /* Wait until the stop condition is sent or the hardware detects the line is stuck low */
         volatile bool timed_out = false;
@@ -935,10 +995,15 @@ static void        riic_abort_hw_master    (riic_instance_ctrl_t        * const 
         if (timed_out)
         {
             SSP_ERROR_LOG(SSP_ERR_TIMEOUT, g_module_name, g_riic_master_version);
+
+            /* Manually issue 9 clock pulses to make the slave release the bus */
+            /* NXP I2C-bus specification and user manual, Rev. 6 - 4 April 2014, section 3.1.16 -Bus clear */
+            riic_extra_clock_cycles(p_ctrl, 9U);
         }
     }
 
     /* Do I2C internal reset to clear all the transaction states and release the bus */
+    HW_RIIC_Output(p_ctrl->p_reg, false);
     HW_RIIC_Reset(p_ctrl->p_reg, true);
 
     /* Make sure there are no retained interrupt requests, as per manual */
@@ -953,6 +1018,7 @@ static void        riic_abort_hw_master    (riic_instance_ctrl_t        * const 
     NVIC_ClearPendingIRQ(p_ctrl->txi_irq);
 
     /* Release peripheral from internal reset */
+    HW_RIIC_Output(p_ctrl->p_reg, true);
     HW_RIIC_Reset(p_ctrl->p_reg, false);
 }
 
@@ -968,7 +1034,7 @@ static void       riic_enable_transfer_support_tx    (riic_instance_ctrl_t  * co
     if((NULL != p_transfer_tx) && (!p_ctrl->read) && (p_ctrl->total > 0U))
     {
         p_transfer_tx->p_api->reset(p_transfer_tx->p_ctrl, (void *) (p_ctrl->p_buff), NULL,
-                (uint16_t) (p_ctrl->remain));
+                                    (uint16_t) (p_ctrl->remain));
         p_ctrl->remain = 0U;
         p_ctrl->loaded = p_ctrl->total;
         p_ctrl->activation_on_txi = true;
@@ -990,7 +1056,7 @@ static void       riic_enable_transfer_support_rx    (riic_instance_ctrl_t  * co
     if((NULL != p_transfer_rx) && (p_ctrl->read) && (p_ctrl->total > 3U))
     {
         p_transfer_rx->p_api->reset(p_transfer_rx->p_ctrl, NULL, (void *) (p_ctrl->p_buff),
-                (uint16_t) (p_ctrl->total - 3));
+                                    (uint16_t) (p_ctrl->total - 3));
         p_ctrl->remain = 3U;
         p_ctrl->loaded = p_ctrl->total - 3U;
         p_ctrl->activation_on_rxi = true;
@@ -1008,23 +1074,43 @@ static void       riic_enable_transfer_support_rx    (riic_instance_ctrl_t  * co
 ***********************************************************************************************************************/
 static          ssp_err_t   riic_run_hw_master      (riic_instance_ctrl_t    * const p_ctrl)
 {
+    volatile uint32_t timeout_count = BUSBUSY_TIMEOUT_COUNT;
+    volatile bool transaction_completed = true;
+
     /* Initialize fields used during transfer */
-    p_ctrl->addr_loaded 			= 0U;
-    p_ctrl->loaded      			= 0U;
-    p_ctrl->remain      			= p_ctrl->total;
-    p_ctrl->addr_remain 			= p_ctrl->addr_total;
-    p_ctrl->err         			= false;
-    p_ctrl->dummy_read_completed 	= false;
-    p_ctrl->activation_on_rxi 		= false;
-    p_ctrl->activation_on_txi 		= false;
-    p_ctrl->transaction_completed 	= false;
+    p_ctrl->addr_loaded             = 0U;
+    p_ctrl->loaded                  = 0U;
+    p_ctrl->remain                  = p_ctrl->total;
+    p_ctrl->addr_remain             = p_ctrl->addr_total;
+    p_ctrl->err                     = false;
+    p_ctrl->dummy_read_completed    = false;
+    p_ctrl->activation_on_rxi       = false;
+    p_ctrl->activation_on_txi       = false;
     p_ctrl->address_restarted       = false;
 
     /* Check if this is a new transaction or a continuation */
     if (!p_ctrl->restarted)
     {
+        /* As per HM, the HW_RIIC_BusBusy returns 0 when the bus free time(ICBRL setting) start condition is not
+         * detected after a stop condition detection */
+        while (timeout_count)
+        {
+            /* Check whether the bus is busy or not */
+            if (!HW_RIIC_BusBusy(p_ctrl->p_reg))
+            {
+                break;
+            }
+            timeout_count--;
+        }
         /* If bus is busy, return error */
-        RIIC_ERROR_RETURN((!HW_RIIC_BusBusy(p_ctrl->p_reg)), SSP_ERR_IN_USE);
+        if (0U == timeout_count)
+        {
+            /* Bus busy condition exists even after timeout duration, release the lock for this operation.
+             * Return code is not checked here since unlocking cannot fail when performed after
+             * a guarded locking operation */
+            R_BSP_SoftwareUnlock((bsp_lock_t *)&p_ctrl->resource_lock_tx_rx);
+            return SSP_ERR_IN_USE;
+        }
 
         /* Clear all the interrupts before the transfer */
         HW_RIIC_ClearIrqs(p_ctrl->p_reg);
@@ -1038,14 +1124,14 @@ static          ssp_err_t   riic_run_hw_master      (riic_instance_ctrl_t    * c
         NVIC_ClearPendingIRQ(p_ctrl->txi_irq);
     }
 
-    /* Allow timeouts to be generated on the low value of SCL using short count mode */
-    HW_RIIC_TimeoutCfg(p_ctrl->p_reg, RIIC_TIMEOUT_ON_SCL_LOW, true);
+    /* Allow timeouts to be generated on the low value of SCL using either short or long mode */
+    HW_RIIC_TimeoutCfg(p_ctrl->p_reg, RIIC_TIMEOUT_ON_SCL_LOW, p_ctrl->timeout_mode);
 
     /* Re-enable the interrupts  */
     riic_configure_interrupts_master(p_ctrl);
 
     /* If previous transaction did not end with restart, send a start condition */
-    if(!p_ctrl->restarted)
+    if (!p_ctrl->restarted)
     {
         HW_RIIC_SendStart(p_ctrl->p_reg);
     }
@@ -1058,12 +1144,19 @@ static          ssp_err_t   riic_run_hw_master      (riic_instance_ctrl_t    * c
     if (NULL == p_ctrl->info.p_callback)
     {
         /* Note: There is a hardware timeout that will allow this loop to exit */
-        while (false == p_ctrl->transaction_completed)
+        while (transaction_completed)
         {
             /* The transfer descriptor is updated during interrupt processing */
+            if (BSP_LOCK_UNLOCKED == p_ctrl->resource_lock_tx_rx.lock)
+            {
+                transaction_completed = false ;
+            }
         }
+
         if (p_ctrl->err)
         {
+            /* Clear the err flag */
+            p_ctrl->err = false;
             return SSP_ERR_ABORTED;
         }
     }
@@ -1124,7 +1217,7 @@ static void riic_rxi_master (riic_instance_ctrl_t * p_ctrl)
         }
         else
         {
-        	HW_RIIC_SetACKTransmission(p_ctrl->p_reg);
+            HW_RIIC_SetACKTransmission(p_ctrl->p_reg);
         }
 
         /* Enable transfer support if possible */
@@ -1142,7 +1235,7 @@ static void riic_rxi_master (riic_instance_ctrl_t * p_ctrl)
      * ignore it as the DTC has already taken care of the data transfer */
     else if (true == p_ctrl->activation_on_rxi)
     {
-    	p_ctrl->activation_on_rxi = false;
+        p_ctrl->activation_on_rxi = false;
     }
     /* ICDRR contain valid received data */
     else if (0U < p_ctrl->remain)
@@ -1169,11 +1262,11 @@ static void riic_txi_master (riic_instance_ctrl_t * p_ctrl)
     }
     else if (!p_ctrl->read)
     {
-    	/* If this is the interrupt that got fired after DTC transfer,
-    	 * ignore it as the DTC has already taken care of the data transfer */
+        /* If this is the interrupt that got fired after DTC transfer,
+         * ignore it as the DTC has already taken care of the data transfer */
         if(true == p_ctrl->activation_on_txi)
         {
-        	p_ctrl->activation_on_txi = false;
+            p_ctrl->activation_on_txi = false;
         }
         else if (p_ctrl->remain > 0U)
         {
@@ -1236,7 +1329,7 @@ static void riic_tei_master (riic_instance_ctrl_t * p_ctrl)
             HW_RIIC_SendRestart(p_ctrl->p_reg);
 
             /* Disable timeout */
-            HW_RIIC_TimeoutCfg(p_ctrl->p_reg, RIIC_TIMEOUT_OFF, false);
+            HW_RIIC_TimeoutCfg(p_ctrl->p_reg, RIIC_TIMEOUT_OFF, p_ctrl->timeout_mode);
 
             /* Remember that we issued a restart for the next transfer */
             p_ctrl->restarted = true;
@@ -1273,16 +1366,26 @@ static void riic_err_master (riic_instance_ctrl_t * p_ctrl)
     if (errs_events & (uint8_t) ((uint8_t) (RIIC_ERR_EVENT_TIMEOUT) | (uint8_t) (RIIC_ERR_EVENT_ARBITRATION_LOSS) |
                                  (uint8_t) (RIIC_ERR_EVENT_NACK)))
     {
+        /* Set the error flag when an error event occurred */
+        p_ctrl->err = true;
+
+        /* Update the Hardware generated Error */
+        if(errs_events & (uint8_t) RIIC_ERR_EVENT_TIMEOUT)
+        {
+            p_ctrl->actual_hwErr_event = I2C_HW_ERR_EVENT_TIMEOUT;
+        }
+        else if(errs_events & (uint8_t) RIIC_ERR_EVENT_NACK)
+        {
+            p_ctrl->actual_hwErr_event = I2C_HW_ERR_EVENT_NACK;
+        }
+        /* This will check for Arbitration Loss */
+        else
+        {
+            p_ctrl->actual_hwErr_event = I2C_HW_ERR_EVENT_ARBITRATION_LOSS;
+        }
+
         /* Abort an in-progress transfer with the current device */
         riic_abort_seq_master(p_ctrl);
-
-        /* If timeout occurs when remaining bytes are zero, Set the flag indicating that the transaction is completed
-         * to true to come out of the lockup situation. */
-        if ((errs_events & (uint8_t) (RIIC_ERR_EVENT_TIMEOUT)) &&  (0U == p_ctrl->remain))
-        {
-            /* Set the flag indicating that the transaction is completed. */
-            p_ctrl->transaction_completed = true;
-        }
     }
 
     /* This is a STOP, START or RESTART event.We only need to process these events only at the
@@ -1496,7 +1599,7 @@ static  void     riic_txi_send_address         (riic_instance_ctrl_t  * const p_
             /* MSB transfer after restart of 10 bit read, send high byte with R/W set to 1 */
             else if((2U == p_ctrl->addr_loaded) && (3U == p_ctrl->addr_total))
             {
-                address_byte = p_ctrl->addr_high | (uint8_t) I2C_CODE_READ;;
+                address_byte = p_ctrl->addr_high | (uint8_t) I2C_CODE_READ;
             }
             /* low byte transfer */
             else
@@ -1670,23 +1773,59 @@ static ssp_err_t riic_transfer_configure_tx   (riic_instance_ctrl_t * p_ctrl, i2
 }
 
 /*******************************************************************************************************************//**
+ * @brief  This function calculates the SDA delay value (clock cycles) to be set to SDDL bits, based on the PCLCK frequency
+ *         and divider settings.
+ * @param[in]  clk_divisor   Clock divisor value
+ * @param[in]  sda_delay     Requested SDA delay in nano seconds.
+ *                           Standard value for sda_delay is 300ns and Maximum supported value is 1000ns.
+ * @param[out] p_cycles      Calculated value to be set on SDDL bits
+ ********************************************************************************************************************/
+static void riic_sda_delay_settings(uint32_t const  clk_divisor,
+                                         uint16_t      sda_delay,
+                                         uint32_t  * const   p_cycles)
+{
+
+    uint32_t clock_hz = 0U;
+
+    g_cgc_on_cgc.systemClockFreqGet(CGC_SYSTEM_CLOCKS_PCLKB, &clock_hz);
+
+    /* Determine the internal clock frequency */
+    uint32_t frequency_hz = clock_hz / clk_divisor;
+
+    /* Determine ratio of a nanosecond (1GHz) clock to the internal source clock */
+    uint32_t ratio_ns_to_internal_clock = RIIC_NANOSECONDS_PER_SECOND / frequency_hz;
+
+    /* sda_delay is cycles of a nanosecond clock, convert to cycles of the internal clock */
+    uint32_t clock_cycles = ((uint32_t)sda_delay / ratio_ns_to_internal_clock);
+
+    /* Only use 0 delay if the configuration specifies 0 delay */
+    /* Adding one to ensure the user specified minimum sda delay is not violated */
+    if(0U != sda_delay)
+    {
+        clock_cycles++;
+    }
+
+    *p_cycles = clock_cycles;
+}
+
+#if RIIC_CFG_PARAM_CHECKING_ENABLE
+/*******************************************************************************************************************//**
  * @brief  Parameter check.
  * @param[in]     p_ctrl                 Pointer to IIC specific control structure
  * @param[in]     p_cfg                  Pointer to IIC specific configuration structure
  *
  * @retval        SSP_SUCCESS            Provided parameters not NULL.
  * @retval        SSP_ERR_ASSERTION      The parameter p_api_ctrl or p_cfg is NULL or clock rate is greater than 1MHz.
- *                                       or p_cfg->p_extend not equal to NULL.
+ *                                       or the extended parameter is NULL
  **********************************************************************************************************************/
 static ssp_err_t riic_param_check(riic_instance_ctrl_t * const p_ctrl, i2c_cfg_t const * const p_cfg)
 {
     SSP_ASSERT(p_ctrl != NULL);
     SSP_ASSERT(p_cfg != NULL);
     SSP_ASSERT(p_cfg->rate <= I2C_RATE_FASTPLUS);
+    SSP_ASSERT((p_cfg->p_extend != NULL));
 
-    /** p_extend not supported currently*/
-    SSP_ASSERT(p_cfg->p_extend == NULL);
     return SSP_SUCCESS;
 }
-
+#endif
 /* End of file */

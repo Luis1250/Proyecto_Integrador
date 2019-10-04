@@ -1,10 +1,9 @@
 /*
  * Display_Handler.h
  *
- *  Created on: 09/08/2019
  *
- * - 09-aug-2019  Francisco Govea
- *  - Add_display_module
+ *  Created on: 01/10/2019
+ *      Author: Team 2
  */
 
 //#ifndef DISPLAY_HANDLER_H_
