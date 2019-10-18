@@ -155,8 +155,11 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
+					<fileInfo id="com.renesas.cdt.managedbuild.gnuarm.config.elf.debug.2001020889.1933381543" name="Display_Thread_entry.c" rcbsApplicability="disable" resourcePath="src/Display_Thread_entry.c" toolsToInvoke="ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.76970492.1966376324">
+						<tool id="ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.76970492.1966376324" name="Cross ARM C Compiler" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.76970492"/>
+					</fileInfo>
 					<sourceEntries>
-						<entry excluding="Display_Thread_entry.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="synergy"/>
 					</sourceEntries>
 				</configuration>
@@ -331,7 +334,14 @@
 		<project id="Proyecto_Integrador.com.renesas.cdt.managedbuild.gnuarm.target.elf.328140119" name="Executable" projectType="com.renesas.cdt.managedbuild.gnuarm.target.elf"/>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
-	<storageModule moduleId="refreshScope"/>
+	<storageModule moduleId="refreshScope" versionNumber="2">
+		<configuration configurationName="Debug">
+			<resource resourceType="PROJECT" workspacePath="/Proyecto_Integrador"/>
+		</configuration>
+		<configuration configurationName="Release">
+			<resource resourceType="PROJECT" workspacePath="/Proyecto_Integrador"/>
+		</configuration>
+	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
 	<storageModule moduleId="scannerConfiguration"/>
 </cproject>

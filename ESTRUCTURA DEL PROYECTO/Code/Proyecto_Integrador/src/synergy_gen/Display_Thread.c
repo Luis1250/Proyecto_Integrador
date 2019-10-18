@@ -275,5 +275,5 @@ static void Display_Thread_func(ULONG thread_input)
 #endif
 
     /* Enter user code for this thread. */
-    Display_Thread_entry ();
+    Display_Thread_entry();
 }

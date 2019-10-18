@@ -3,6 +3,7 @@
 #include "gx_api.h"
 #include "gui/guiapp_specifications.h"
 #include "gui/guiapp_resources.h"
+#include "Display_lib.h"
 
 #if defined(BSP_BOARD_S7G2_SK)
 #include "hardware/lcd.h"
@@ -11,7 +12,7 @@
 /***********************************************************************************************************************
     Private function prototypes
  ***********************************************************************************************************************/
-static bool ssp_touch_to_guix(sf_touch_panel_payload_t * p_touch_payload, GX_EVENT * g_gx_event);
+bool ssp_touch_to_guix(sf_touch_panel_payload_t * p_touch_payload, GX_EVENT * g_gx_event);
 void Display_Thread_entry(void);
 
 #if defined(BSP_BOARD_S7G2_SK)
