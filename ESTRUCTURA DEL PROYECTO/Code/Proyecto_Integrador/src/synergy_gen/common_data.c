@@ -14,8 +14,8 @@ const jpeg_decode_cfg_t g_jpeg_decode0_cfg =
   .pixel_format = JPEG_DECODE_PIXEL_FORMAT_RGB565,
   .alpha_value = 255,
   .p_callback = NULL,
-  .jedi_ipl = (15),
-  .jdti_ipl = (15), };
+  .jedi_ipl = (3),
+  .jdti_ipl = (3), };
 const jpeg_decode_instance_t g_jpeg_decode0 =
 { .p_api = (jpeg_decode_api_t const *) &g_jpeg_decode_on_jpeg_decode, .p_ctrl = &g_jpeg_decode0_ctrl, .p_cfg =
           &g_jpeg_decode0_cfg };
@@ -26,17 +26,17 @@ static const sf_jpeg_decode_cfg_t g_sf_jpeg_decode0_cfg =
 const sf_jpeg_decode_instance_t g_sf_jpeg_decode0 =
 { .p_api = &g_sf_jpeg_decode_on_sf_jpeg_decode, .p_ctrl = &g_sf_jpeg_decode0_ctrl, .p_cfg =
           (sf_jpeg_decode_cfg_t const *) &g_sf_jpeg_decode0_cfg };
-#if (15) != BSP_IRQ_DISABLED
+#if (3) != BSP_IRQ_DISABLED
 #if !defined(SSP_SUPPRESS_ISR_g_display) && !defined(SSP_SUPPRESS_ISR_GLCD)
 SSP_VECTOR_DEFINE( glcdc_line_detect_isr, GLCDC, LINE_DETECT);
 #endif
 #endif
-#if (15) != BSP_IRQ_DISABLED
+#if (3) != BSP_IRQ_DISABLED
 #if !defined(SSP_SUPPRESS_ISR_g_display) && !defined(SSP_SUPPRESS_ISR_GLCD)
 SSP_VECTOR_DEFINE( glcdc_underflow_1_isr, GLCDC, UNDERFLOW_1);
 #endif
 #endif
-#if (15) != BSP_IRQ_DISABLED
+#if (3) != BSP_IRQ_DISABLED
 #if !defined(SSP_SUPPRESS_ISR_g_display) && !defined(SSP_SUPPRESS_ISR_GLCD)
 SSP_VECTOR_DEFINE( glcdc_underflow_2_isr, GLCDC, UNDERFLOW_2);
 #endif
@@ -199,8 +199,8 @@ const display_cfg_t g_display_cfg =
           /** Display device extended configuration */
           .p_extend = (void *) (&g_display_extend_cfg),
 
-          .line_detect_ipl = (15),
-          .underflow_1_ipl = (15), .underflow_2_ipl = (15), };
+          .line_detect_ipl = (3),
+          .underflow_1_ipl = (3), .underflow_2_ipl = (3), };
 
 #if (true)
 /** Display on GLCD run-time configuration(for the graphics1 screen) */
@@ -430,13 +430,13 @@ void sf_message_init0(void)
         g_sf_message0_err_callback ((void *) &g_sf_message0, &ssp_err_g_sf_message0);
     }
 }
+const cgc_instance_t g_cgc =
+{ .p_api = &g_cgc_on_cgc, .p_cfg = NULL };
+const ioport_instance_t g_ioport =
+{ .p_api = &g_ioport_on_ioport, .p_cfg = NULL };
 /* Instance structure to use this module. */
 const fmi_instance_t g_fmi =
 { .p_api = &g_fmi_on_fmi };
-const ioport_instance_t g_ioport =
-{ .p_api = &g_ioport_on_ioport, .p_cfg = NULL };
-const cgc_instance_t g_cgc =
-{ .p_api = &g_cgc_on_cgc, .p_cfg = NULL };
 const elc_instance_t g_elc =
 { .p_api = &g_elc_on_elc, .p_cfg = NULL };
 void g_common_init(void)

@@ -1,10 +1,10 @@
 /* generated thread source file - do not edit */
-#include "main_thread.h"
+#include "Display_Thread.h"
 
-TX_THREAD main_thread;
-void main_thread_create(void);
-static void main_thread_func(ULONG thread_input);
-static uint8_t main_thread_stack[2048] BSP_PLACE_IN_SECTION_V2(".stack.main_thread") BSP_ALIGN_VARIABLE_V2(BSP_STACK_ALIGNMENT);
+TX_THREAD Display_Thread;
+void Display_Thread_create(void);
+static void Display_Thread_func(ULONG thread_input);
+static uint8_t Display_Thread_stack[2048] BSP_PLACE_IN_SECTION_V2(".stack.Display_Thread") BSP_ALIGN_VARIABLE_V2(BSP_STACK_ALIGNMENT);
 void tx_startup_err_callback(void *p_instance, void *p_data);
 void tx_startup_common_init(void);
 #if !defined(SSP_SUPPRESS_ISR_g_spi_lcdc) && !defined(SSP_SUPPRESS_ISR_SCI0)
@@ -42,7 +42,7 @@ const spi_cfg_t g_spi_lcdc_cfg =
 #endif
 #undef SYNERGY_NOT_DEFINED	
   .p_callback = g_lcd_spi_callback,
-  .p_context = (void *) &g_spi_lcdc, .rxi_ipl = (15), .txi_ipl = (15), .tei_ipl = (15), .eri_ipl = (15), .p_extend =
+  .p_context = (void *) &g_spi_lcdc, .rxi_ipl = (3), .txi_ipl = (3), .tei_ipl = (3), .eri_ipl = (3), .p_extend =
           &g_spi_lcdc_cfg_extend, };
 /* Instance structure to use this module. */
 const spi_instance_t g_spi_lcdc =
@@ -176,7 +176,7 @@ const i2c_cfg_t g_i2c_cfg =
 #endif
 #undef SYNERGY_NOT_DEFINED	
   .p_callback = NULL,
-  .p_context = (void *) &g_i2c, .rxi_ipl = (15), .txi_ipl = (15), .tei_ipl = (15), .eri_ipl = (15), .p_extend =
+  .p_context = (void *) &g_i2c, .rxi_ipl = (3), .txi_ipl = (3), .tei_ipl = (3), .eri_ipl = (3), .p_extend =
           &g_i2c_extend, };
 /* Instance structure to use this module. */
 const i2c_master_instance_t g_i2c =
@@ -238,29 +238,29 @@ extern bool g_ssp_common_initialized;
 extern uint32_t g_ssp_common_thread_count;
 extern TX_SEMAPHORE g_ssp_common_initialized_semaphore;
 
-void main_thread_create(void)
+void Display_Thread_create(void)
 {
     /* Increment count so we will know the number of ISDE created threads. */
     g_ssp_common_thread_count++;
 
     /* Initialize each kernel object. */
     UINT err_g_main_semaphore_lcdc;
-    err_g_main_semaphore_lcdc = tx_semaphore_create (&g_main_semaphore_lcdc, (CHAR *) "Main_Semaphore", 0);
+    err_g_main_semaphore_lcdc = tx_semaphore_create (&g_main_semaphore_lcdc, (CHAR *) "Main Semaphore", 0);
     if (TX_SUCCESS != err_g_main_semaphore_lcdc)
     {
         tx_startup_err_callback (&g_main_semaphore_lcdc, 0);
     }
 
     UINT err;
-    err = tx_thread_create (&main_thread, (CHAR *) "Main Thread", main_thread_func, (ULONG) NULL, &main_thread_stack,
-                            2048, 6, 6, 10, TX_AUTO_START);
+    err = tx_thread_create (&Display_Thread, (CHAR *) "Display_Thread", Display_Thread_func, (ULONG) NULL,
+                            &Display_Thread_stack, 2048, 3, 3, 20, TX_AUTO_START);
     if (TX_SUCCESS != err)
     {
-        tx_startup_err_callback (&main_thread, 0);
+        tx_startup_err_callback (&Display_Thread, 0);
     }
 }
 
-static void main_thread_func(ULONG thread_input)
+static void Display_Thread_func(ULONG thread_input)
 {
     /* Not currently using thread_input. */
     SSP_PARAMETER_NOT_USED (thread_input);
@@ -275,5 +275,5 @@ static void main_thread_func(ULONG thread_input)
 #endif
 
     /* Enter user code for this thread. */
-    main_thread_entry ();
+    Display_Thread_entry ();
 }

@@ -20,7 +20,7 @@
  * Description  : Definition for the SK-S7 LCD Panel setup function through SPI interface
 ***********************************************************************************************************************/
 
-#include "main_thread.h"
+#include "Display_Thread.h"
 #include "lcd.h"
 
 static void lcd_write(uint8_t cmd, char *data ,uint32_t len)

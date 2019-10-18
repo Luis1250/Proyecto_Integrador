@@ -1,18 +1,13 @@
 /*
  * constants.c
  *
- *  Created on: 01/10/2019
- *      Author: Tean 2
+ *  Created on: 15/10/2019
+ *      This files contains all the constants of the Proyecto Integrador
  */
 
 
-/* Defines the constant for Proportional part. */
-const float PI_KP = 0.0;
-
-/* Defines the constant for Integral part. */
-const float PI_KI = 0.0;
-
-/* Defines the constant for Derivative part. */
-const float PI_KD = 0.0;
-
-
+/*
+ * All the constants are macros to save memory.
+ * All the constants are located in the header file.
+ *
+ * */
