@@ -20,8 +20,7 @@
 #include "r_elc.h"
 #include "r_elc_api.h"
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 
 extern const jpeg_decode_instance_t g_jpeg_decode0;

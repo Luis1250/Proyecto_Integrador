@@ -14,8 +14,7 @@ extern void IC_Thread_entry(void);
 #include "r_gpt_input_capture.h"
 #include "r_input_capture_api.h"
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 /** Timer on GPT Instance. */
 extern const timer_instance_t g_timer9;

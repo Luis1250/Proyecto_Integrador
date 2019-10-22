@@ -14,8 +14,7 @@ extern void ADC_Thread_entry(void);
 #include "r_adc.h"
 #include "r_adc_api.h"
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 /** Timer on GPT Instance. */
 extern const timer_instance_t g_timer1;

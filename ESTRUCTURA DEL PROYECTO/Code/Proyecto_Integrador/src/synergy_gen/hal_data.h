@@ -5,8 +5,7 @@
 #include "bsp_api.h"
 #include "common_data.h"
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 void hal_entry(void);
 void g_hal_init(void);

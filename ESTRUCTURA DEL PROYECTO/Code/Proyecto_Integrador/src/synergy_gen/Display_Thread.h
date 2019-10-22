@@ -21,8 +21,7 @@ extern void Display_Thread_entry(void);
 #include "sf_touch_panel_i2c.h"
 #include "sf_touch_panel_api.h"
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 extern const spi_cfg_t g_spi_lcdc_cfg;
 /** SPI on SCI Instance. */
