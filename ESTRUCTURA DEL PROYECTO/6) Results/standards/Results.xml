@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<results version="2">
+    <cppcheck version="1.85"/>
+    <errors>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;_gx_synergy_display_driver_setup&amp;#039; is never used." verbose="The function &amp;#039;_gx_synergy_display_driver_setup&amp;#039; is never used." sinceDate="22/10/2019">
+            <location file="..\..\Code\Proyecto_Integrador\src\gui\guiapp_specifications.c" line="877"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;g_sf_message0_err_callback_internal&amp;#039; is never used." verbose="The function &amp;#039;g_sf_message0_err_callback_internal&amp;#039; is never used." sinceDate="22/10/2019">
+            <location file="..\..\Code\Proyecto_Integrador\src\synergy_gen\common_data.c" line="388"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;g_sf_touch_panel_i2c_err_callback_internal&amp;#039; is never used." verbose="The function &amp;#039;g_sf_touch_panel_i2c_err_callback_internal&amp;#039; is never used." sinceDate="22/10/2019">
+            <location file="..\..\Code\Proyecto_Integrador\src\synergy_gen\Display_Thread.c" line="193"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;ssp_touch_to_guix&amp;#039; is never used." verbose="The function &amp;#039;ssp_touch_to_guix&amp;#039; is never used." sinceDate="22/10/2019">
+            <location file="..\..\Code\Proyecto_Integrador\src\Display_Thread_entry.c" line="150"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;tx_application_define&amp;#039; is never used." verbose="The function &amp;#039;tx_application_define&amp;#039; is never used." sinceDate="22/10/2019">
+            <location file="..\..\Code\Proyecto_Integrador\src\synergy_gen\main.c" line="48"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;tx_application_define_internal&amp;#039; is never used." verbose="The function &amp;#039;tx_application_define_internal&amp;#039; is never used." sinceDate="22/10/2019">
+            <location file="..\..\Code\Proyecto_Integrador\src\synergy_gen\main.c" line="39"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;tx_startup_err_callback_internal&amp;#039; is never used." verbose="The function &amp;#039;tx_startup_err_callback_internal&amp;#039; is never used." sinceDate="22/10/2019">
+            <location file="..\..\Code\Proyecto_Integrador\src\synergy_gen\main.c" line="79"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;update_text_id&amp;#039; is never used." verbose="The function &amp;#039;update_text_id&amp;#039; is never used." sinceDate="22/10/2019">
+            <location file="..\..\Code\Proyecto_Integrador\src\guiapp_event_handlers.c" line="88"/>
+        </error>
+    </errors>
+</results>

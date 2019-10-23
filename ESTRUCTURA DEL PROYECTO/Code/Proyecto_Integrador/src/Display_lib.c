@@ -31,33 +31,31 @@ display_type display;
 
 void Refresh_Screen()
 {
-	UINT status;
-
 	//display state
 	screenState=-1;
 	screenState=stateMachine(&screenState);
 	if(screenState==myInitState)
 	{
-		status = gx_prompt_text_set(&window1.window1_state,"READY");
+		gx_prompt_text_set(&window1.window1_state,"READY");
 		gx_system_dirty_mark((GX_WIDGET*)&window1.window1_state);
 	}
 	else if(screenState==myRunning_State)
 	{
-		status = gx_prompt_text_set(&window1.window1_state,"Running");
+		gx_prompt_text_set(&window1.window1_state,"Running");
 		gx_system_dirty_mark((GX_WIDGET*)&window1.window1_state);
 
 		//Duty Cycle
-		status = gx_prompt_text_set(&window1.window1_counter_dutycycle,display.dutyCycle);
+		gx_prompt_text_set(&window1.window1_counter_dutycycle,display.dutyCycle);
 		gx_system_dirty_mark((GX_WIDGET*)&window1.window1_counter_dutycycle);
 
 		//Speed RPM
-		status = gx_prompt_text_set(&window1.window1_speedcounter,display.speed);
+		gx_prompt_text_set(&window1.window1_speedcounter,display.speed);
 		gx_system_dirty_mark((GX_WIDGET*)&window1.window1_speedcounter);
 
 	}
 	else if(screenState==myStop_State)
 	{
-		status = gx_prompt_text_set(&window1.window1_state,"ON-HOLD");
+		gx_prompt_text_set(&window1.window1_state,"ON-HOLD");
 		gx_system_dirty_mark((GX_WIDGET*)&window1.window1_state);
 	}
 
@@ -71,9 +69,8 @@ void Refresh_Screen()
 
 	 LONG swVer = 5;
 	 gx_utility_ltoa(swVer,swVerAux,DEFAULT_SIZE);
-	 status = gx_prompt_text_set(&window1.window1_swver,swVerAux);
-	 status++;
-	 status = gx_prompt_text_set(&window1.window1_swver,"1.0");
+     gx_prompt_text_set(&window1.window1_swver,swVerAux);
+     gx_prompt_text_set(&window1.window1_swver,"1.0");
 	 gx_system_dirty_mark((GX_WIDGET*)&window1.window1_swver);
 	 gx_system_canvas_refresh();
 }

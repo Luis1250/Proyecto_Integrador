@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="3089417123">
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="Refresh_Screen" lineNumber="32"/>
+    <functiondecl functionName="setDutyCycle" lineNumber="78"/>
+    <functiondecl functionName="setSpeed" lineNumber="105"/>
+    <functiondecl functionName="setSetPoint" lineNumber="120"/>
+    <functiondecl functionName="Refresh_Screen" lineNumber="32"/>
+    <functiondecl functionName="setDutyCycle" lineNumber="78"/>
+    <functiondecl functionName="setSpeed" lineNumber="105"/>
+    <functiondecl functionName="setSetPoint" lineNumber="120"/>
+    <functiondecl functionName="Refresh_Screen" lineNumber="32"/>
+    <functiondecl functionName="setDutyCycle" lineNumber="78"/>
+    <functiondecl functionName="setSpeed" lineNumber="105"/>
+    <functiondecl functionName="setSetPoint" lineNumber="120"/>
+    <functiondecl functionName="Refresh_Screen" lineNumber="32"/>
+    <functiondecl functionName="setDutyCycle" lineNumber="78"/>
+    <functiondecl functionName="setSpeed" lineNumber="105"/>
+    <functiondecl functionName="setSetPoint" lineNumber="120"/>
+    <functioncall functionName="DEFAULT_SIZE"/>
+    <functioncall functionName="dutyCycle"/>
+    <functioncall functionName="gx_prompt_text_set"/>
+    <functioncall functionName="gx_system_canvas_refresh"/>
+    <functioncall functionName="gx_system_dirty_mark"/>
+    <functioncall functionName="gx_utility_ltoa"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="int"/>
+    <functioncall functionName="itoa"/>
+    <functioncall functionName="long"/>
+    <functioncall functionName="screenState"/>
+    <functioncall functionName="setPoint"/>
+    <functioncall functionName="speed"/>
+    <functioncall functionName="stateMachine"/>
+    <functioncall functionName="strcpy"/>
+    <functioncall functionName="string"/>
+    <functioncall functionName="swVer"/>
+    <functioncall functionName="swVerAux"/>
+    <functioncall functionName="window1_counter_dutycycle"/>
+    <functioncall functionName="window1_speedcounter"/>
+    <functioncall functionName="window1_state"/>
+    <functioncall functionName="window1_swver"/>
+    <functioncall functionName="x"/>
+  </FileInfo>
+</analyzerinfo>

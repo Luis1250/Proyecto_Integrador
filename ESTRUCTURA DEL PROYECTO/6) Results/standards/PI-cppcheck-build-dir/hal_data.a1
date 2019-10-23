@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="2537695827">
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="g_hal_init" lineNumber="3"/>
+    <functiondecl functionName="g_hal_init" lineNumber="3"/>
+    <functiondecl functionName="g_hal_init" lineNumber="3"/>
+    <functiondecl functionName="g_hal_init" lineNumber="3"/>
+    <functiondecl functionName="g_hal_init" lineNumber="3"/>
+    <functioncall functionName="g_common_init"/>
+  </FileInfo>
+</analyzerinfo>

@@ -33,7 +33,7 @@ extern GX_CONST GX_STUDIO_WIDGET *guiapp_widget_table[];
 void Display_Thread_entry(void) {
 	ssp_err_t        err;
 	sf_message_header_t * p_message = NULL;
-	UINT      status = TX_SUCCESS;
+	UINT      status;
 
     /* Initializes GUIX. */
     status = gx_system_initialize();

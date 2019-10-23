@@ -13,6 +13,7 @@ extern void initialise_monitor_handles(void);
 #define TIMER_MILLISECOND (1000000U)
 #define TIMER_MICROSECOND (1000U)
 #define BIT_32 (0x100000000U)
+#define BIT_32_OVERFLOW (0x100000000U)
 
 static void error_trap(char *name, ssp_err_t err);
 void input_capture_hal_module_guide_project(void);
@@ -156,25 +157,17 @@ void IC_Thread_entry(void)
 
 void input_capture_callback(input_capture_callback_args_t * p_args)
 {
-
-    volatile uint32_t g_capture_counter;
-    volatile float g_time_captured;
-    volatile uint32_t g_capture_overflow=0;
-    volatile uint32_t g_pclk_freq_hz;
-    volatile float g_rpm;
-
-
-    #define BIT_32_OVERFLOW (0x100000000U)
+	volatile uint32_t g_pclk_freq_hz;
 
     if(CHANNEL_NINE == p_args->channel)
     {
         switch(p_args->event)
         {
-            case INPUT_CAPTURE_EVENT_MEASUREMENT:
+           volatile float g_time_captured;
+           volatile uint32_t g_capture_overflow=0;
+           volatile float g_rpm;
 
-                /* Get the value of the captured counter and overflows number */
-                //#capture_counter = p_args->counter;
-                g_capture_counter = p_args->counter;
+            case INPUT_CAPTURE_EVENT_MEASUREMENT:
 
                 /*
                 * Currently there is a limitation for using API of lastCaptureGet, otherwise captured counter and overflows number can
@@ -189,7 +182,7 @@ void input_capture_callback(input_capture_callback_args_t * p_args)
                 //#time_captured = (uint64_t)(((capture_overflow * BIT_32) + (uint64_t)capture_counter) * TIMER_SECOND / pclk_freq_hz);
 
                 g_time_captured = (float)(g_capture_overflow * BIT_32_OVERFLOW);
-                g_time_captured += (float)(g_capture_counter + 1);
+                g_time_captured += (float)(p_args->counter + 1);
                 g_time_captured /= (float)g_pclk_freq_hz;
                 g_time_captured *= (float)4;
 
@@ -235,8 +228,8 @@ void input_capture_callback(input_capture_callback_args_t * p_args)
                         //#printf("The captured timer value from interrupt callback is: %ld\n", capture_counter);
                         //#printf("The overflows counter value from interrupt callback is: %ld\n", (uint32_t)capture_overflow);
 
-                        printf("The pulse counter value from interrupt callback is: %ld\n", (uint32_t)g_rpm);
-                        printf("The overflows counter value from interrupt callback is: %ld\n", (uint32_t)g_capture_overflow);
+                        printf("The pulse counter value from interrupt callback is: %i\n", (int)g_rpm);
+                        printf("The overflows counter value from interrupt callback is: %i\n", (int)g_capture_overflow);
 
 
                         /* Output time value of measurement */

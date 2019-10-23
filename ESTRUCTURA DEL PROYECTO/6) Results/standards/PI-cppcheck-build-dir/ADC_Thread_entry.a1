@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="1103129980">
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="ADC_Thread_entry" lineNumber="71"/>
+    <functioncall functionName="ADC_Queue"/>
+    <functioncall functionName="ADC_REG_CHANNEL_0"/>
+    <functioncall functionName="Ctrl_D"/>
+    <functioncall functionName="Ctrl_I"/>
+    <functioncall functionName="Ctrl_I_0"/>
+    <functioncall functionName="PI_Transfer_Function_x7"/>
+    <functioncall functionName="PI_Transfer_Function_y2"/>
+    <functioncall functionName="TIMER_PWM_UNIT_PERCENT"/>
+    <functioncall functionName="adcData"/>
+    <functioncall functionName="dutyCycle"/>
+    <functioncall functionName="dutyCycleDisplay"/>
+    <functioncall functionName="dutyCycleSet"/>
+    <functioncall functionName="dutyCycle_E"/>
+    <functioncall functionName="dutyCycle_E_0"/>
+    <functioncall functionName="firstTime"/>
+    <functioncall functionName="float"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="int"/>
+    <functioncall functionName="long"/>
+    <functioncall functionName="open"/>
+    <functioncall functionName="p_cfg"/>
+    <functioncall functionName="p_channel_cfg"/>
+    <functioncall functionName="p_ctrl"/>
+    <functioncall functionName="pow"/>
+    <functioncall functionName="read"/>
+    <functioncall functionName="scanCfg"/>
+    <functioncall functionName="scanStart"/>
+    <functioncall functionName="setDutyCycle"/>
+    <functioncall functionName="setSetPoint"/>
+    <functioncall functionName="setSpeed"/>
+    <functioncall functionName="ssp_err_t"/>
+    <functioncall functionName="start"/>
+    <functioncall functionName="state"/>
+    <functioncall functionName="stateMachine"/>
+    <functioncall functionName="tx_queue_receive"/>
+    <functioncall functionName="tx_thread_sleep"/>
+    <functioncall functionName="uint32_t"/>
+    <functioncall functionName="variable_rpm_rx"/>
+    <functioncall functionName="while"/>
+    <functioncall functionName="y"/>
+    <functioncall functionName="y0"/>
+  </FileInfo>
+</analyzerinfo>

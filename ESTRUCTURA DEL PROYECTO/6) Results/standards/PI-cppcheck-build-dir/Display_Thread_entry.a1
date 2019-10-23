@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="3094618925">
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="Display_Thread_entry" lineNumber="33"/>
+    <functiondecl functionName="ssp_touch_to_guix" lineNumber="150"/>
+    <functiondecl functionName="Display_Thread_entry" lineNumber="33"/>
+    <functiondecl functionName="ssp_touch_to_guix" lineNumber="150"/>
+    <functiondecl functionName="Display_Thread_entry" lineNumber="33"/>
+    <functiondecl functionName="ssp_touch_to_guix" lineNumber="150"/>
+    <functiondecl functionName="Display_Thread_entry" lineNumber="33"/>
+    <functiondecl functionName="ssp_touch_to_guix" lineNumber="150"/>
+    <functiondecl functionName="g_lcd_spi_callback" lineNumber="193"/>
+    <functiondecl functionName="Display_Thread_entry" lineNumber="33"/>
+    <functiondecl functionName="ssp_touch_to_guix" lineNumber="150"/>
+    <functiondecl functionName="Display_Thread_entry" lineNumber="33"/>
+    <functiondecl functionName="ssp_touch_to_guix" lineNumber="150"/>
+    <functiondecl functionName="Display_Thread_entry" lineNumber="33"/>
+    <functiondecl functionName="ssp_touch_to_guix" lineNumber="150"/>
+    <functioncall functionName="GX_EVENT_PEN_DOWN"/>
+    <functioncall functionName="GX_EVENT_PEN_DRAG"/>
+    <functioncall functionName="GX_EVENT_PEN_UP"/>
+    <functioncall functionName="GX_ID_NONE"/>
+    <functioncall functionName="GX_NULL"/>
+    <functioncall functionName="ILI9341V_Init"/>
+    <functioncall functionName="IOPORT_LEVEL_HIGH"/>
+    <functioncall functionName="IOPORT_PORT_07_PIN_10"/>
+    <functioncall functionName="IOPORT_PORT_10_PIN_03"/>
+    <functioncall functionName="NULL"/>
+    <functioncall functionName="Refresh_Screen"/>
+    <functioncall functionName="break"/>
+    <functioncall functionName="canvasInit"/>
+    <functioncall functionName="default"/>
+    <functioncall functionName="err"/>
+    <functioncall functionName="event_type"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="g_main_semaphore_lcdc"/>
+    <functioncall functionName="guiapp_widget_table"/>
+    <functioncall functionName="gx_studio_display_configure"/>
+    <functioncall functionName="gx_studio_named_widget_create"/>
+    <functioncall functionName="gx_system_initialize"/>
+    <functioncall functionName="gx_system_start"/>
+    <functioncall functionName="gx_widget_attach"/>
+    <functioncall functionName="gx_widget_show"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="int"/>
+    <functioncall functionName="long"/>
+    <functioncall functionName="open"/>
+    <functioncall functionName="p_args"/>
+    <functioncall functionName="p_cfg"/>
+    <functioncall functionName="p_ctrl"/>
+    <functioncall functionName="p_first_screen"/>
+    <functioncall functionName="p_window_root"/>
+    <functioncall functionName="pinWrite"/>
+    <functioncall functionName="send_event"/>
+    <functioncall functionName="setup"/>
+    <functioncall functionName="strcmp"/>
+    <functioncall functionName="switch"/>
+    <functioncall functionName="true"/>
+    <functioncall functionName="tx_semaphore_ceiling_put"/>
+    <functioncall functionName="tx_thread_sleep"/>
+    <functioncall functionName="void"/>
+    <functioncall functionName="while"/>
+    <functioncall functionName="widget_name"/>
+    <functioncall functionName="x"/>
+    <functioncall functionName="y"/>
+  </FileInfo>
+</analyzerinfo>
