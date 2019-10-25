@@ -1,0 +1,270 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="3080208579">
+  <FileInfo check="Bounds checking">
+    <ArraySize array="guiapp_display_table" size="1"/>
+  </FileInfo>
+  <FileInfo check="Bounds checking">
+    <ArraySize array="guiapp_display_table" size="1"/>
+  </FileInfo>
+  <FileInfo check="Bounds checking">
+    <ArraySize array="guiapp_display_table" size="1"/>
+  </FileInfo>
+  <FileInfo check="Bounds checking">
+    <ArraySize array="guiapp_display_table" size="1"/>
+  </FileInfo>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="gx_studio_text_button_create" lineNumber="25"/>
+    <functiondecl functionName="gx_studio_prompt_create" lineNumber="39"/>
+    <functiondecl functionName="gx_studio_window_create" lineNumber="53"/>
+    <functiondecl functionName="gx_studio_nested_widget_create" lineNumber="669"/>
+    <functiondecl functionName="gx_studio_widget_create" lineNumber="733"/>
+    <functiondecl functionName="gx_studio_named_widget_create" lineNumber="745"/>
+    <functiondecl functionName="gx_studio_display_configure" lineNumber="795"/>
+    <functiondecl functionName="_gx_synergy_display_driver_setup" lineNumber="877"/>
+    <functiondecl functionName="gx_studio_text_button_create" lineNumber="25"/>
+    <functiondecl functionName="gx_studio_prompt_create" lineNumber="39"/>
+    <functiondecl functionName="gx_studio_window_create" lineNumber="53"/>
+    <functiondecl functionName="gx_studio_nested_widget_create" lineNumber="669"/>
+    <functiondecl functionName="gx_studio_widget_create" lineNumber="733"/>
+    <functiondecl functionName="gx_studio_named_widget_create" lineNumber="745"/>
+    <functiondecl functionName="gx_studio_display_configure" lineNumber="795"/>
+    <functiondecl functionName="_gx_synergy_display_driver_setup" lineNumber="877"/>
+    <functiondecl functionName="gx_studio_text_button_create" lineNumber="25"/>
+    <functiondecl functionName="gx_studio_prompt_create" lineNumber="39"/>
+    <functiondecl functionName="gx_studio_window_create" lineNumber="53"/>
+    <functiondecl functionName="gx_studio_nested_widget_create" lineNumber="669"/>
+    <functiondecl functionName="gx_studio_widget_create" lineNumber="733"/>
+    <functiondecl functionName="gx_studio_named_widget_create" lineNumber="745"/>
+    <functiondecl functionName="gx_studio_display_configure" lineNumber="795"/>
+    <functiondecl functionName="_gx_synergy_display_driver_setup" lineNumber="871"/>
+    <functiondecl functionName="gx_studio_text_button_create" lineNumber="25"/>
+    <functiondecl functionName="gx_studio_prompt_create" lineNumber="39"/>
+    <functiondecl functionName="gx_studio_window_create" lineNumber="53"/>
+    <functiondecl functionName="gx_studio_nested_widget_create" lineNumber="669"/>
+    <functiondecl functionName="gx_studio_widget_create" lineNumber="733"/>
+    <functiondecl functionName="gx_studio_named_widget_create" lineNumber="745"/>
+    <functiondecl functionName="gx_studio_display_configure" lineNumber="795"/>
+    <functiondecl functionName="_gx_synergy_display_driver_setup" lineNumber="877"/>
+    <functioncall functionName="GX_CANVAS_VISIBLE"/>
+    <functioncall functionName="GX_FAILURE"/>
+    <functioncall functionName="GX_ID_NONE"/>
+    <functioncall functionName="GX_NULL"/>
+    <functioncall functionName="GX_PROMPT"/>
+    <functioncall functionName="GX_STATUS_ACCEPTS_FOCUS"/>
+    <functioncall functionName="GX_STYLE_ENABLED"/>
+    <functioncall functionName="GX_STYLE_NONE"/>
+    <functioncall functionName="GX_STYLE_TEXT_CENTER"/>
+    <functioncall functionName="GX_STYLE_TEXT_LEFT"/>
+    <functioncall functionName="GX_SUCCESS"/>
+    <functioncall functionName="GX_TEXT_BUTTON"/>
+    <functioncall functionName="GX_TYPE_PROMPT"/>
+    <functioncall functionName="GX_TYPE_TEXT_BUTTON"/>
+    <functioncall functionName="GX_TYPE_WINDOW"/>
+    <functioncall functionName="GX_VALUE"/>
+    <functioncall functionName="_gx_dave2d_aliased_arc_draw"/>
+    <functioncall functionName="_gx_dave2d_aliased_circle_draw"/>
+    <functioncall functionName="_gx_dave2d_aliased_ellipse_draw"/>
+    <functioncall functionName="_gx_dave2d_aliased_line"/>
+    <functioncall functionName="_gx_dave2d_aliased_wide_line"/>
+    <functioncall functionName="_gx_dave2d_alphamap_draw"/>
+    <functioncall functionName="_gx_dave2d_arc_draw"/>
+    <functioncall functionName="_gx_dave2d_arc_fill"/>
+    <functioncall functionName="_gx_dave2d_block_move"/>
+    <functioncall functionName="_gx_dave2d_buffer_toggle"/>
+    <functioncall functionName="_gx_dave2d_canvas_blend"/>
+    <functioncall functionName="_gx_dave2d_canvas_copy"/>
+    <functioncall functionName="_gx_dave2d_circle_draw"/>
+    <functioncall functionName="_gx_dave2d_circle_fill"/>
+    <functioncall functionName="_gx_dave2d_compressed_glyph_1bit_draw"/>
+    <functioncall functionName="_gx_dave2d_compressed_glyph_4bit_draw"/>
+    <functioncall functionName="_gx_dave2d_compressed_glyph_8bit_draw"/>
+    <functioncall functionName="_gx_dave2d_drawing_complete"/>
+    <functioncall functionName="_gx_dave2d_drawing_initiate"/>
+    <functioncall functionName="_gx_dave2d_ellipse_draw"/>
+    <functioncall functionName="_gx_dave2d_ellipse_fill"/>
+    <functioncall functionName="_gx_dave2d_horizontal_line"/>
+    <functioncall functionName="_gx_dave2d_horizontal_pattern_line_draw_565"/>
+    <functioncall functionName="_gx_dave2d_horizontal_pixelmap_line_draw"/>
+    <functioncall functionName="_gx_dave2d_pie_fill"/>
+    <functioncall functionName="_gx_dave2d_pixel_blend_565"/>
+    <functioncall functionName="_gx_dave2d_pixel_write_565"/>
+    <functioncall functionName="_gx_dave2d_pixelmap_blend"/>
+    <functioncall functionName="_gx_dave2d_pixelmap_draw"/>
+    <functioncall functionName="_gx_dave2d_polygon_draw"/>
+    <functioncall functionName="_gx_dave2d_polygon_fill"/>
+    <functioncall functionName="_gx_dave2d_raw_glyph_1bit_draw"/>
+    <functioncall functionName="_gx_dave2d_raw_glyph_4bit_draw"/>
+    <functioncall functionName="_gx_dave2d_raw_glyph_8bit_draw"/>
+    <functioncall functionName="_gx_dave2d_simple_line_draw"/>
+    <functioncall functionName="_gx_dave2d_simple_wide_line"/>
+    <functioncall functionName="_gx_dave2d_vertical_line"/>
+    <functioncall functionName="_gx_dave2d_vertical_pattern_line_draw_565"/>
+    <functioncall functionName="_gx_display_driver_565rgb_setup"/>
+    <functioncall functionName="_gx_synergy_jpeg_draw"/>
+    <functioncall functionName="break"/>
+    <functioncall functionName="button"/>
+    <functioncall functionName="canvas"/>
+    <functioncall functionName="canvas_memory"/>
+    <functioncall functionName="canvas_memory_size"/>
+    <functioncall functionName="canvas_name"/>
+    <functioncall functionName="child_widget"/>
+    <functioncall functionName="control"/>
+    <functioncall functionName="control_block"/>
+    <functioncall functionName="control_block_offset"/>
+    <functioncall functionName="control_block_size"/>
+    <functioncall functionName="create_function"/>
+    <functioncall functionName="definition"/>
+    <functioncall functionName="display"/>
+    <functioncall functionName="display_1_canvas_control_block"/>
+    <functioncall functionName="display_1_control_block"/>
+    <functioncall functionName="display_1_language_table"/>
+    <functioncall functionName="display_1_root_window"/>
+    <functioncall functionName="display_1_theme_table"/>
+    <functioncall functionName="draw_function"/>
+    <functioncall functionName="driver"/>
+    <functioncall functionName="event_function"/>
+    <functioncall functionName="font_id"/>
+    <functioncall functionName="guiapp_widget_table"/>
+    <functioncall functionName="gx_canvas_create"/>
+    <functioncall functionName="gx_display_color_table_set"/>
+    <functioncall functionName="gx_display_create"/>
+    <functioncall functionName="gx_display_driver_palette_set"/>
+    <functioncall functionName="gx_display_font_table_set"/>
+    <functioncall functionName="gx_display_pixelmap_table_set"/>
+    <functioncall functionName="gx_prompt_create"/>
+    <functioncall functionName="gx_prompt_font_set"/>
+    <functioncall functionName="gx_prompt_text_color_set"/>
+    <functioncall functionName="gx_studio_nested_widget_create"/>
+    <functioncall functionName="gx_studio_prompt_create"/>
+    <functioncall functionName="gx_studio_text_button_create"/>
+    <functioncall functionName="gx_studio_widget_create"/>
+    <functioncall functionName="gx_studio_window_create"/>
+    <functioncall functionName="gx_system_active_language_set"/>
+    <functioncall functionName="gx_system_language_table_set"/>
+    <functioncall functionName="gx_system_scroll_appearance_set"/>
+    <functioncall functionName="gx_text_button_create"/>
+    <functioncall functionName="gx_text_button_font_set"/>
+    <functioncall functionName="gx_text_button_text_color_set"/>
+    <functioncall functionName="gx_utility_rectangle_define"/>
+    <functioncall functionName="gx_widget_allocate"/>
+    <functioncall functionName="gx_widget_attach"/>
+    <functioncall functionName="gx_widget_draw_set"/>
+    <functioncall functionName="gx_widget_event_process_set"/>
+    <functioncall functionName="gx_widget_fill_color_set"/>
+    <functioncall functionName="gx_widget_status_remove"/>
+    <functioncall functionName="gx_window_create"/>
+    <functioncall functionName="gx_window_root_create"/>
+    <functioncall functionName="gx_window_wallpaper_set"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="language"/>
+    <functioncall functionName="language_table"/>
+    <functioncall functionName="language_table_size"/>
+    <functioncall functionName="name"/>
+    <functioncall functionName="new_widget"/>
+    <functioncall functionName="next_widget"/>
+    <functioncall functionName="normal_fill_color_id"/>
+    <functioncall functionName="normal_text_color_id"/>
+    <functioncall functionName="offsetof"/>
+    <functioncall functionName="parent"/>
+    <functioncall functionName="prompt"/>
+    <functioncall functionName="properties"/>
+    <functioncall functionName="return_root"/>
+    <functioncall functionName="root_window"/>
+    <functioncall functionName="selected_fill_color_id"/>
+    <functioncall functionName="selected_text_color_id"/>
+    <functioncall functionName="size"/>
+    <functioncall functionName="sizeof"/>
+    <functioncall functionName="strcmp"/>
+    <functioncall functionName="string_id"/>
+    <functioncall functionName="string_table_size"/>
+    <functioncall functionName="style"/>
+    <functioncall functionName="theme"/>
+    <functioncall functionName="theme_color_table"/>
+    <functioncall functionName="theme_color_table_size"/>
+    <functioncall functionName="theme_font_table"/>
+    <functioncall functionName="theme_font_table_size"/>
+    <functioncall functionName="theme_horizontal_scroll_style"/>
+    <functioncall functionName="theme_horizontal_scrollbar_appearance"/>
+    <functioncall functionName="theme_palette"/>
+    <functioncall functionName="theme_palette_size"/>
+    <functioncall functionName="theme_pixelmap_table"/>
+    <functioncall functionName="theme_pixelmap_table_size"/>
+    <functioncall functionName="theme_ptr"/>
+    <functioncall functionName="theme_table"/>
+    <functioncall functionName="theme_vertical_scroll_style"/>
+    <functioncall functionName="theme_vertical_scrollbar_appearance"/>
+    <functioncall functionName="user_data"/>
+    <functioncall functionName="wallpaper_id"/>
+    <functioncall functionName="while"/>
+    <functioncall functionName="widget"/>
+    <functioncall functionName="widget_id"/>
+    <functioncall functionName="widget_information"/>
+    <functioncall functionName="widget_name"/>
+    <functioncall functionName="win32_synergy_graphics_driver_setup_565rgb"/>
+    <functioncall functionName="window"/>
+    <functioncall functionName="window1"/>
+    <functioncall functionName="window1_Dev1"/>
+    <functioncall functionName="window1_Dev1_define"/>
+    <functioncall functionName="window1_Dev1_properties"/>
+    <functioncall functionName="window1_Dev2"/>
+    <functioncall functionName="window1_Dev2_define"/>
+    <functioncall functionName="window1_Dev2_properties"/>
+    <functioncall functionName="window1_Dev3"/>
+    <functioncall functionName="window1_Dev3_define"/>
+    <functioncall functionName="window1_Dev3_properties"/>
+    <functioncall functionName="window1_counter_dutycycle"/>
+    <functioncall functionName="window1_counter_dutycycle_define"/>
+    <functioncall functionName="window1_counter_dutycycle_properties"/>
+    <functioncall functionName="window1_define"/>
+    <functioncall functionName="window1_developers"/>
+    <functioncall functionName="window1_developers_define"/>
+    <functioncall functionName="window1_developers_properties"/>
+    <functioncall functionName="window1_dutycycle"/>
+    <functioncall functionName="window1_dutycycle_define"/>
+    <functioncall functionName="window1_dutycycle_properties"/>
+    <functioncall functionName="window1_handler"/>
+    <functioncall functionName="window1_hw"/>
+    <functioncall functionName="window1_hw_define"/>
+    <functioncall functionName="window1_hw_properties"/>
+    <functioncall functionName="window1_hwversion"/>
+    <functioncall functionName="window1_hwversion_define"/>
+    <functioncall functionName="window1_hwversion_properties"/>
+    <functioncall functionName="window1_prompt_4"/>
+    <functioncall functionName="window1_prompt_4_define"/>
+    <functioncall functionName="window1_prompt_4_properties"/>
+    <functioncall functionName="window1_prompt_5"/>
+    <functioncall functionName="window1_prompt_5_define"/>
+    <functioncall functionName="window1_prompt_5_properties"/>
+    <functioncall functionName="window1_properties"/>
+    <functioncall functionName="window1_proyectname"/>
+    <functioncall functionName="window1_proyectname_define"/>
+    <functioncall functionName="window1_proyectname_properties"/>
+    <functioncall functionName="window1_speed"/>
+    <functioncall functionName="window1_speed_define"/>
+    <functioncall functionName="window1_speed_properties"/>
+    <functioncall functionName="window1_speedcounter"/>
+    <functioncall functionName="window1_speedcounter_define"/>
+    <functioncall functionName="window1_speedcounter_properties"/>
+    <functioncall functionName="window1_state"/>
+    <functioncall functionName="window1_state_define"/>
+    <functioncall functionName="window1_state_properties"/>
+    <functioncall functionName="window1_swver"/>
+    <functioncall functionName="window1_swver_define"/>
+    <functioncall functionName="window1_swver_properties"/>
+    <functioncall functionName="window1_swversion"/>
+    <functioncall functionName="window1_swversion_define"/>
+    <functioncall functionName="window1_swversion_properties"/>
+    <functioncall functionName="window2"/>
+    <functioncall functionName="window2_buttoncounter2"/>
+    <functioncall functionName="window2_buttoncounter2_define"/>
+    <functioncall functionName="window2_buttoncounter2_properties"/>
+    <functioncall functionName="window2_define"/>
+    <functioncall functionName="window2_handler"/>
+    <functioncall functionName="window2_hellotext"/>
+    <functioncall functionName="window2_hellotext_define"/>
+    <functioncall functionName="window2_hellotext_properties"/>
+    <functioncall functionName="window2_properties"/>
+    <functioncall functionName="x_resolution"/>
+    <functioncall functionName="y_resolution"/>
+  </FileInfo>
+</analyzerinfo>

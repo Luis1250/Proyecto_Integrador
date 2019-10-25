@@ -1,0 +1,66 @@
+CCCC_Module@anonymous@@
+CCCC_Module@char@builtin@
+CCCC_ModExt@char@builtin@<nofile>@0@builtin definition@d?????@@0@d@
+CCCC_Module@double@builtin@
+CCCC_ModExt@double@builtin@<nofile>@0@builtin definition@d?????@@0@d@
+CCCC_Module@float@builtin@
+CCCC_ModExt@float@builtin@<nofile>@0@builtin definition@d?????@@0@d@
+CCCC_Module@int@builtin@
+CCCC_ModExt@int@builtin@<nofile>@0@builtin definition@d?????@@0@d@
+CCCC_Module@long@builtin@
+CCCC_ModExt@long@builtin@<nofile>@0@builtin definition@d?????@@0@d@
+CCCC_Module@void@builtin@
+CCCC_ModExt@void@builtin@<nofile>@0@builtin definition@d?????@@0@d@
+CCCC_Member@anonymous@ADC_Thread_entry@@(void)@
+CCCC_MemExt@anonymous@ADC_Thread_entry@@(void)@ADC_Thread_entry.c@71@definition@F????@LOC:61 COM:33 MVG:6@?@d@
+CCCC_Member@anonymous@Display_Thread_entry@@(void)@
+CCCC_MemExt@anonymous@Display_Thread_entry@@(void)@Display_Thread_entry.c@16@declaration@FT???@LOC:1 COM:0 MVG:0@?@D@
+CCCC_MemExt@anonymous@Display_Thread_entry@@(void)@Display_Thread_entry.c@33@definition@FT???@LOC:78 COM:18 MVG:23@?@d@
+CCCC_Member@anonymous@IC_Thread_entry@@(void)@
+CCCC_MemExt@anonymous@IC_Thread_entry@@(void)@IC_Thread_entry.c@144@definition@FT???@LOC:9 COM:1 MVG:1@?@d@
+CCCC_Member@anonymous@Refresh_Screen@@()@
+CCCC_MemExt@anonymous@Refresh_Screen@@()@Display_lib.c@32@definition@F????@LOC:32 COM:3 MVG:3@?@d@
+CCCC_Member@anonymous@error_trap@@(char *,ssp_err_t)@
+CCCC_MemExt@anonymous@error_trap@@(char *,ssp_err_t)@ADC_Thread_entry.c@65@declaration@F????@LOC:1 COM:0 MVG:0@?@D@
+CCCC_MemExt@anonymous@error_trap@@(char *,ssp_err_t)@IC_Thread_entry.c@18@declaration@FT???@LOC:1 COM:0 MVG:0@?@D@
+CCCC_MemExt@anonymous@error_trap@@(char *,ssp_err_t)@IC_Thread_entry.c@33@definition@FT???@LOC:12 COM:3 MVG:3@?@d@
+CCCC_Member@anonymous@g_lcd_spi_callback@@(spi_callback_args_t *)@
+CCCC_MemExt@anonymous@g_lcd_spi_callback@@(spi_callback_args_t *)@Display_Thread_entry.c@19@declaration@FT???@LOC:1 COM:0 MVG:0@?@D@
+CCCC_MemExt@anonymous@g_lcd_spi_callback@@(spi_callback_args_t *)@Display_Thread_entry.c@193@definition@FT???@LOC:5 COM:0 MVG:0@?@d@
+CCCC_Member@anonymous@initialise_monitor_handles@@(void)@
+CCCC_MemExt@anonymous@initialise_monitor_handles@@(void)@IC_Thread_entry.c@7@declaration@F????@LOC:1 COM:0 MVG:0@?@D@
+CCCC_Member@anonymous@input_capture_callback@@(input_capture_callback_args_t *)@
+CCCC_MemExt@anonymous@input_capture_callback@@(input_capture_callback_args_t *)@IC_Thread_entry.c@158@definition@FT???@LOC:63 COM:42 MVG:12@?@d@
+CCCC_Member@anonymous@input_capture_hal_module_guide_project@@()@
+CCCC_MemExt@anonymous@input_capture_hal_module_guide_project@@()@ADC_Thread_entry.c@64@declaration@F????@LOC:1 COM:0 MVG:0@?@D@
+CCCC_Member@anonymous@input_capture_hal_module_guide_project@@(void)@
+CCCC_MemExt@anonymous@input_capture_hal_module_guide_project@@(void)@IC_Thread_entry.c@19@declaration@FT???@LOC:1 COM:0 MVG:0@?@D@
+CCCC_MemExt@anonymous@input_capture_hal_module_guide_project@@(void)@IC_Thread_entry.c@60@definition@FT???@LOC:59 COM:12 MVG:11@?@d@
+CCCC_Member@anonymous@setDutyCycle@@(ULONG)@
+CCCC_MemExt@anonymous@setDutyCycle@@(ULONG)@Display_lib.c@78@definition@F????@LOC:21 COM:1 MVG:2@?@d@
+CCCC_Member@anonymous@setSetPoint@@(ULONG)@
+CCCC_MemExt@anonymous@setSetPoint@@(ULONG)@Display_lib.c@120@definition@F????@LOC:8 COM:2 MVG:1@?@d@
+CCCC_Member@anonymous@setSpeed@@(ULONG)@
+CCCC_MemExt@anonymous@setSpeed@@(ULONG)@Display_lib.c@105@definition@F????@LOC:8 COM:2 MVG:1@?@d@
+CCCC_Member@anonymous@show_window@@(GX_WINDOW *,GX_WIDGET *,bool)@
+CCCC_MemExt@anonymous@show_window@@(GX_WINDOW *,GX_WIDGET *,bool)@guiapp_event_handlers.c@11@declaration@FT???@LOC:1 COM:0 MVG:0@?@D@
+CCCC_MemExt@anonymous@show_window@@(GX_WINDOW *,GX_WIDGET *,bool)@guiapp_event_handlers.c@61@definition@FT???@LOC:22 COM:0 MVG:5@?@d@
+CCCC_Member@anonymous@ssp_touch_to_guix@@(sf_touch_panel_payload_t *,GX_EVENT *)@
+CCCC_MemExt@anonymous@ssp_touch_to_guix@@(sf_touch_panel_payload_t *,GX_EVENT *)@Display_Thread_entry.c@15@declaration@FT???@LOC:1 COM:3 MVG:0@?@D@
+CCCC_MemExt@anonymous@ssp_touch_to_guix@@(sf_touch_panel_payload_t *,GX_EVENT *)@Display_Thread_entry.c@150@definition@FT???@LOC:32 COM:3 MVG:8@?@d@
+CCCC_Member@anonymous@stateMachine@@(int *)@
+CCCC_MemExt@anonymous@stateMachine@@(int *)@stateMachine.c@22@definition@F????@LOC:48 COM:20 MVG:9@?@d@
+CCCC_Member@anonymous@update_text_id@@(GX_WIDGET *,GX_RESOURCE_ID,UINT)@
+CCCC_MemExt@anonymous@update_text_id@@(GX_WIDGET *,GX_RESOURCE_ID,UINT)@guiapp_event_handlers.c@12@declaration@FT???@LOC:1 COM:0 MVG:0@?@D@
+CCCC_MemExt@anonymous@update_text_id@@(GX_WIDGET *,GX_RESOURCE_ID,UINT)@guiapp_event_handlers.c@88@definition@FT???@LOC:9 COM:0 MVG:1@?@d@
+CCCC_Member@anonymous@window1_handler@@(GX_WINDOW *,GX_EVENT *)@
+CCCC_MemExt@anonymous@window1_handler@@(GX_WINDOW *,GX_EVENT *)@guiapp_event_handlers.c@14@definition@FT???@LOC:11 COM:18 MVG:3@?@d@
+CCCC_Member@anonymous@window2_handler@@(GX_WINDOW *,GX_EVENT *)@
+CCCC_MemExt@anonymous@window2_handler@@(GX_WINDOW *,GX_EVENT *)@guiapp_event_handlers.c@46@definition@FT???@LOC:13 COM:0 MVG:4@?@d@
+CCCC_RejExt@ADC_Thread_entry.c@1@<file scope items>@F????@LOC:24 COM:22 MVG:0@?@r@
+CCCC_RejExt@constants.c@1@<file scope items>@?????@LOC:14 COM:10 MVG:0@?@r@
+CCCC_RejExt@Display_lib.c@1@<file scope items>@F????@LOC:7 COM:12 MVG:0@?@r@
+CCCC_RejExt@Display_Thread_entry.c@1@<file scope items>@FT???@LOC:4 COM:3 MVG:0@?@r@
+CCCC_RejExt@guiapp_event_handlers.c@1@<file scope items>@FT???@LOC:3 COM:0 MVG:0@?@r@
+CCCC_RejExt@IC_Thread_entry.c@1@<file scope items>@FT???@LOC:9 COM:0 MVG:0@?@r@
+CCCC_RejExt@stateMachine.c@1@<file scope items>@F????@LOC:7 COM:12 MVG:0@?@r@

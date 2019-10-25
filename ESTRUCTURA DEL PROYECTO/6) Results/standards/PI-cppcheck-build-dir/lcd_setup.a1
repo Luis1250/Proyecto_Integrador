@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="4166154515">
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="lcd_write" lineNumber="26"/>
+    <functiondecl functionName="lcd_read" lineNumber="57"/>
+    <functiondecl functionName="ILI9341V_Init" lineNumber="88"/>
+    <functioncall functionName="BSP_DELAY_UNITS_MICROSECONDS"/>
+    <functioncall functionName="IOPORT_LEVEL_HIGH"/>
+    <functioncall functionName="IOPORT_LEVEL_LOW"/>
+    <functioncall functionName="IOPORT_PERIPHERAL_SCI0_2_4_6_8"/>
+    <functioncall functionName="IOPORT_PORT_01_PIN_02"/>
+    <functioncall functionName="IOPORT_PORT_01_PIN_15"/>
+    <functioncall functionName="IOPORT_PORT_06_PIN_10"/>
+    <functioncall functionName="IOPORT_PORT_06_PIN_11"/>
+    <functioncall functionName="R_BSP_SoftwareDelay"/>
+    <functioncall functionName="SPI_BIT_WIDTH_8_BITS"/>
+    <functioncall functionName="TX_WAIT_FOREVER"/>
+    <functioncall functionName="cmd"/>
+    <functioncall functionName="data"/>
+    <functioncall functionName="dummy_write"/>
+    <functioncall functionName="for"/>
+    <functioncall functionName="g_main_semaphore_lcdc"/>
+    <functioncall functionName="i"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="lcd_read"/>
+    <functioncall functionName="lcd_write"/>
+    <functioncall functionName="len"/>
+    <functioncall functionName="p_ctrl"/>
+    <functioncall functionName="pinCfg"/>
+    <functioncall functionName="pinWrite"/>
+    <functioncall functionName="tx_semaphore_get"/>
+    <functioncall functionName="tx_thread_sleep"/>
+    <functioncall functionName="uint8_t"/>
+    <functioncall functionName="while"/>
+    <functioncall functionName="write"/>
+    <functioncall functionName="writeRead"/>
+  </FileInfo>
+</analyzerinfo>

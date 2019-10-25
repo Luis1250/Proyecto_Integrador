@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="226069245">
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="tx_application_define_internal" lineNumber="39"/>
+    <functiondecl functionName="tx_application_define" lineNumber="48"/>
+    <functiondecl functionName="tx_startup_err_callback_internal" lineNumber="79"/>
+    <functiondecl functionName="tx_startup_common_init" lineNumber="89"/>
+    <functiondecl functionName="main" lineNumber="124"/>
+    <functiondecl functionName="tx_application_define_internal" lineNumber="39"/>
+    <functiondecl functionName="tx_application_define" lineNumber="48"/>
+    <functiondecl functionName="tx_startup_err_callback_internal" lineNumber="79"/>
+    <functiondecl functionName="tx_startup_common_init" lineNumber="89"/>
+    <functiondecl functionName="main" lineNumber="124"/>
+    <functioncall functionName="ADC_Thread_create"/>
+    <functioncall functionName="BSP_CFG_HANDLE_UNRECOVERABLE_ERROR"/>
+    <functioncall functionName="Display_Thread_create"/>
+    <functioncall functionName="IC_Thread_create"/>
+    <functioncall functionName="SSP_PARAMETER_NOT_USED"/>
+    <functioncall functionName="TX_WAIT_FOREVER"/>
+    <functioncall functionName="WEAK_REF_ATTRIBUTE"/>
+    <functioncall functionName="__disable_irq"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="first_unused_memory"/>
+    <functioncall functionName="g_hal_init"/>
+    <functioncall functionName="g_ssp_common_initialized_semaphore"/>
+    <functioncall functionName="g_ssp_common_thread_count"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="p_data"/>
+    <functioncall functionName="p_instance"/>
+    <functioncall functionName="true"/>
+    <functioncall functionName="tx_application_define_user"/>
+    <functioncall functionName="tx_kernel_enter"/>
+    <functioncall functionName="tx_semaphore_create"/>
+    <functioncall functionName="tx_semaphore_get"/>
+    <functioncall functionName="tx_semaphore_put"/>
+    <functioncall functionName="tx_startup_err_callback"/>
+    <functioncall functionName="tx_startup_err_callback_WEAK_ATTRIBUTE"/>
+    <functioncall functionName="while"/>
+  </FileInfo>
+</analyzerinfo>

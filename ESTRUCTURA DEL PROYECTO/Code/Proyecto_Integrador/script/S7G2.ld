@@ -189,7 +189,7 @@ SECTIONS
 	} > RAM
 
 	/* Initialized data section. */
-	.data : AT (__etext)
+	.data :
 	{
 		__data_start__ = .;
 		*(vtable)
@@ -234,7 +234,7 @@ SECTIONS
 		/* All data end */
 		__data_end__ = .;
 
-	} > RAM
+	} > RAM AT > FLASH
 
     __Lock_Size = __Lock_End - __Lock_Start;
 
@@ -291,20 +291,24 @@ SECTIONS
 		__HeapLimit = .;
 	} > RAM
 
-	/* Stacks are stored in this section. */
-	.stack_dummy (NOLOAD):
-	{
+    /* Stacks are stored in this section. */
+    .stack_dummy (NOLOAD):
+    {
         . = ALIGN(8);
-	    __StackLimit = .;
-		KEEP(*(.stack*))
-		__StackTop = .;
-	} > RAM
+        __StackLimit = .;
+        /* Main stack */
+        KEEP(*(.stack))
+        __StackTop = .;
+        /* Thread stacks */
+        KEEP(*(.stack*))
+        __StackTopAll = .;
+    } > RAM
 
-	PROVIDE(__stack = __StackTop);
+    PROVIDE(__stack = __StackTopAll);
 
-	/* This symbol represents the end of user allocated RAM. The RAM after this symbol can be used
-	   at run time for things such as ThreadX memory pool allocations. */
-	__RAM_segment_used_end__ = ALIGN(__StackTop , 4);
+    /* This symbol represents the end of user allocated RAM. The RAM after this symbol can be used
+       at run time for things such as ThreadX memory pool allocations. */
+    __RAM_segment_used_end__ = ALIGN(__StackTopAll , 4);
 
 	/* Data flash. */
 	.data_flash :

@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Detailed report on module anonymous-->
+<CCCC_Project>
+<module_summary>
+<lines_of_code value="501" level="1" />
+<lines_of_code_per_member_function value="******" level="0" />
+<McCabes_cyclomatic_complexity value="93" level="0" />
+<McCabes_cyclomatic_complexity_per_member_function value="******" level="2" />
+<lines_of_code value="161" level="0" />
+<lines_of_code_per_member_function value="********" level="2" />
+<lines_of_code_per_line_of_comment value="3.112" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="0.578" level="0" />
+<weighted_methods_per_class_unity value="19" level="0" />
+<weighted_methods_per_class_visibility value="0" level="0" />
+<depth_of_inheritance_tree value="0" level="0" />
+<number_of_children value="0" level="0" />
+<coupling_between_objects value="0" level="0" />
+<IF4 value="0" level="0" />
+<IF4_per_member_function value="********" level="0" />
+<IF4_visible value="0" level="0" />
+<IF4_visible_per_member_function value="********" level="0" />
+<IF4_concrete value="0" level="0" />
+<IF4_concrete_per_member_function value="********" level="0" />
+</module_summary>
+<module_detail>
+</module_detail>
+<procedural_detail>
+<member_function>
+<name>ADC_Thread_entry(void)</name>
+<extent>
+<description>definition</description>
+<source_reference file="ADC_Thread_entry.c" line="71" />
+</extent>
+<lines_of_code value="61" level="1" />
+<McCabes_cyclomatic_complexity value="6" level="0" />
+<lines_of_comment value="33" level="0" />
+<lines_of_code_per_line_of_comment value="1.848" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="0.182" level="0" />
+</member_function>
+<member_function>
+<name>Display_Thread_entry(void)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="Display_Thread_entry.c" line="16" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="Display_Thread_entry.c" line="33" />
+</extent>
+<lines_of_code value="79" level="1" />
+<McCabes_cyclomatic_complexity value="23" level="1" />
+<lines_of_comment value="18" level="0" />
+<lines_of_code_per_line_of_comment value="4.389" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="1.278" level="0" />
+</member_function>
+<member_function>
+<name>IC_Thread_entry(void)</name>
+<extent>
+<description>definition</description>
+<source_reference file="IC_Thread_entry.c" line="144" />
+</extent>
+<lines_of_code value="9" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="1" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>Refresh_Screen()</name>
+<extent>
+<description>definition</description>
+<source_reference file="Display_lib.c" line="32" />
+</extent>
+<lines_of_code value="32" level="1" />
+<McCabes_cyclomatic_complexity value="3" level="0" />
+<lines_of_comment value="3" level="0" />
+<lines_of_code_per_line_of_comment value="10.667" level="1" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>error_trap(char *,ssp_err_t)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="ADC_Thread_entry.c" line="65" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="IC_Thread_entry.c" line="18" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="IC_Thread_entry.c" line="33" />
+</extent>
+<lines_of_code value="14" level="0" />
+<McCabes_cyclomatic_complexity value="3" level="0" />
+<lines_of_comment value="3" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>g_lcd_spi_callback(spi_callback_args_t *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="Display_Thread_entry.c" line="19" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="Display_Thread_entry.c" line="193" />
+</extent>
+<lines_of_code value="6" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>initialise_monitor_handles(void)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="IC_Thread_entry.c" line="7" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>input_capture_callback(input_capture_callback_args_t *)</name>
+<extent>
+<description>definition</description>
+<source_reference file="IC_Thread_entry.c" line="158" />
+</extent>
+<lines_of_code value="63" level="1" />
+<McCabes_cyclomatic_complexity value="12" level="1" />
+<lines_of_comment value="42" level="0" />
+<lines_of_code_per_line_of_comment value="1.500" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="0.286" level="0" />
+</member_function>
+<member_function>
+<name>input_capture_hal_module_guide_project()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="ADC_Thread_entry.c" line="64" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>input_capture_hal_module_guide_project(void)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="IC_Thread_entry.c" line="19" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="IC_Thread_entry.c" line="60" />
+</extent>
+<lines_of_code value="60" level="1" />
+<McCabes_cyclomatic_complexity value="11" level="1" />
+<lines_of_comment value="12" level="0" />
+<lines_of_code_per_line_of_comment value="5.000" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="0.917" level="0" />
+</member_function>
+<member_function>
+<name>setDutyCycle(ULONG)</name>
+<extent>
+<description>definition</description>
+<source_reference file="Display_lib.c" line="78" />
+</extent>
+<lines_of_code value="21" level="0" />
+<McCabes_cyclomatic_complexity value="2" level="0" />
+<lines_of_comment value="1" level="0" />
+<lines_of_code_per_line_of_comment value="21.000" level="1" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>setSetPoint(ULONG)</name>
+<extent>
+<description>definition</description>
+<source_reference file="Display_lib.c" line="120" />
+</extent>
+<lines_of_code value="8" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="2" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>setSpeed(ULONG)</name>
+<extent>
+<description>definition</description>
+<source_reference file="Display_lib.c" line="105" />
+</extent>
+<lines_of_code value="8" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="2" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>show_window(GX_WINDOW *,GX_WIDGET *,bool)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="guiapp_event_handlers.c" line="11" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="guiapp_event_handlers.c" line="61" />
+</extent>
+<lines_of_code value="23" level="0" />
+<McCabes_cyclomatic_complexity value="5" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="******" level="2" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="******" level="0" />
+</member_function>
+<member_function>
+<name>ssp_touch_to_guix(sf_touch_panel_payload_t *,GX_EVENT *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="Display_Thread_entry.c" line="15" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="Display_Thread_entry.c" line="150" />
+</extent>
+<lines_of_code value="33" level="1" />
+<McCabes_cyclomatic_complexity value="8" level="0" />
+<lines_of_comment value="6" level="0" />
+<lines_of_code_per_line_of_comment value="5.500" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="1.333" level="0" />
+</member_function>
+<member_function>
+<name>stateMachine(int *)</name>
+<extent>
+<description>definition</description>
+<source_reference file="stateMachine.c" line="22" />
+</extent>
+<lines_of_code value="48" level="1" />
+<McCabes_cyclomatic_complexity value="9" level="0" />
+<lines_of_comment value="20" level="0" />
+<lines_of_code_per_line_of_comment value="2.400" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="0.450" level="0" />
+</member_function>
+<member_function>
+<name>update_text_id(GX_WIDGET *,GX_RESOURCE_ID,UINT)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="guiapp_event_handlers.c" line="12" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="guiapp_event_handlers.c" line="88" />
+</extent>
+<lines_of_code value="10" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>window1_handler(GX_WINDOW *,GX_EVENT *)</name>
+<extent>
+<description>definition</description>
+<source_reference file="guiapp_event_handlers.c" line="14" />
+</extent>
+<lines_of_code value="11" level="0" />
+<McCabes_cyclomatic_complexity value="3" level="0" />
+<lines_of_comment value="18" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>window2_handler(GX_WINDOW *,GX_EVENT *)</name>
+<extent>
+<description>definition</description>
+<source_reference file="guiapp_event_handlers.c" line="46" />
+</extent>
+<lines_of_code value="13" level="0" />
+<McCabes_cyclomatic_complexity value="4" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+</procedural_detail>
+<structural_detail>
+<module>
+<name>anonymous</name>
+<client_module>
+</client_module>
+<supplier_module>
+</supplier_module>
+</module>
+</structural_detail>
+</CCCC_Project>

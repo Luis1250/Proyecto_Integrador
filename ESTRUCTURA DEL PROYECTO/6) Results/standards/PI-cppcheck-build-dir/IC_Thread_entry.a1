@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="3197131570">
+  <FileInfo check="Bounds checking">
+    <ArraySize array="rpmAvg" size="100"/>
+  </FileInfo>
+  <FileInfo check="Bounds checking">
+    <ArraySize array="rpmAvg" size="100"/>
+  </FileInfo>
+  <FileInfo check="Bounds checking">
+    <ArraySize array="rpmAvg" size="100"/>
+  </FileInfo>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="error_trap" lineNumber="33"/>
+    <functiondecl functionName="input_capture_hal_module_guide_project" lineNumber="60"/>
+    <functiondecl functionName="IC_Thread_entry" lineNumber="144"/>
+    <functiondecl functionName="input_capture_callback" lineNumber="158"/>
+    <functiondecl functionName="error_trap" lineNumber="33"/>
+    <functiondecl functionName="input_capture_hal_module_guide_project" lineNumber="60"/>
+    <functiondecl functionName="IC_Thread_entry" lineNumber="144"/>
+    <functiondecl functionName="input_capture_callback" lineNumber="158"/>
+    <functiondecl functionName="error_trap" lineNumber="33"/>
+    <functiondecl functionName="input_capture_hal_module_guide_project" lineNumber="60"/>
+    <functiondecl functionName="IC_Thread_entry" lineNumber="144"/>
+    <functiondecl functionName="input_capture_callback" lineNumber="158"/>
+    <functioncall functionName="ADC_Queue"/>
+    <functioncall functionName="CGC_SYSTEM_CLOCKS_PCLKD"/>
+    <functioncall functionName="TX_NO_WAIT"/>
+    <functioncall functionName="api_version_major"/>
+    <functioncall functionName="api_version_minor"/>
+    <functioncall functionName="break"/>
+    <functioncall functionName="channel"/>
+    <functioncall functionName="code_version_major"/>
+    <functioncall functionName="code_version_minor"/>
+    <functioncall functionName="default"/>
+    <functioncall functionName="err"/>
+    <functioncall functionName="error_trap"/>
+    <functioncall functionName="event"/>
+    <functioncall functionName="float"/>
+    <functioncall functionName="for"/>
+    <functioncall functionName="g_capture_overflow"/>
+    <functioncall functionName="g_pclk_freq_hz"/>
+    <functioncall functionName="g_rpm"/>
+    <functioncall functionName="g_time_captured"/>
+    <functioncall functionName="i"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="infoGet"/>
+    <functioncall functionName="init"/>
+    <functioncall functionName="initialise_monitor_handles"/>
+    <functioncall functionName="input_capture_hal_module_guide_project"/>
+    <functioncall functionName="input_capture_info"/>
+    <functioncall functionName="input_capture_version"/>
+    <functioncall functionName="int"/>
+    <functioncall functionName="int16_t"/>
+    <functioncall functionName="name"/>
+    <functioncall functionName="open"/>
+    <functioncall functionName="p_cfg"/>
+    <functioncall functionName="p_ctrl"/>
+    <functioncall functionName="printf"/>
+    <functioncall functionName="rpmAvg_cnt_div"/>
+    <functioncall functionName="status"/>
+    <functioncall functionName="switch"/>
+    <functioncall functionName="systemClockFreqGet"/>
+    <functioncall functionName="tx_queue_send"/>
+    <functioncall functionName="tx_thread_sleep"/>
+    <functioncall functionName="variable_rpm_tx"/>
+    <functioncall functionName="variant"/>
+    <functioncall functionName="versionGet"/>
+    <functioncall functionName="while"/>
+  </FileInfo>
+</analyzerinfo>

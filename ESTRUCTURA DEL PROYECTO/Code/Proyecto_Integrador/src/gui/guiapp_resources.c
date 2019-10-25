@@ -6,7 +6,7 @@
 /*  site at www.expresslogic.com.                                              */
 /*                                                                             */
 /*  GUIX Studio Revision 5.4.2.9                                               */
-/*  Date (dd.mm.yyyy):  4.10.2019   Time (hh:mm): 09:47                        */
+/*  Date (dd.mm.yyyy): 18.10.2019   Time (hh:mm): 16:40                        */
 /*******************************************************************************/
 
 
@@ -336,32 +336,41 @@ GX_CONST GX_UBYTE display_1_WINDOW1_English[8] = "Window1";
 GX_CONST GX_UBYTE display_1_WINDOW2_English[8] = "Window2";
 GX_CONST GX_UBYTE display_1_INSTRUCT_BUTTON_English[23] = "Press to go to window2";
 GX_CONST GX_UBYTE display_1_TEXT_SPEED_English[7] = "Speed:";
-GX_CONST GX_UBYTE display_1_TEXT_DUTYCYCLE_English[12] = "Duty_cycle:";
+GX_CONST GX_UBYTE display_1_TEXT_DUTYCYCLE_English[12] = "Duty Cycle:";
 GX_CONST GX_UBYTE display_1_TEXT_PERCENTAGE_English[2] = "%";
 GX_CONST GX_UBYTE display_1_TEXT_RPM_English[4] = "RPM";
 GX_CONST GX_UBYTE display_1_TEXT_SWVERSION_English[12] = "SW Version:";
 GX_CONST GX_UBYTE display_1_TEXT_XX_English[4] = "x.x";
-GX_CONST GX_UBYTE display_1_TEXT_NOMBREPROYECTO_English[22] = "CONTROL VEL. MOTOR CD";
-GX_CONST GX_UBYTE display_1_TEXT_HWVERSION_English[12] = "HW Version:";
+GX_CONST GX_UBYTE display_1_TEXT_NOMBREPROYECTO_English[24] = "Speed Control DC motor ";
+GX_CONST GX_UBYTE display_1_TEXT_STATE_English[7] = "State:";
 GX_CONST GX_UBYTE display_1_TEXT_CESEQP001_English[11] = "CESEQ-P001";
-GX_CONST GX_UBYTE display_1_TEXT_CESEQC001_English[11] = "CESEQ-C001";
+GX_CONST GX_UBYTE display_1_TEXT_C_STATE_English[6] = "State";
 GX_CONST GX_UBYTE display_1_TEXT_DEVELOPERS_English[8] = "TEAM 2:";
-GX_CONST GX_UBYTE display_1_TEXT_DEV2_English[14] = "Jesus Ramirez";
-GX_CONST GX_UBYTE display_1_TEXT_DEV1_English[13] = "Algemiro Gil";
+GX_CONST GX_UBYTE display_1_TEXT_DEV2_English[15] = "Ramirez, Jesus";
+GX_CONST GX_UBYTE display_1_TEXT_DEV1_English[15] = "Gil, Algemiro ";
 GX_CONST GX_UBYTE display_1_TEXT_SETPOINT_English[10] = "SetPoint:";
 GX_CONST GX_UBYTE display_1_TEXT_DIAGNOSTICS_English[12] = "DIAGNOSTICS";
 GX_CONST GX_UBYTE display_1_TEXT_VARIABLES_English[10] = "VARIABLES";
 GX_CONST GX_UBYTE display_1_STRING_1_English[10] = "Jesus Rmz";
 GX_CONST GX_UBYTE display_1_STRING_2_English[13] = "Algemiro Gil";
-GX_CONST GX_UBYTE display_1_TEXT_DEV3_English[13] = "Luis Sanchez";
-GX_CONST GX_UBYTE display_1_DEV_3_English[14] = "Jesus Ramirez";
+GX_CONST GX_UBYTE display_1_TEXT_DEV3_English[14] = "Sanchez, Luis";
+GX_CONST GX_UBYTE display_1_DEV_3_English[15] = "Ramirez, Jesus";
 GX_CONST GX_UBYTE display_1_STRING_4_English[14] = {0x4c, 0x75, 0x69, 0x73, 0x20, 0x53, 0xc3, 0xa1, 0x6e, 0x63, 0x68, 0x65, 0x7a, 0x00};
 GX_CONST GX_UBYTE display_1_STRING_3_English[4] = "0.0";
 GX_CONST GX_UBYTE display_1_STRING_5_English[2] = "0";
+GX_CONST GX_UBYTE display_1_STRING_6_English[7] = "prompt";
+GX_CONST GX_UBYTE display_1_STRING_7_English[2] = ":";
+GX_CONST GX_UBYTE display_1_STRING_8_English[4] = "HW:";
+GX_CONST GX_UBYTE display_1_STRING_9_English[33] = "HW:     CESEQ-C001 / CESEQ-P001 ";
+GX_CONST GX_UBYTE display_1_STRING_10_English[29] = "HW: CESEQ-C001 / CESEQ-P001 ";
+GX_CONST GX_UBYTE display_1_STRING_11_English[27] = "HW: CESEQ-C001/CESEQ-P001 ";
+GX_CONST GX_UBYTE display_1_STRING_12_English[26] = "HW:CESEQ-C001/CESEQ-P001 ";
+GX_CONST GX_UBYTE display_1_STRING_13_English[11] = "Set Point:";
+GX_CONST GX_UBYTE display_1_STRING_14_English[12] = "Developers:";
 
 /* String Table for display_1 language English                                 */
 
-GX_CONST GX_UBYTE *display_1_English_string_table[33] =
+GX_CONST GX_UBYTE *display_1_English_string_table[42] =
 {
     GX_NULL,
     display_1_HELLO_WORLD_English,
@@ -380,9 +389,9 @@ GX_CONST GX_UBYTE *display_1_English_string_table[33] =
     display_1_TEXT_SWVERSION_English,
     display_1_TEXT_XX_English,
     display_1_TEXT_NOMBREPROYECTO_English,
-    display_1_TEXT_HWVERSION_English,
+    display_1_TEXT_STATE_English,
     display_1_TEXT_CESEQP001_English,
-    display_1_TEXT_CESEQC001_English,
+    display_1_TEXT_C_STATE_English,
     display_1_TEXT_DEVELOPERS_English,
     display_1_TEXT_DEV2_English,
     display_1_TEXT_DEV1_English,
@@ -395,7 +404,16 @@ GX_CONST GX_UBYTE *display_1_English_string_table[33] =
     display_1_DEV_3_English,
     display_1_STRING_4_English,
     display_1_STRING_3_English,
-    display_1_STRING_5_English
+    display_1_STRING_5_English,
+    display_1_STRING_6_English,
+    display_1_STRING_7_English,
+    display_1_STRING_8_English,
+    display_1_STRING_9_English,
+    display_1_STRING_10_English,
+    display_1_STRING_11_English,
+    display_1_STRING_12_English,
+    display_1_STRING_13_English,
+    display_1_STRING_14_English
 
 };
 

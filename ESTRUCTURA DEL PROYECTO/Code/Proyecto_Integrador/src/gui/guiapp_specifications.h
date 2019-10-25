@@ -6,7 +6,7 @@
 /*  www.expresslogic.com.                                                      */
 /*                                                                             */
 /*  GUIX Studio Revision 5.4.2.9                                               */
-/*  Date (dd.mm.yyyy):  4.10.2019   Time (hh:mm): 09:47                        */
+/*  Date (dd.mm.yyyy): 18.10.2019   Time (hh:mm): 16:40                        */
 /*******************************************************************************/
 
 
@@ -23,24 +23,22 @@ extern   "C" {
 /* Define widget ids                                                           */
 
 #define ID_WINDOW1 1
-#define ID_BUTTONCOUNTER 2
-#define ID_SPEEDCOUNTER 3
-#define ID_PROYECTNAME 4
-#define ID_TDUTYCYCLE 5
-#define ID_TSPEED 6
-#define ID_TSWVERSION 7
-#define ID_THWVERSION 8
-#define ID_TCESEQP001 9
-#define ID_TCESEQC001 10
-#define ID_TDEVELOPERS 11
-#define ID_Developer1 12
-#define ID_Developer2 13
-#define ID_TSETPOINT 14
-#define ID_SETPOINTCOUNTER 15
-#define SW_Ver 16
-#define ID_WINDOW2 17
-#define ID_HELLO 18
-#define ID_BUTTONCOUNTER2 19
+#define ID_PROYECTNAME 2
+#define ID_TDUTYCYCLE 3
+#define ID_TSPEED 4
+#define ID_TSWVERSION 5
+#define ID_THWVERSION 6
+#define ID_State 7
+#define ID_TDEVELOPERS 8
+#define ID_Developer1 9
+#define ID_Developer2 10
+#define SW_Ver 11
+#define ID_dutycycle_cnt 12
+#define ID_Speed_Cnt 13
+#define ID_hw 14
+#define ID_WINDOW2 15
+#define ID_HELLO 16
+#define ID_BUTTONCOUNTER2 17
 
 
 /* Define animation ids                                                        */
@@ -102,16 +100,6 @@ typedef struct
 
 typedef struct
 {
-    GX_RESOURCE_ID string_id;
-    GX_RESOURCE_ID font_id;
-    GX_RESOURCE_ID normal_text_color_id;
-    GX_RESOURCE_ID selected_text_color_id;
-    VOID (*format_func)(GX_NUMERIC_PROMPT *, INT);
-    INT            numeric_prompt_value;
-} GX_NUMERIC_PROMPT_PROPERTIES;
-
-typedef struct
-{
     GX_RESOURCE_ID wallpaper_id;
 } GX_WINDOW_PROPERTIES;
 
@@ -121,8 +109,6 @@ typedef struct
 typedef struct WINDOW1_CONTROL_BLOCK_STRUCT
 {
     GX_WINDOW_MEMBERS_DECLARE
-    GX_NUMERIC_PROMPT window1_counter_dutycycle;
-    GX_NUMERIC_PROMPT window1_speedcounter;
     GX_PROMPT window1_proyectname;
     GX_PROMPT window1_dutycycle;
     GX_PROMPT window1_speed;
@@ -130,16 +116,15 @@ typedef struct WINDOW1_CONTROL_BLOCK_STRUCT
     GX_PROMPT window1_prompt_5;
     GX_PROMPT window1_swversion;
     GX_PROMPT window1_hwversion;
-    GX_PROMPT window1_ceseqp001;
-    GX_PROMPT window1_ceseqc001;
+    GX_PROMPT window1_state;
     GX_PROMPT window1_developers;
     GX_PROMPT window1_Dev1;
     GX_PROMPT window1_Dev3;
-    GX_PROMPT window1_setpoint;
-    GX_NUMERIC_PROMPT window1_setpointcounter;
-    GX_PROMPT window1_prompt_15;
     GX_PROMPT window1_Dev2;
     GX_PROMPT window1_swver;
+    GX_PROMPT window1_counter_dutycycle;
+    GX_PROMPT window1_speedcounter;
+    GX_PROMPT window1_hw;
 } WINDOW1_CONTROL_BLOCK;
 
 typedef struct WINDOW2_CONTROL_BLOCK_STRUCT
@@ -247,7 +232,6 @@ typedef struct GX_STUDIO_DISPLAY_INFO_STRUCT
 
 UINT gx_studio_text_button_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *control_block, GX_WIDGET *parent);
 UINT gx_studio_prompt_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *control_block, GX_WIDGET *parent);
-UINT gx_studio_numeric_prompt_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *control_block, GX_WIDGET *parent);
 UINT gx_studio_window_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *control_block, GX_WIDGET *parent);
 GX_WIDGET *gx_studio_widget_create(GX_BYTE *storage, GX_CONST GX_STUDIO_WIDGET *definition, GX_WIDGET *parent);
 UINT gx_studio_named_widget_create(char *name, GX_WIDGET *parent, GX_WIDGET **new_widget);

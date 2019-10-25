@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="1566250332">
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="IC_Thread_create" lineNumber="55"/>
+    <functiondecl functionName="IC_Thread_func" lineNumber="69"/>
+    <functiondecl functionName="IC_Thread_create" lineNumber="55"/>
+    <functiondecl functionName="IC_Thread_func" lineNumber="69"/>
+    <functioncall functionName="BSP_ALIGN_VARIABLE_V2"/>
+    <functioncall functionName="BSP_IRQ_DISABLED"/>
+    <functioncall functionName="BSP_STACK_ALIGNMENT"/>
+    <functioncall functionName="CAPTURE_COMPARE_A"/>
+    <functioncall functionName="COUNTER_OVERFLOW"/>
+    <functioncall functionName="GPT"/>
+    <functioncall functionName="GPT_INPUT_CAPTURE_CLOCK_DIVIDER_1"/>
+    <functioncall functionName="GPT_INPUT_CAPTURE_SIGNAL_FILTER_NONE"/>
+    <functioncall functionName="GPT_INPUT_CAPTURE_SIGNAL_PIN_GTIOCA"/>
+    <functioncall functionName="GPT_PIN_LEVEL_HIGH"/>
+    <functioncall functionName="GPT_PIN_LEVEL_LOW"/>
+    <functioncall functionName="GPT_SHORTEST_LEVEL_OFF"/>
+    <functioncall functionName="IC_Thread"/>
+    <functioncall functionName="IC_Thread_entry"/>
+    <functioncall functionName="IC_Thread_func"/>
+    <functioncall functionName="IC_Thread_stack"/>
+    <functioncall functionName="INPUT_CAPTURE_MODE_PERIOD"/>
+    <functioncall functionName="INPUT_CAPTURE_REPETITION_PERIODIC"/>
+    <functioncall functionName="INPUT_CAPTURE_SIGNAL_EDGE_RISING"/>
+    <functioncall functionName="INPUT_CAPTURE_SIGNAL_LEVEL_NONE"/>
+    <functioncall functionName="NULL"/>
+    <functioncall functionName="SSP_PARAMETER_NOT_USED"/>
+    <functioncall functionName="SSP_VECTOR_DEFINE_CHAN"/>
+    <functioncall functionName="TIMER_MODE_PERIODIC"/>
+    <functioncall functionName="TIMER_PWM_UNIT_PERCENT"/>
+    <functioncall functionName="TIMER_UNIT_PERIOD_MSEC"/>
+    <functioncall functionName="TX_AUTO_START"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="g_input_capture"/>
+    <functioncall functionName="g_input_capture_cfg"/>
+    <functioncall functionName="g_input_capture_ctrl"/>
+    <functioncall functionName="g_input_capture_extend"/>
+    <functioncall functionName="g_input_capture_on_gpt"/>
+    <functioncall functionName="g_timer9"/>
+    <functioncall functionName="g_timer9_cfg"/>
+    <functioncall functionName="g_timer9_ctrl"/>
+    <functioncall functionName="g_timer9_extend"/>
+    <functioncall functionName="g_timer_on_gpt"/>
+    <functioncall functionName="gpt_input_capture_counter_overflow_isr"/>
+    <functioncall functionName="gpt_input_capture_isr"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="input_capture_callback"/>
+    <functioncall functionName="long"/>
+    <functioncall functionName="thread_input"/>
+    <functioncall functionName="true"/>
+    <functioncall functionName="tx_startup_common_init"/>
+    <functioncall functionName="tx_startup_err_callback"/>
+    <functioncall functionName="tx_thread_create"/>
+  </FileInfo>
+</analyzerinfo>

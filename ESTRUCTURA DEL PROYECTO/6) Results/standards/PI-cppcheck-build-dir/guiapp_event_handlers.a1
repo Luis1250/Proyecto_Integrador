@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="3754867694">
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="window1_handler" lineNumber="14"/>
+    <functiondecl functionName="window2_handler" lineNumber="46"/>
+    <functiondecl functionName="show_window" lineNumber="61"/>
+    <functiondecl functionName="update_text_id" lineNumber="88"/>
+    <functiondecl functionName="window1_handler" lineNumber="14"/>
+    <functiondecl functionName="window2_handler" lineNumber="46"/>
+    <functiondecl functionName="show_window" lineNumber="61"/>
+    <functiondecl functionName="update_text_id" lineNumber="88"/>
+    <functiondecl functionName="window1_handler" lineNumber="14"/>
+    <functiondecl functionName="window2_handler" lineNumber="46"/>
+    <functiondecl functionName="show_window" lineNumber="61"/>
+    <functiondecl functionName="update_text_id" lineNumber="88"/>
+    <functiondecl functionName="window1_handler" lineNumber="14"/>
+    <functiondecl functionName="window2_handler" lineNumber="46"/>
+    <functiondecl functionName="show_window" lineNumber="61"/>
+    <functiondecl functionName="update_text_id" lineNumber="88"/>
+    <functioncall functionName="GX_SEARCH_DEPTH_INFINITE"/>
+    <functioncall functionName="GX_SUCCESS"/>
+    <functioncall functionName="NULL"/>
+    <functioncall functionName="break"/>
+    <functioncall functionName="default"/>
+    <functioncall functionName="event_ptr"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="gx_event_type"/>
+    <functioncall functionName="gx_prompt_text_id_set"/>
+    <functioncall functionName="gx_system_focus_claim"/>
+    <functioncall functionName="gx_widget_attach"/>
+    <functioncall functionName="gx_widget_detach"/>
+    <functioncall functionName="gx_widget_find"/>
+    <functioncall functionName="gx_widget_parent"/>
+    <functioncall functionName="gx_widget_show"/>
+    <functioncall functionName="gx_window_event_process"/>
+    <functioncall functionName="id"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="p_new"/>
+    <functioncall functionName="p_old"/>
+    <functioncall functionName="p_prompt"/>
+    <functioncall functionName="p_widget"/>
+    <functioncall functionName="p_window_root"/>
+    <functioncall functionName="show_window"/>
+    <functioncall functionName="string_id"/>
+    <functioncall functionName="switch"/>
+    <functioncall functionName="true"/>
+    <functioncall functionName="widget"/>
+    <functioncall functionName="window1"/>
+  </FileInfo>
+</analyzerinfo>

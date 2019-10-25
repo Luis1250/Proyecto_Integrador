@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="2836535864">
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="ADC_Thread_create" lineNumber="84"/>
+    <functiondecl functionName="ADC_Thread_func" lineNumber="104"/>
+    <functioncall functionName="ADC_ADD_OFF"/>
+    <functioncall functionName="ADC_ALIGNMENT_RIGHT"/>
+    <functioncall functionName="ADC_CLEAR_AFTER_READ_ON"/>
+    <functioncall functionName="ADC_GROUP_A_PRIORITY_OFF"/>
+    <functioncall functionName="ADC_MASK_CHANNEL_0"/>
+    <functioncall functionName="ADC_MODE_CONTINUOUS_SCAN"/>
+    <functioncall functionName="ADC_Queue"/>
+    <functioncall functionName="ADC_RESOLUTION_8_BIT"/>
+    <functioncall functionName="ADC_TRIGGER_SOFTWARE"/>
+    <functioncall functionName="ADC_TRIGGER_SYNC_ELC"/>
+    <functioncall functionName="ADC_Thread"/>
+    <functioncall functionName="ADC_Thread_entry"/>
+    <functioncall functionName="ADC_Thread_func"/>
+    <functioncall functionName="ADC_Thread_stack"/>
+    <functioncall functionName="BSP_ALIGN_VARIABLE_V2"/>
+    <functioncall functionName="BSP_IRQ_DISABLED"/>
+    <functioncall functionName="BSP_STACK_ALIGNMENT"/>
+    <functioncall functionName="GPT_PIN_LEVEL_LOW"/>
+    <functioncall functionName="GPT_SHORTEST_LEVEL_OFF"/>
+    <functioncall functionName="NULL"/>
+    <functioncall functionName="SSP_PARAMETER_NOT_USED"/>
+    <functioncall functionName="TIMER_MODE_PWM"/>
+    <functioncall functionName="TIMER_PWM_UNIT_PERCENT"/>
+    <functioncall functionName="TIMER_UNIT_FREQUENCY_HZ"/>
+    <functioncall functionName="TX_AUTO_START"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="g_adc0"/>
+    <functioncall functionName="g_adc0_cfg"/>
+    <functioncall functionName="g_adc0_channel_cfg"/>
+    <functioncall functionName="g_adc0_ctrl"/>
+    <functioncall functionName="g_adc_on_adc"/>
+    <functioncall functionName="g_timer1"/>
+    <functioncall functionName="g_timer1_cfg"/>
+    <functioncall functionName="g_timer1_ctrl"/>
+    <functioncall functionName="g_timer1_extend"/>
+    <functioncall functionName="g_timer_on_gpt"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="long"/>
+    <functioncall functionName="queue_memory_ADC_Queue"/>
+    <functioncall functionName="sizeof"/>
+    <functioncall functionName="thread_input"/>
+    <functioncall functionName="true"/>
+    <functioncall functionName="tx_queue_create"/>
+    <functioncall functionName="tx_startup_common_init"/>
+    <functioncall functionName="tx_startup_err_callback"/>
+    <functioncall functionName="tx_thread_create"/>
+    <functioncall functionName="uint32_t"/>
+    <functioncall functionName="uint64_t"/>
+  </FileInfo>
+</analyzerinfo>

@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="3365627623">
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="g_sf_touch_panel_i2c_err_callback_internal" lineNumber="193"/>
+    <functiondecl functionName="sf_touch_panel_i2c_init0" lineNumber="205"/>
+    <functiondecl functionName="Display_Thread_create" lineNumber="219"/>
+    <functiondecl functionName="Display_Thread_func" lineNumber="240"/>
+    <functiondecl functionName="g_sf_touch_panel_i2c_err_callback_internal" lineNumber="193"/>
+    <functiondecl functionName="sf_touch_panel_i2c_init0" lineNumber="205"/>
+    <functiondecl functionName="Display_Thread_create" lineNumber="219"/>
+    <functiondecl functionName="Display_Thread_func" lineNumber="240"/>
+    <functiondecl functionName="g_sf_touch_panel_i2c_err_callback_internal" lineNumber="193"/>
+    <functiondecl functionName="sf_touch_panel_i2c_init0" lineNumber="205"/>
+    <functiondecl functionName="Display_Thread_create" lineNumber="219"/>
+    <functiondecl functionName="Display_Thread_func" lineNumber="240"/>
+    <functiondecl functionName="g_sf_touch_panel_i2c_err_callback_internal" lineNumber="193"/>
+    <functiondecl functionName="sf_touch_panel_i2c_init0" lineNumber="205"/>
+    <functiondecl functionName="Display_Thread_create" lineNumber="219"/>
+    <functiondecl functionName="Display_Thread_func" lineNumber="240"/>
+    <functiondecl functionName="g_sf_touch_panel_i2c_err_callback_internal" lineNumber="193"/>
+    <functiondecl functionName="sf_touch_panel_i2c_init0" lineNumber="205"/>
+    <functiondecl functionName="Display_Thread_create" lineNumber="219"/>
+    <functiondecl functionName="Display_Thread_func" lineNumber="240"/>
+    <functioncall functionName="BSP_ALIGN_VARIABLE_V2"/>
+    <functioncall functionName="BSP_CFG_HANDLE_UNRECOVERABLE_ERROR"/>
+    <functioncall functionName="BSP_IRQ_DISABLED"/>
+    <functioncall functionName="BSP_STACK_ALIGNMENT"/>
+    <functioncall functionName="Display_Thread"/>
+    <functioncall functionName="Display_Thread_entry"/>
+    <functioncall functionName="Display_Thread_func"/>
+    <functioncall functionName="Display_Thread_stack"/>
+    <functioncall functionName="ELC_EVENT_IIC2_RXI"/>
+    <functioncall functionName="ELC_EVENT_IIC2_TXI"/>
+    <functioncall functionName="ERI"/>
+    <functioncall functionName="EXTERNAL_IRQ_PCLK_DIV_BY_64"/>
+    <functioncall functionName="EXTERNAL_IRQ_TRIG_FALLING"/>
+    <functioncall functionName="I2C_ADDR_MODE_7BIT"/>
+    <functioncall functionName="I2C_RATE_STANDARD"/>
+    <functioncall functionName="ICU"/>
+    <functioncall functionName="IIC"/>
+    <functioncall functionName="IOPORT_PORT_06_PIN_09"/>
+    <functioncall functionName="IRQ9"/>
+    <functioncall functionName="NULL"/>
+    <functioncall functionName="RIIC_TIMEOUT_MODE_SHORT"/>
+    <functioncall functionName="RXI"/>
+    <functioncall functionName="SCI"/>
+    <functioncall functionName="SF_EXTERNAL_IRQ_EVENT_SEMAPHORE_PUT"/>
+    <functioncall functionName="SPI_BIT_ORDER_MSB_FIRST"/>
+    <functioncall functionName="SPI_CLK_PHASE_EDGE_ODD"/>
+    <functioncall functionName="SPI_CLK_POLARITY_HIGH"/>
+    <functioncall functionName="SPI_MODE_FAULT_ERROR_DISABLE"/>
+    <functioncall functionName="SPI_MODE_MASTER"/>
+    <functioncall functionName="SSP_PARAMETER_NOT_USED"/>
+    <functioncall functionName="SSP_VECTOR_DEFINE"/>
+    <functioncall functionName="SSP_VECTOR_DEFINE_CHAN"/>
+    <functioncall functionName="TEI"/>
+    <functioncall functionName="TRANSFER_ADDR_MODE_FIXED"/>
+    <functioncall functionName="TRANSFER_ADDR_MODE_INCREMENTED"/>
+    <functioncall functionName="TRANSFER_CHAIN_MODE_DISABLED"/>
+    <functioncall functionName="TRANSFER_IRQ_END"/>
+    <functioncall functionName="TRANSFER_MODE_NORMAL"/>
+    <functioncall functionName="TRANSFER_REPEAT_AREA_DESTINATION"/>
+    <functioncall functionName="TRANSFER_REPEAT_AREA_SOURCE"/>
+    <functioncall functionName="TRANSFER_SIZE_1_BYTE"/>
+    <functioncall functionName="TXI"/>
+    <functioncall functionName="TX_AUTO_START"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="g_external_irq"/>
+    <functioncall functionName="g_external_irq_cfg"/>
+    <functioncall functionName="g_external_irq_ctrl"/>
+    <functioncall functionName="g_external_irq_on_icu"/>
+    <functioncall functionName="g_i2c"/>
+    <functioncall functionName="g_i2c_cfg"/>
+    <functioncall functionName="g_i2c_ctrl"/>
+    <functioncall functionName="g_i2c_extend"/>
+    <functioncall functionName="g_i2c_master_on_riic"/>
+    <functioncall functionName="g_lcd_spi_callback"/>
+    <functioncall functionName="g_main_semaphore_lcdc"/>
+    <functioncall functionName="g_sf_external_irq"/>
+    <functioncall functionName="g_sf_external_irq_cfg"/>
+    <functioncall functionName="g_sf_external_irq_ctrl"/>
+    <functioncall functionName="g_sf_external_irq_on_sf_external_irq"/>
+    <functioncall functionName="g_sf_message0"/>
+    <functioncall functionName="g_sf_touch_panel_i2c"/>
+    <functioncall functionName="g_sf_touch_panel_i2c_cfg"/>
+    <functioncall functionName="g_sf_touch_panel_i2c_cfg_extend"/>
+    <functioncall functionName="g_sf_touch_panel_i2c_chip_sx8654"/>
+    <functioncall functionName="g_sf_touch_panel_i2c_ctrl"/>
+    <functioncall functionName="g_sf_touch_panel_i2c_err_callback"/>
+    <functioncall functionName="g_sf_touch_panel_i2c_err_callback_WEAK_ATTRIBUTE"/>
+    <functioncall functionName="g_sf_touch_panel_on_sf_touch_panel_i2c"/>
+    <functioncall functionName="g_spi_lcdc"/>
+    <functioncall functionName="g_spi_lcdc_cfg"/>
+    <functioncall functionName="g_spi_lcdc_cfg_extend"/>
+    <functioncall functionName="g_spi_lcdc_ctrl"/>
+    <functioncall functionName="g_spi_on_sci"/>
+    <functioncall functionName="g_transfer0"/>
+    <functioncall functionName="g_transfer0_cfg"/>
+    <functioncall functionName="g_transfer0_ctrl"/>
+    <functioncall functionName="g_transfer0_info"/>
+    <functioncall functionName="g_transfer1"/>
+    <functioncall functionName="g_transfer1_cfg"/>
+    <functioncall functionName="g_transfer1_ctrl"/>
+    <functioncall functionName="g_transfer1_info"/>
+    <functioncall functionName="g_transfer_on_dtc"/>
+    <functioncall functionName="icu_irq_isr"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="iic_eri_isr"/>
+    <functioncall functionName="iic_rxi_isr"/>
+    <functioncall functionName="iic_tei_isr"/>
+    <functioncall functionName="iic_txi_isr"/>
+    <functioncall functionName="long"/>
+    <functioncall functionName="open"/>
+    <functioncall functionName="p_cfg"/>
+    <functioncall functionName="p_ctrl"/>
+    <functioncall functionName="p_data"/>
+    <functioncall functionName="p_instance"/>
+    <functioncall functionName="sci_spi_eri_isr"/>
+    <functioncall functionName="sci_spi_rxi_isr"/>
+    <functioncall functionName="sci_spi_tei_isr"/>
+    <functioncall functionName="sci_spi_txi_isr"/>
+    <functioncall functionName="sf_touch_panel_i2c_init0"/>
+    <functioncall functionName="ssp_err_g_sf_touch_panel_i2c"/>
+    <functioncall functionName="thread_input"/>
+    <functioncall functionName="true"/>
+    <functioncall functionName="tx_semaphore_create"/>
+    <functioncall functionName="tx_startup_common_init"/>
+    <functioncall functionName="tx_startup_err_callback"/>
+    <functioncall functionName="tx_thread_create"/>
+  </FileInfo>
+</analyzerinfo>

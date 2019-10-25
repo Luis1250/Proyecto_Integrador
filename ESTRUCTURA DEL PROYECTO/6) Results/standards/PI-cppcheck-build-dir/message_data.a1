@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="1745232719">
+  <FileInfo check="Bounds checking">
+    <ArraySize array="p_subscriber_lists" size="2"/>
+  </FileInfo>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="g_message_init" lineNumber="19"/>
+    <functioncall functionName="Display_Thread_message_queue"/>
+    <functioncall functionName="Display_Thread_message_queue_0_0"/>
+    <functioncall functionName="NULL"/>
+    <functioncall functionName="SF_MESSAGE_EVENT_CLASS_TOUCH"/>
+    <functioncall functionName="g_list_SF_MESSAGE_EVENT_CLASS_TOUCH"/>
+    <functioncall functionName="gp_group_SF_MESSAGE_EVENT_CLASS_TOUCH"/>
+    <functioncall functionName="queue_memory_Display_Thread_message_queue"/>
+    <functioncall functionName="sizeof"/>
+    <functioncall functionName="tx_queue_create"/>
+  </FileInfo>
+</analyzerinfo>
