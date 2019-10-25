@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="1">
+    <builddir>PI-cppcheck-build-dir</builddir>
+    <platform>Unspecified</platform>
+    <analyze-all-vs-configs>true</analyze-all-vs-configs>
+    <paths>
+        <dir name="H:/Diplomado/Docs/proyecto/out/ceseq_diplomado-master/Proyecto_Integrador/ESTRUCTURA DEL PROYECTO/Code/Proyecto_Integrador/src"/>
+    </paths>
+</project>

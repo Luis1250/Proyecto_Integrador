@@ -9,18 +9,18 @@
 #include "stateMachine.h"
 #include "IC_Thread.h"
 
+/*Top level state in case any client of the state machine needs to synchronization*/
+ioport_level_t P05_sw5_status;
+ioport_level_t P06_sw4_status;
+ioport_level_t LedGreen=C_LED_OFF;//green
+ioport_level_t LedRed=C_LED_OFF;//red
+ioport_level_t LedYellow=C_LED_OFF;//yellow
 
 /*Top level state in case any client of the state machine needs to synchronization*/
 int myState=0;
 
 int stateMachine(int *state)
 {
-
-	ioport_level_t P05_sw5_status;
-	ioport_level_t P06_sw4_status;
-	ioport_level_t LedGreen=C_LED_OFF;//green
-	ioport_level_t LedRed=C_LED_OFF;//red
-	ioport_level_t LedYellow=C_LED_OFF;//yellow
 
 	/*Read buttons*/
 	g_ioport.p_api->pinRead(IOPORT_PORT_00_PIN_05, &P05_sw5_status);
@@ -41,7 +41,7 @@ int stateMachine(int *state)
 		if(P06_sw4_status == C_BTN_PRESSED)
 		{
 			myState=1;
-			/*Turn off Led Yellow to indicate the initialize is done and switch 4 has been pressed to run*/
+			/*Turn off Led Yellow to indicate the init is done and switch 4 has been pressed to run*/
 			LedYellow = C_LED_OFF;
 			/*Turn on LED2 to indicate that we are in control*/
 			LedGreen = C_LED_ON;
@@ -64,7 +64,6 @@ int stateMachine(int *state)
 				LedRed = C_LED_ON;
 			}
 		else
-			/*blinking*/
 			LedGreen = !LedGreen;
 
 	break;
@@ -81,12 +80,11 @@ int stateMachine(int *state)
 				LedGreen = C_LED_ON;
 			}
 		else
-			/*blinking*/
 			LedRed = !LedRed;
 
 		break;
 
-	/*Any unhandled state set initialize*/
+	/*Any unhandle state set init*/
 	default:
 		*state=myState;
 

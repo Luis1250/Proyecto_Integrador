@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="957232221">
+  <FileInfo check="Bounds checking">
+    <ArraySize array="g_sf_el_gx_jpegbuffer" size="81920"/>
+  </FileInfo>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="g_sf_message0_err_callback_internal" lineNumber="388"/>
+    <functiondecl functionName="sf_message_init0" lineNumber="402"/>
+    <functiondecl functionName="g_common_init" lineNumber="423"/>
+    <functiondecl functionName="g_sf_message0_err_callback_internal" lineNumber="388"/>
+    <functiondecl functionName="sf_message_init0" lineNumber="402"/>
+    <functiondecl functionName="g_common_init" lineNumber="423"/>
+    <functiondecl functionName="g_sf_message0_err_callback_internal" lineNumber="388"/>
+    <functiondecl functionName="sf_message_init0" lineNumber="402"/>
+    <functiondecl functionName="g_common_init" lineNumber="423"/>
+    <functiondecl functionName="g_sf_message0_err_callback_internal" lineNumber="388"/>
+    <functiondecl functionName="sf_message_init0" lineNumber="402"/>
+    <functiondecl functionName="g_common_init" lineNumber="423"/>
+    <functioncall functionName="BSP_CFG_HANDLE_UNRECOVERABLE_ERROR"/>
+    <functioncall functionName="BSP_PLACE_IN_SECTION_V2"/>
+    <functioncall functionName="DISPLAY_COLOR_ORDER_RGB"/>
+    <functioncall functionName="DISPLAY_ENDIAN_LITTLE"/>
+    <functioncall functionName="DISPLAY_FADE_CONTROL_NONE"/>
+    <functioncall functionName="DISPLAY_FRAME_LAYER_1"/>
+    <functioncall functionName="DISPLAY_IN_FORMAT_16BITS_RGB565"/>
+    <functioncall functionName="DISPLAY_OUT_FORMAT_16BITS_RGB565"/>
+    <functioncall functionName="DISPLAY_SIGNAL_POLARITY_HIACTIVE"/>
+    <functioncall functionName="DISPLAY_SIGNAL_POLARITY_LOACTIVE"/>
+    <functioncall functionName="DISPLAY_SIGNAL_SYNC_EDGE_RISING"/>
+    <functioncall functionName="GLCDC"/>
+    <functioncall functionName="GLCD_CLK_SRC_INTERNAL"/>
+    <functioncall functionName="GLCD_CORRECTION_PROC_ORDER_BRIGHTNESS_CONTRAST2GAMMA"/>
+    <functioncall functionName="GLCD_DITHERING_MODE_TRUNCATE"/>
+    <functioncall functionName="GLCD_DITHERING_PATTERN_11"/>
+    <functioncall functionName="GLCD_PANEL_CLK_DIVISOR_32"/>
+    <functioncall functionName="GLCD_TCON_PIN_0"/>
+    <functioncall functionName="GLCD_TCON_PIN_1"/>
+    <functioncall functionName="GLCD_TCON_PIN_2"/>
+    <functioncall functionName="JDTI"/>
+    <functioncall functionName="JEDI"/>
+    <functioncall functionName="JPEG"/>
+    <functioncall functionName="JPEG_DECODE_DATA_FORMAT_NORMAL"/>
+    <functioncall functionName="JPEG_DECODE_PIXEL_FORMAT_RGB565"/>
+    <functioncall functionName="LINE_DETECT"/>
+    <functioncall functionName="NULL"/>
+    <functioncall functionName="SSP_PARAMETER_NOT_USED"/>
+    <functioncall functionName="SSP_VECTOR_DEFINE"/>
+    <functioncall functionName="UNDERFLOW_1"/>
+    <functioncall functionName="UNDERFLOW_2"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="g_cgc_on_cgc"/>
+    <functioncall functionName="g_display"/>
+    <functioncall functionName="g_display_cfg"/>
+    <functioncall functionName="g_display_ctrl"/>
+    <functioncall functionName="g_display_extend_cfg"/>
+    <functioncall functionName="g_display_fb_background"/>
+    <functioncall functionName="g_display_on_glcd"/>
+    <functioncall functionName="g_display_runtime_cfg_bg"/>
+    <functioncall functionName="g_elc_on_elc"/>
+    <functioncall functionName="g_fmi_on_fmi"/>
+    <functioncall functionName="g_ioport_on_ioport"/>
+    <functioncall functionName="g_jpeg_decode0"/>
+    <functioncall functionName="g_jpeg_decode0_cfg"/>
+    <functioncall functionName="g_jpeg_decode0_ctrl"/>
+    <functioncall functionName="g_jpeg_decode_on_jpeg_decode"/>
+    <functioncall functionName="g_message_init"/>
+    <functioncall functionName="g_sf_el_gx_cfg"/>
+    <functioncall functionName="g_sf_el_gx_ctrl"/>
+    <functioncall functionName="g_sf_el_gx_jpegbuffer"/>
+    <functioncall functionName="g_sf_jpeg_decode0"/>
+    <functioncall functionName="g_sf_jpeg_decode0_cfg"/>
+    <functioncall functionName="g_sf_jpeg_decode0_ctrl"/>
+    <functioncall functionName="g_sf_jpeg_decode_on_sf_jpeg_decode"/>
+    <functioncall functionName="g_sf_message0"/>
+    <functioncall functionName="g_sf_message0_cfg"/>
+    <functioncall functionName="g_sf_message0_ctrl"/>
+    <functioncall functionName="g_sf_message0_err_callback"/>
+    <functioncall functionName="g_sf_message0_err_callback_WEAK_ATTRIBUTE"/>
+    <functioncall functionName="g_sf_message0_work_buffer"/>
+    <functioncall functionName="g_sf_message_on_sf_message"/>
+    <functioncall functionName="glcdc_line_detect_isr"/>
+    <functioncall functionName="glcdc_underflow_1_isr"/>
+    <functioncall functionName="glcdc_underflow_2_isr"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="jpeg_jdti_isr"/>
+    <functioncall functionName="jpeg_jedi_isr"/>
+    <functioncall functionName="open"/>
+    <functioncall functionName="p_cfg"/>
+    <functioncall functionName="p_ctrl"/>
+    <functioncall functionName="p_data"/>
+    <functioncall functionName="p_instance"/>
+    <functioncall functionName="p_subscriber_lists"/>
+    <functioncall functionName="sf_el_gx_on_guix"/>
+    <functioncall functionName="sf_message_init0"/>
+    <functioncall functionName="sf_message_payload_t"/>
+    <functioncall functionName="sizeof"/>
+    <functioncall functionName="ssp_err_g_sf_message0"/>
+    <functioncall functionName="true"/>
+  </FileInfo>
+</analyzerinfo>

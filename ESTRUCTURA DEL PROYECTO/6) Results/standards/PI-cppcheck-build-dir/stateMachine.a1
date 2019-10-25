@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="3252421006">
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="stateMachine" lineNumber="22"/>
+    <functioncall functionName="IOPORT_LEVEL_HIGH"/>
+    <functioncall functionName="IOPORT_LEVEL_LOW"/>
+    <functioncall functionName="IOPORT_PORT_00_PIN_05"/>
+    <functioncall functionName="IOPORT_PORT_00_PIN_06"/>
+    <functioncall functionName="IOPORT_PORT_06_PIN_00"/>
+    <functioncall functionName="IOPORT_PORT_06_PIN_01"/>
+    <functioncall functionName="IOPORT_PORT_06_PIN_02"/>
+    <functioncall functionName="LedGreen"/>
+    <functioncall functionName="LedRed"/>
+    <functioncall functionName="LedYellow"/>
+    <functioncall functionName="P05_sw5_status"/>
+    <functioncall functionName="P06_sw4_status"/>
+    <functioncall functionName="break"/>
+    <functioncall functionName="default"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="myState"/>
+    <functioncall functionName="pinRead"/>
+    <functioncall functionName="pinWrite"/>
+    <functioncall functionName="switch"/>
+  </FileInfo>
+</analyzerinfo>

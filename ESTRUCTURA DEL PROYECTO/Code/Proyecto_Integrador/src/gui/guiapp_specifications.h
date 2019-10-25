@@ -6,7 +6,7 @@
 /*  www.expresslogic.com.                                                      */
 /*                                                                             */
 /*  GUIX Studio Revision 5.4.2.9                                               */
-/*  Date (dd.mm.yyyy): 17.10.2019   Time (hh:mm): 19:24                        */
+/*  Date (dd.mm.yyyy): 18.10.2019   Time (hh:mm): 16:40                        */
 /*******************************************************************************/
 
 
@@ -36,6 +36,9 @@ extern   "C" {
 #define ID_dutycycle_cnt 12
 #define ID_Speed_Cnt 13
 #define ID_hw 14
+#define ID_WINDOW2 15
+#define ID_HELLO 16
+#define ID_BUTTONCOUNTER2 17
 
 
 /* Define animation ids                                                        */
@@ -85,6 +88,14 @@ typedef struct
     GX_RESOURCE_ID font_id;
     GX_RESOURCE_ID normal_text_color_id;
     GX_RESOURCE_ID selected_text_color_id;
+} GX_TEXT_BUTTON_PROPERTIES;
+
+typedef struct
+{
+    GX_RESOURCE_ID string_id;
+    GX_RESOURCE_ID font_id;
+    GX_RESOURCE_ID normal_text_color_id;
+    GX_RESOURCE_ID selected_text_color_id;
 } GX_PROMPT_PROPERTIES;
 
 typedef struct
@@ -116,11 +127,19 @@ typedef struct WINDOW1_CONTROL_BLOCK_STRUCT
     GX_PROMPT window1_hw;
 } WINDOW1_CONTROL_BLOCK;
 
+typedef struct WINDOW2_CONTROL_BLOCK_STRUCT
+{
+    GX_WINDOW_MEMBERS_DECLARE
+    GX_PROMPT window2_hellotext;
+    GX_TEXT_BUTTON window2_buttoncounter2;
+} WINDOW2_CONTROL_BLOCK;
+
 
 /* extern statically defined control blocks                                    */
 
 #ifndef GUIX_STUDIO_GENERATED_FILE
 extern WINDOW1_CONTROL_BLOCK window1;
+extern WINDOW2_CONTROL_BLOCK window2;
 #endif
 
 /* Prototype Synergy display driver specific functions                         */
@@ -185,6 +204,7 @@ VOID _gx_synergy_jpeg_draw (GX_DRAW_CONTEXT *p_context, INT x, INT y, GX_PIXELMA
 /* Declare event process functions, draw functions, and callback functions     */
 
 UINT window1_handler(GX_WINDOW *widget, GX_EVENT *event_ptr);
+UINT window2_handler(GX_WINDOW *widget, GX_EVENT *event_ptr);
 
 /* Declare the GX_STUDIO_DISPLAY_INFO structure                                */
 
@@ -210,6 +230,7 @@ typedef struct GX_STUDIO_DISPLAY_INFO_STRUCT
 
 /* Declare Studio-generated functions for creating top-level widgets           */
 
+UINT gx_studio_text_button_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *control_block, GX_WIDGET *parent);
 UINT gx_studio_prompt_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *control_block, GX_WIDGET *parent);
 UINT gx_studio_window_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *control_block, GX_WIDGET *parent);
 GX_WIDGET *gx_studio_widget_create(GX_BYTE *storage, GX_CONST GX_STUDIO_WIDGET *definition, GX_WIDGET *parent);
